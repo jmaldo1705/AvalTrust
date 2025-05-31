@@ -494,10 +494,10 @@ form label.error { display: none !important; }
 .site-header .navbar-collapse { padding: 0; background-color: transparent; color: #747d88; }
 .site-header .logo-light { display: none; }
 .site-header .quote-btn { padding: 0; display: inline-block; }
-.site-header .quote-btn .btn { font-family: "Roboto", sans-serif; padding: 6px 25px; font-size: 12px; line-height: 24px; font-weight: 700; text-transform: uppercase; color: #fff; background-color: #FB5B45; border: 2px solid #FB5B45; margin: 0; vertical-align: middle; }
-.site-header .quote-btn .btn:hover { border-color: #2C7DFA; color: #fff; background-color: #2C7DFA; }
+.site-header .quote-btn .btn { font-family: "Roboto", sans-serif; padding: 6px 25px; font-size: 12px; line-height: 24px; font-weight: 700; text-transform: uppercase; color: #fff; background-color: #2C7DFA; border: 2px solid #2C7DFA; margin: 0; vertical-align: middle; }
+.site-header .quote-btn .btn:hover { border-color: #FB5B45; color: #fff; background-color: #FB5B45; }
 .site-header .quote-btn .btn.btn-outline { background: transparent; }
-.site-header .quote-btn .btn.btn-outline:hover { background: #FB5B45; border-color: #FB5B45; }
+.site-header .quote-btn .btn.btn-outline:hover { background: #2C7DFA; border-color: #2C7DFA; }
 
 .topbar { padding: 6px 0; color: #535457; background: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-size: 13px; line-height: 1; }
 .topbar .top-aside > p { margin: 0 10px 0 0; }

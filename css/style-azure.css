@@ -573,11 +573,11 @@ form label.error { display: none !important; }
 .header-s1.is-transparent .navbar-brand .logo-light { display: block; }
 .header-s1.is-transparent .navbar-brand .logo-dark { display: none; }
 .header-s1.is-transparent.has-fixed .topbar + .navbar { margin-top: 0; }
-.header-s1.is-transparent.has-fixed .navbar { background: #fff; color: #747d88; }
+.header-s1.is-transparent.has-fixed .navbar { background: #021232; color: #fff; }
 .header-s1.is-transparent.has-fixed .navbar-nav > li.active > a, .header-s1.is-transparent.has-fixed .navbar-nav > li > a:hover, .header-s1.is-transparent.has-fixed .navbar-nav > li > a:focus { color: #2C7DFA; }
 .header-s1.is-transparent.has-fixed .navbar-nav > li.quote-btn .btn { color: #fff; }
 .header-s1.is-transparent.has-fixed .navbar-nav > li > a .navbar-nav > li > a:not(.btn)::after { background-color: #2C7DFA; }
-.header-s1.is-transparent.has-fixed .navbar-collapse { color: #747d88; }
+.header-s1.is-transparent.has-fixed .navbar-collapse { color: #fff; }
 .header-s1.is-transparent.has-fixed .banner { margin-top: 0; }
 .header-s1.is-transparent.has-fixed .navbar-brand .logo-light { display: none; }
 .header-s1.is-transparent.has-fixed .navbar-brand .logo-dark { display: block; }

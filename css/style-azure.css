@@ -1405,7 +1405,7 @@ div[class*='filtered-menu'].style-v2 li:last-child { padding-right: 0; }
   .header-s1 .navbar-toggle { float: right; margin: 12px 15px 12px 0; }
   .header-s1 .navbar-header { background: none; padding: 0; margin-top: 0; }
   .header-s1 .navbar-header .quote-btn { display: none; }
-  .header-s1 .navbar-collapse { margin: 0; background-color: #2C7DFA; color: #fff; width: 100%; }
+  .header-s1 .navbar-collapse { margin: 0; background-color: #001642; color: #fff; width: 100%; }
   .header-s1.is-transparent .topbar, .header-s1.is-transparent .navbar { position: static; }
   .header-s1.is-transparent .navbar-brand .logo-light { display: none; }
   .header-s1.is-transparent .navbar-brand .logo-dark { display: block; }

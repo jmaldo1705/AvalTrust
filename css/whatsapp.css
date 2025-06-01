@@ -1,3 +1,4 @@
+
 /* Botón flotante de WhatsApp */
 .whatsapp-float {
     position: fixed;
@@ -10,13 +11,17 @@
     border-radius: 50px;
     text-align: center;
     font-size: 30px;
-    box-shadow: 2px 2px 3px #999;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     z-index: 100;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    /* Asegurar centrado perfecto */
+    line-height: 1;
+    vertical-align: middle;
 }
 
 .whatsapp-float:hover {
@@ -24,13 +29,68 @@
     background-color: #128c7e;
     color: #FFF;
     text-decoration: none;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 
+.whatsapp-float:focus,
+.whatsapp-float:active {
+    color: #FFF;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Si usas un ícono de FontAwesome */
+.whatsapp-float i {
+    display: block;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+/* Si usas una imagen */
 .whatsapp-float img {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+/* Si usas texto o símbolo */
+.whatsapp-float::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Animación de pulso opcional */
+.whatsapp-float::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    object-fit: cover;
+    background-color: #25d366;
+    opacity: 0;
+    animation: whatsappPulse 2s infinite;
+    z-index: -1;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
 }
 
 /* Responsivo para móviles */
@@ -41,5 +101,40 @@
         bottom: 20px;
         right: 20px;
         font-size: 24px;
+        box-shadow: 0 3px 12px rgba(37, 211, 102, 0.4);
     }
+
+    .whatsapp-float:hover {
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.6);
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media screen and (max-width: 480px) {
+    .whatsapp-float {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+}
+
+/* Asegurar que funcione en todos los navegadores */
+.whatsapp-float {
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-flex-align: center;
+    -webkit-justify-content: center;
+}
+
+/* Centrado para ícono específico de WhatsApp */
+.whatsapp-float .fa-whatsapp,
+.whatsapp-float .fab.fa-whatsapp {
+    line-height: 1;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
 }

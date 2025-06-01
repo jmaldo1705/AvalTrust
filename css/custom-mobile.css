@@ -1,0 +1,73 @@
+/* ==========================================================================
+   NAVBAR MÓVIL - CORRECCIÓN DE COLOR
+   ========================================================================== */
+
+/* Estilos para el navbar móvil */
+@media (max-width: 767px) {
+    .navbar-primary {
+        background-color: #001642 !important;
+        border-color: #2C7DFA !important;
+    }
+
+    .navbar-primary .navbar-collapse {
+        background-color: #001642 !important;
+        border-color: #2C7DFA !important;
+        box-shadow: none !important;
+    }
+
+    .navbar-primary .navbar-nav {
+        background-color: #001642 !important;
+    }
+
+    .navbar-primary .navbar-nav > li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    .navbar-primary .navbar-nav > li:last-child {
+        border-bottom: none !important;
+    }
+
+    .navbar-primary .navbar-nav > li > a {
+        color: #fff !important;
+        background-color: transparent !important;
+        border-top: none !important;
+        border-bottom: none !important;
+    }
+
+    .navbar-primary .navbar-nav > li > a:hover,
+    .navbar-primary .navbar-nav > li > a:focus {
+        color: #fff !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .navbar-primary .navbar-toggle {
+        border-color: #fff !important;
+        background-color: transparent !important;
+    }
+
+    .navbar-primary .navbar-toggle:hover,
+    .navbar-primary .navbar-toggle:focus {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .navbar-primary .navbar-toggle .icon-bar {
+        background-color: #fff !important;
+    }
+
+    /* Asegurar que el contenedor del navbar también tenga el color correcto */
+    .navbar-primary .container {
+        background-color: transparent !important;
+    }
+
+    /* Para el botón de quote en móvil */
+    .navbar-primary .quote-btn .btn {
+        color: #2C7DFA !important;
+        background-color: #fff !important;
+        border-color: #fff !important;
+    }
+
+    /* Remover bordes predeterminados que puedan interferir */
+    .navbar-primary .navbar-nav > li > a {
+        border: none !important;
+    }
+}

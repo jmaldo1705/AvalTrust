@@ -494,7 +494,7 @@ form label.error { display: none !important; }
 .site-header .navbar-collapse { padding: 0; background-color: transparent; color: #747d88; }
 .site-header .logo-light { display: none; }
 .site-header .quote-btn { padding: 0; display: inline-block; }
-.site-header .quote-btn .btn { font-family: "Roboto", sans-serif; padding: 6px 25px; font-size: 12px; line-height: 24px; font-weight: 700; text-transform: uppercase; color: #fff; background-color: #00D48F; border: 2px solid #00D48F; margin: 0; vertical-align: middle; }
+.site-header .quote-btn .btn { font-family: "Roboto", sans-serif; padding: 6px 25px; font-size: 12px; line-height: 24px; font-weight: 700; text-transform: uppercase; color: #fff; background-color: #28a745; border: 2px solid #28a745; margin: 0; vertical-align: middle; }
 .site-header .quote-btn .btn:hover { border-color: #FB5B45; color: #fff; background-color: #FB5B45; }
 .site-header .quote-btn .btn.btn-outline { background: transparent; }
 .site-header .quote-btn .btn.btn-outline:hover { background: #2C7DFA; border-color: #2C7DFA; }

@@ -897,6 +897,33 @@
 	<img src="image/whatsapp.png" alt="WhatsApp">
 </a>
 
+<!-- JavaScript for FAQ -->
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const faqItems = document.querySelectorAll('.faq-item');
+
+		faqItems.forEach(item => {
+			const question = item.querySelector('.faq-question');
+			const answer = item.querySelector('.faq-answer');
+
+			question.addEventListener('click', () => {
+				const isActive = item.classList.contains('active');
+
+				// Close all FAQ items
+				faqItems.forEach(otherItem => {
+					otherItem.classList.remove('active');
+					otherItem.querySelector('.faq-answer').classList.remove('show');
+				});
+
+				// Toggle current item
+				if (!isActive) {
+					item.classList.add('active');
+					answer.classList.add('show');
+				}
+			});
+		});
+	});
+</script>
 <!-- Scripts -->
 <script src="js/jquery.bundle.js"></script>
 <script src="js/script.js"></script>

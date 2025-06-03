@@ -1,303 +1,923 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>AvalTrust - Financial And Fintech</title>
+	<title>AvalTrust - Revolucionando el Acceso al Crédito en Colombia</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="La primera plataforma de garantías crediticias diseñada específicamente para el ecosistema Fintech colombiano. Desbloqueando oportunidades, impulsando la inclusión.">
 	<link rel="icon" href="image/favicon.png" type="image/png" sizes="16x16">
 	<link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
 	<link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
-	<link rel="stylesheet" type="text/css" href="css/whatsapp.css">
+	<link id="whatsapp" rel="stylesheet" type="text/css" href="css/whatsapp.css">
 	<link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
+	<style>
+		/* Hero Innovation Section */
+		.hero-innovation {
+			background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+			color: white;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-innovation::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background:
+					radial-gradient(circle at 20% 30%, rgba(44, 125, 250, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 70%, rgba(251, 91, 69, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 40% 80%, rgba(44, 125, 250, 0.05) 0%, transparent 50%);
+			animation: pulse 8s ease-in-out infinite alternate;
+		}
+
+		@keyframes pulse {
+			0% { opacity: 0.8; }
+			100% { opacity: 1; }
+		}
+
+		.hero-content-wrapper {
+			position: relative;
+			z-index: 2;
+			width: 100%;
+		}
+
+		.hero-badge {
+			background: rgba(44, 125, 250, 0.2);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(44, 125, 250, 0.3);
+			border-radius: 50px;
+			padding: 12px 25px;
+			display: inline-block;
+			margin-bottom: 30px;
+			font-size: 0.9em;
+			font-weight: 500;
+			color: #00d4ff;
+		}
+
+		.hero-main-title {
+			font-size: 4.5em;
+			font-weight: 200;
+			line-height: 1.1;
+			margin-bottom: 25px;
+			background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #2C7DFA 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.hero-subtitle {
+			font-size: 1.5em;
+			opacity: 0.85;
+			line-height: 1.4;
+			margin-bottom: 50px;
+			max-width: 600px;
+			font-weight: 300;
+		}
+
+		.hero-cta-group {
+			display: flex;
+			gap: 25px;
+			margin-bottom: 80px;
+		}
+
+		.btn-hero-primary {
+			background: linear-gradient(135deg, #2C7DFA 0%, #00b4d8 100%);
+			color: white;
+			padding: 18px 40px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.4s ease;
+			box-shadow: 0 10px 30px rgba(44, 125, 250, 0.3);
+			border: none;
+		}
+
+		.btn-hero-primary:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 20px 40px rgba(44, 125, 250, 0.4);
+			color: white;
+		}
+
+		.btn-hero-secondary {
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			border: 2px solid rgba(255, 255, 255, 0.3);
+			color: white;
+			padding: 16px 38px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+
+		.btn-hero-secondary:hover {
+			background: rgba(255, 255, 255, 0.2);
+			border-color: rgba(255, 255, 255, 0.5);
+			color: white;
+		}
+
+		.floating-cards {
+			position: absolute;
+			top: 20%;
+			right: 5%;
+			width: 300px;
+			z-index: 1;
+		}
+
+		.floating-card {
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 20px;
+			padding: 25px;
+			margin-bottom: 20px;
+			animation: float-cards 6s ease-in-out infinite;
+		}
+
+		.floating-card:nth-child(2) {
+			animation-delay: -2s;
+		}
+
+		.floating-card:nth-child(3) {
+			animation-delay: -4s;
+		}
+
+		@keyframes float-cards {
+			0%, 100% { transform: translateY(0px) rotate(0deg); }
+			50% { transform: translateY(-20px) rotate(1deg); }
+		}
+
+		/* About AvalTrust Section */
+		.about-avaltrust {
+			background: #ffffff;
+			padding: 120px 0;
+			position: relative;
+		}
+
+		.about-header {
+			text-align: center;
+			margin-bottom: 80px;
+		}
+
+		.about-title {
+			font-size: 3.2em;
+			color: #1a1a2e;
+			margin-bottom: 25px;
+			font-weight: 300;
+		}
+
+		.about-subtitle {
+			font-size: 1.3em;
+			color: #666;
+			max-width: 700px;
+			margin: 0 auto;
+			line-height: 1.6;
+		}
+
+		.features-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 40px;
+			margin-top: 60px;
+		}
+
+		.feature-item {
+			display: flex;
+			align-items: flex-start;
+			padding: 30px;
+			background: white;
+			border-radius: 15px;
+			box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+			transition: all 0.3s ease;
+		}
+
+		.feature-item:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+		}
+
+		.feature-icon {
+			font-size: 2em;
+			color: #2C7DFA;
+			margin-right: 20px;
+			min-width: 50px;
+		}
+
+		.feature-content h4 {
+			font-size: 1.3em;
+			color: #1a1a2e;
+			margin-bottom: 10px;
+			font-weight: 600;
+		}
+
+		.feature-content p {
+			color: #666;
+			line-height: 1.6;
+			margin: 0;
+		}
+
+		/* Services Section */
+		.services-section {
+			background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+			padding: 120px 0;
+		}
+
+		.services-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 30px;
+			margin-top: 60px;
+		}
+
+		.service-card {
+			background: white;
+			border-radius: 20px;
+			padding: 40px 30px;
+			text-align: center;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+			transition: all 0.4s ease;
+			border: 1px solid #f0f0f0;
+		}
+
+		.service-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 20px 60px rgba(44, 125, 250, 0.15);
+			border-color: #2C7DFA;
+		}
+
+		.service-icon {
+			font-size: 3em;
+			margin-bottom: 25px;
+			color: #2C7DFA;
+		}
+
+		.service-title {
+			font-size: 1.4em;
+			color: #1a1a2e;
+			margin-bottom: 15px;
+			font-weight: 600;
+		}
+
+		.service-description {
+			color: #666;
+			line-height: 1.6;
+			margin-bottom: 25px;
+		}
+
+		.btn-service {
+			background: linear-gradient(135deg, #2C7DFA 0%, #00b4d8 100%);
+			color: white;
+			padding: 12px 30px;
+			border-radius: 25px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			border: none;
+			display: inline-block;
+		}
+
+		.btn-service:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 25px rgba(44, 125, 250, 0.3);
+			color: white;
+		}
+
+		/* Why FinTech Section */
+		.why-fintech-section {
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+			color: white;
+			padding: 120px 0;
+		}
+
+		.process-steps {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 40px;
+			margin-top: 60px;
+		}
+
+		.process-step {
+			text-align: center;
+			padding: 30px 20px;
+		}
+
+		.process-number {
+			width: 80px;
+			height: 80px;
+			background: linear-gradient(135deg, #2C7DFA, #00b4d8);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 25px;
+			font-size: 1.8em;
+			font-weight: bold;
+			color: white;
+		}
+
+		.process-step h4 {
+			font-size: 1.3em;
+			margin-bottom: 15px;
+			font-weight: 600;
+		}
+
+		.process-step p {
+			opacity: 0.9;
+			line-height: 1.6;
+		}
+
+		/* Testimonials Section */
+		.testimonials-section {
+			background: #ffffff;
+			padding: 120px 0;
+		}
+
+		.testimonials-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			gap: 40px;
+			margin-top: 60px;
+		}
+
+		.testimonial-card {
+			background: #f8f9fa;
+			border-radius: 20px;
+			padding: 40px 30px;
+			text-align: center;
+			position: relative;
+			border-left: 4px solid #2C7DFA;
+		}
+
+		.testimonial-quote {
+			font-size: 1.2em;
+			font-style: italic;
+			color: #1a1a2e;
+			margin-bottom: 25px;
+			line-height: 1.6;
+		}
+
+		.testimonial-author {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 15px;
+		}
+
+		.testimonial-avatar {
+			width: 50px;
+			height: 50px;
+			background: #2C7DFA;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 1.5em;
+		}
+
+		.testimonial-info h5 {
+			margin: 0;
+			color: #1a1a2e;
+			font-weight: 600;
+		}
+
+		.testimonial-info span {
+			color: #666;
+			font-size: 0.9em;
+		}
+
+		/* FAQ Section */
+		.faq-section {
+			background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+			padding: 120px 0;
+		}
+
+		.faq-container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		.faq-item {
+			background: white;
+			border-radius: 15px;
+			margin-bottom: 20px;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+			overflow: hidden;
+		}
+
+		.faq-question {
+			padding: 25px 30px;
+			background: white;
+			border: none;
+			width: 100%;
+			text-align: left;
+			font-size: 1.1em;
+			font-weight: 600;
+			color: #1a1a2e;
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			transition: all 0.3s ease;
+		}
+
+		.faq-question:hover {
+			background: #f8f9fa;
+		}
+
+		.faq-answer {
+			padding: 0 30px 25px;
+			color: #666;
+			line-height: 1.6;
+			display: none;
+		}
+
+		.faq-answer.show {
+			display: block;
+		}
+
+		.faq-icon {
+			transition: transform 0.3s ease;
+		}
+
+		.faq-item.active .faq-icon {
+			transform: rotate(180deg);
+		}
+
+		/* Final CTA Section */
+		.final-cta {
+			background: linear-gradient(135deg, #0d7db8 0%, #0f192a 100%);
+			color: white;
+			padding: 100px 0;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.final-cta::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 60,35 100,35 70,57 80,100 50,75 20,100 30,57 0,35 40,35" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+			animation: sparkle 10s linear infinite;
+		}
+
+		@keyframes sparkle {
+			0% { transform: translateX(0); }
+			100% { transform: translateX(100px); }
+		}
+
+		.final-cta-content {
+			position: relative;
+			z-index: 2;
+		}
+
+		.final-cta-title {
+			font-size: 3.5em;
+			font-weight: 300;
+			margin-bottom: 25px;
+			line-height: 1.2;
+		}
+
+		.final-cta-text {
+			font-size: 1.3em;
+			margin-bottom: 50px;
+			opacity: 0.95;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.btn-final-cta {
+			background: white;
+			color: #0f192a;
+			padding: 20px 50px;
+			border-radius: 50px;
+			font-size: 1.2em;
+			font-weight: 600;
+			text-decoration: none;
+			transition: all 0.4s ease;
+			box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+		}
+
+		.btn-final-cta:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+			color: #00b4d8;
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.hero-main-title { font-size: 3em; }
+			.hero-cta-group { flex-direction: column; align-items: center; }
+			.floating-cards { display: none; }
+			.about-title { font-size: 2.5em; }
+			.final-cta-title { font-size: 2.5em; }
+			.features-grid { grid-template-columns: 1fr; }
+			.services-grid { grid-template-columns: 1fr; }
+			.process-steps { grid-template-columns: 1fr; }
+			.testimonials-grid { grid-template-columns: 1fr; }
+		}
+	</style>
 </head>
 <body class="site-body style-v1">
-	<!-- Header -->
-	<header class="site-header header-s1 is-transparent is-sticky">
-		<!-- Navbar -->
-		<div class="navbar navbar-primary">
-			<div class="container">
-				<!-- Logo -->
-				<a class="navbar-brand" href="./">
-					<img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
-					<img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
-				</a>
-				<!-- #end Logo -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
-						<span class="sr-only">Menu</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Q-Button for Mobile -->
-					<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
-				</div>
-				<!-- MainNav -->
-				<nav class="navbar-collapse collapse" id="mainnav">
-					<ul class="nav navbar-nav">
-						<li><a href="./">Inicio</a></li>
-						<li><a href="about-us.html">Quiénes Somos</a></li>
-						<li><a href="people.html">Personas</a></li>
-						<li><a href="company.html">Empresas</a></li>
-						<li><a href="owr-service.html">Nuestro Servicio</a></li>
-						<li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
-					</ul>
-				</nav>
-				<!-- #end MainNav -->
-			</div>
-		</div>
-		<!-- #end Navbar -->
-		<!-- Banner/Slider -->
-		<div id="slider" class="banner banner-slider slider-large carousel slide carousel-fade">
-			<!-- Wrapper for Slides -->
-			<div class="carousel-inner">
-				<div class="item active">
-					<!-- Set the first background image using inline CSS below. -->
-					<div class="fill" style="background-image:url('image/slider-lg-a.jpg');"></div>
-				</div>
-				<div class="item">
-					<!-- Set the second background image using inline CSS below. -->
-					<div class="fill" style="background-image:url('image/slider-lg-b.jpg');">
-						<div class="banner-content">
-							<div class="container">
-								<div class="row">
-									<div class="banner-text al-left pos-left light">
-										<h2>Expert Financial Advice<strong>.</strong></h2>
-										<p>We help clients find ways to turn into actionable insights by embedding economics across their organization’s strategy.</p>
-										<a href="#" class="btn">Learn more</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#slider" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
+<!-- Header -->
+<header class="site-header header-s1 is-transparent is-sticky">
+	<!-- Navbar -->
+	<div class="navbar navbar-primary">
+		<div class="container">
+			<!-- Logo -->
+			<a class="navbar-brand" href="./">
+				<img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
+				<img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
 			</a>
-			<a class="right carousel-control" href="#slider" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-		<!-- #end Banner/Slider -->
-	</header>
-	<!-- End Header -->
-
-	<!-- Service Section -->
-	<div class="section section-services">
-	    <div class="container">
-	        <div class="content row">
-				<!-- Feature Row  -->
-				<div class="feature-row feature-service-row row feature-s4 off-text boxed-filled boxed-w">
-					<div class="heading-box clearfix">
-						<div class="col-sm-3">
-							<h2 class="heading-section">Especialistas Financieros</h2>
-						</div>
-						<div class="col-sm-8 col-sm-offset-1">
-							<span>AvalTrust se funda sobre la base de una visión compartida y la sólida experiencia de un equipo multidisciplinario, comprometido con transformar el acceso al crédito a través de soluciones innovadoras de aval y garantía. El equipo fundador está compuesto por profesionales con una trayectoria destacada en áreas clave para el éxito de la empresa: operaciones, finanzas, tecnología y gestión de riesgo crediticio.</span>
-						</div>
-					</div>
-				</div>
-				<!-- Feture Row  #end -->
-
-	        </div>
-	    </div>
-	</div>
-	<!-- End Section -->
-
-	<!-- Content -->
-	<div class="section section-content section-pad">
-		<div class="container">
-			<div class="content row">
-
-				<div class="row row-vm">
-					<div class="col-md-6 res-m-bttm">
-						<h5 class="heading-sm-lead">Sobre Nosotros</h5>
-						<h2 class="heading-section">Quienes Somos</h2>
-						<p>En AvalTrust, nacemos de una visión compartida y la sólida experiencia de un equipo multidisciplinario que cree firmemente en el poder de la inclusión financiera.</p>
-						<p>Nos dedicamos a transformar el acceso al crédito a través de soluciones innovadoras de aval y garantía, diseñadas para brindar una capa de seguridad robusta que mitigue el riesgo para plataformas Fintech y otros acreedores.</p>
-						<p>Comprendemos las dinámicas únicas del ecosistema Fintech y, por ello, nuestras garantías son adaptadas y flexibles. Al ofrecer estas soluciones, no solo desbloqueamos un mercado significativo y en constante crecimiento, sino que también impulsamos activamente la inclusión financiera y el desarrollo económico. En AvalTrust, estamos construyendo puentes hacia un futuro donde el acceso al crédito sea más seguro, confiable, equitativo y accesible para todos.</p>
-					</div>
-					<div class="col-md-5 col-md-offset-1">
-						<img class="no-round" src="image/photo-home-a.jpg" alt="">
-					</div>
-				</div>
-
+			<!-- #end Logo -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
+					<span class="sr-only">Menu</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Q-Button for Mobile -->
+				<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
 			</div>
+			<!-- MainNav -->
+			<nav class="navbar-collapse collapse" id="mainnav">
+				<ul class="nav navbar-nav">
+					<li><a href="./">Inicio</a></li>
+					<li><a href="about-us.html">Quiénes Somos</a></li>
+					<li><a href="people.html">Personas</a></li>
+					<li><a href="company.html">Empresas</a></li>
+					<li><a href="owr-service.html">Nuestro Servicio</a></li>
+					<li><a href="contact.html">Contáctanos</a></li>
+					<li class="quote-btn"><a class="btn" href="contact.html">Solicita tu aval</a></li>
+				</ul>
+			</nav>
+			<!-- #end MainNav -->
 		</div>
 	</div>
-	<!-- End Content -->
+	<!-- #end Navbar -->
+</header>
+<!-- End Header -->
 
-	<!-- Content -->
-	<div class="section section-contents section-pad has-bg fixed-bg light bg-alternet">
-		<div class="container">
+<!-- Hero Innovation Section -->
+<div class="hero-innovation">
+	<div class="container">
+		<div class="hero-content-wrapper">
 			<div class="row">
-
-				<div class="row">
-					<div class="col-md-4 pad-r res-m-bttm">
-						<h2 class="heading-lead">El equipo de AvalTrust proporciona asesoramiento independiente basado en métodos de investigación establecidos.</h2>
-					</div>
-					<div class="col-md-8">
-						<div class="row">
-							<div class="col-sm-6 res-s-bttm">
-								<div class="icon-box style-s4 photo-plx-full">
-									<em class="fa fa-bar-chart-o" aria-hidden="true"></em>
-								</div>
-								<h4>Experiencia</h4>
-								<p>Con nuestro equipo de expertos tendrás total tranquilidad de solicitar el crédito que mejor se acomode a tu necesidad.</p>
-							</div>
-							<div class="col-sm-6">
-								<div class="icon-box style-s4">
-									<em class="fa fa-users" aria-hidden="true"></em>
-								</div>
-								<h4>Metas</h4>
-								<p>Compartimos la meta buscada por nuestros clientes y apuntamos a lograr alcanzarla juntos.</p>
-							</div>
-							<div class="gaps size-lg"></div>
-							<div class="col-sm-6 res-s-bttm">
-								<div class="icon-box style-s4">
-									<em class="fa fa-credit-card" aria-hidden="true"></em>
-								</div>
-								<h4>Profesional</h4>
-								<p>A través de nuestro equipo de profesionales tendrás una asesoría personalizada completa para que logres tus metas.</p>
-							</div>
-							<div class="col-sm-6">
-								<div class="icon-box style-s4">
-									<em class="fa fa-money" aria-hidden="true"></em>
-								</div>
-								<h4>Créditos</h4>
-								<p>Ofrecemos diferentes alternativas de créditos para que alcances ese sueño que buscas.</p>
-							</div>
-							</div>
+				<div class="col-lg-8">
+					<div class="hero-badge">🚀 Revolucionando el Ecosistema Fintech</div>
+					<h1 class="hero-main-title">El Futuro del Crédito Empieza Aquí</h1>
+					<p class="hero-subtitle">Somos pioneros en transformar cómo Colombia accede al financiamiento. Desbloqueamos oportunidades que antes eran imposibles, construyendo puentes entre la tecnología y la inclusión financiera.</p>
+					<div class="hero-cta-group">
+						<a href="contact.html" class="btn-hero-primary">Únete a la Revolución</a>
+						<a href="about-us.html" class="btn-hero-secondary">Descubre Cómo</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="section-bg imagebg"><img src="image/plx-full.jpg" alt=""></div>
 	</div>
-	<!-- End Content -->
 
-	<!-- Footer Widget-->
-	<div class="footer-widget section-pad-md">
-		<div class="container">
-			<div class="row">
+	<!-- Floating Cards -->
+	<div class="floating-cards">
+		<div class="floating-card">
+			<h4 style="color: white; margin-bottom: 10px;">💡 Innovación</h4>
+			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Primera plataforma de garantías diseñada 100% para Fintech</p>
+		</div>
+		<div class="floating-card">
+			<h4 style="color: white; margin-bottom: 10px;">⚡ Velocidad</h4>
+			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Respuestas en máximo 24 horas</p>
+		</div>
+		<div class="floating-card">
+			<h4 style="color: white; margin-bottom: 10px;">🎯 Impacto</h4>
+			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Transformando vidas a través del acceso al crédito</p>
+		</div>
+	</div>
+</div>
 
-				<div class="widget-row row">
-					<div class="footer-col col-md-3 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-text">
-							<div class="wgs-content">
-								<p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
-								<p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Somos tu Aval Para</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a>Créditos de libranzas</a></li>
-									<li><a>Créditos digitales</a></li>
-									<li><a>Créditos educativos</a></li>
-									<li><a>Créditos de vehículos</a></li>
-									<li><a>Créditos de arrendamiento</a></li>
-									<li><a>Créditos retail</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-2 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Enlaces rápidos</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a href="#">Inicio</a></li>
-									<li><a href="#">Quienes Somos</a></li>
-									<li><a href="#">Personas</a></li>
-									<li><a href="#">Empresas</a></li>
-									<li><a href="#">Nuestro Servicio</a></li>
-									<li><a href="#">Contáctenos</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
+<!-- About AvalTrust Section -->
+<div class="about-avaltrust">
+	<div class="container">
+		<div class="about-header">
+			<h2 class="about-title">¿Qué es AvalTrust?</h2>
+			<p class="about-subtitle">AvalTrust es una empresa fintech que facilita el acceso al crédito mediante avales digitales y garantías innovadoras, seguras y justas. Respaldamos tu crecimiento con tecnología y experiencia.</p>
+		</div>
 
-					<div class="footer-col col-md-3 col-sm-6">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer">
-							<h5 class="wgs-title">Estamos para ayudarte</h5>
-							<div class="wgs-content">
-								<p>
-									Calle 70 sur # 43a-13<br>
-									Edificio Cantoluna<br>
-									Sabaneta, Antioquia.
-								</p>
-								<p><span>Teléfono</span>: (123) 1234 5678</p>
-								<ul class="social">
-									<li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
-									<li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
-									<li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-
-				</div><!-- Widget Row -->
-
+		<div class="features-grid">
+			<div class="feature-item">
+				<div class="feature-icon">✓</div>
+				<div class="feature-content">
+					<h4>Soluciones 100% digitales</h4>
+					<p>Todas nuestras soluciones están completamente digitalizadas, eliminando la burocracia y acelerando los procesos de manera significativa.</p>
+				</div>
+			</div>
+			<div class="feature-item">
+				<div class="feature-icon">✓</div>
+				<div class="feature-content">
+					<h4>Atención personalizada</h4>
+					<p>Ofrecemos un servicio adaptado a las necesidades específicas de cada cliente, con asesoría especializada en cada paso del proceso.</p>
+				</div>
+			</div>
+			<div class="feature-item">
+				<div class="feature-icon">✓</div>
+				<div class="feature-content">
+					<h4>Avales diseñados para cada perfil</h4>
+					<p>Nuestros avales están diseñados tanto para personas como para empresas, alineados con su perfil de riesgo específico.</p>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Footer Widget -->
+</div>
 
-	<!-- Copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
+<!-- Services Section -->
+<div class="services-section">
+	<div class="container">
+		<div class="about-header">
+			<h2 class="about-title">Nuestros Servicios</h2>
+			<p class="about-subtitle">Cobertura crediticia ajustada a cada tipo de riesgo, con soluciones innovadoras para diferentes segmentos del mercado.</p>
+		</div>
 
-				<div class="row">
-					<div class="site-copy col-sm-7">
-						<p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
-					</div>
-					<div class="site-by col-sm-5 al-right">
-						<p>Comprometidos con transformar el acceso al crédito.</p>
+		<div class="services-grid">
+			<div class="service-card">
+				<div class="service-icon">🏦</div>
+				<h3 class="service-title">Para Personas</h3>
+				<p class="service-description">Crédito más accesible y seguro. Garantía digital ante imprevistos que te permite acceder al financiamiento que necesitas.</p>
+				<a href="people.html" class="btn-service">Conoce más</a>
+			</div>
+			<div class="service-card">
+				<div class="service-icon">🏢</div>
+				<h3 class="service-title">Para Empresas</h3>
+				<p class="service-description">Aval para licitaciones y financiamiento empresarial. Impulsa el crecimiento de tu negocio con nuestro respaldo.</p>
+				<a href="company.html" class="btn-service">Conoce más</a>
+			</div>
+			<div class="service-card">
+				<div class="service-icon">💡</div>
+				<h3 class="service-title">Para Fintechs</h3>
+				<p class="service-description">Infraestructura de aval digital. Fácil de integrar, lista para escalar y optimizar tu plataforma crediticia.</p>
+				<a href="owr-service.html" class="btn-service">Conoce más</a>
+			</div>
+			<div class="service-card">
+				<div class="service-icon">🏦</div>
+				<h3 class="service-title">Para Cooperativas</h3>
+				<p class="service-description">Fondos autosostenibles contra impagos. Mejoran la cartera crediticia y reducen significativamente las pérdidas.</p>
+				<a href="owr-service.html" class="btn-service">Conoce más</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Why FinTech Section -->
+<div class="why-fintech-section">
+	<div class="container">
+		<div class="about-header">
+			<h2 class="about-title" style="color: white;">¿Por qué tu FinTech necesita esta solución?</h2>
+			<p class="about-subtitle" style="color: rgba(255,255,255,0.9);">Proceso en 4 pasos que transforma la gestión de riesgo de tu plataforma</p>
+		</div>
+
+		<div class="process-steps">
+			<div class="process-step">
+				<div class="process-number">1</div>
+				<h4>📝 Protege tus ingresos</h4>
+				<p>Reduce el impacto de impagos y mantén un flujo de caja estable para garantizar la sostenibilidad de tu operación.</p>
+			</div>
+			<div class="process-step">
+				<div class="process-number">2</div>
+				<h4>🔍 Optimiza tu capital</h4>
+				<p>Libera recursos para innovar y crecer sin asumir todo el riesgo, maximizando el retorno de tu inversión.</p>
+			</div>
+			<div class="process-step">
+				<div class="process-number">3</div>
+				<h4>📄 Expande con confianza</h4>
+				<p>Ofrece crédito de manera más audaz, respaldado por una red de seguridad que te permite crecer sin temor.</p>
+			</div>
+			<div class="process-step">
+				<div class="process-number">4</div>
+				<h4>📈 Atrae inversionistas</h4>
+				<p>Demuestra solidez financiera y gestión inteligente del riesgo para atraer capital e impulsar tu crecimiento.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="testimonials-section">
+	<div class="container">
+		<div class="about-header">
+			<h2 class="about-title">Casos de Éxito</h2>
+			<p class="about-subtitle">Historias reales de personas y empresas que han transformado su acceso al crédito con AvalTrust</p>
+		</div>
+
+		<div class="testimonials-grid">
+			<div class="testimonial-card">
+				<p class="testimonial-quote">"Gracias a su equipo de profesionales pude acceder al crédito que mi banco me negaba. Su proceso digital fue rápido y transparente."</p>
+				<div class="testimonial-author">
+					<div class="testimonial-avatar">🧑</div>
+					<div class="testimonial-info">
+						<h5>Yadira Triana</h5>
+						<span>Medellín</span>
 					</div>
 				</div>
-
+			</div>
+			<div class="testimonial-card">
+				<p class="testimonial-quote">"Nos ayudaron a disminuir el riesgo crediticio asociado a la operación de mi empresa. Su aval nos dio la confianza que necesitábamos."</p>
+				<div class="testimonial-author">
+					<div class="testimonial-avatar">💼</div>
+					<div class="testimonial-info">
+						<h5>Miguel Rodríguez</h5>
+						<span>Bogotá</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Copyright -->
+</div>
 
-	<!-- Botón flotante de WhatsApp -->
-	<a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20servicios%20de%20AvalTrust"
-	   class="whatsapp-float"
-	   target="_blank"
-	   rel="noopener noreferrer"
-	   title="Chatea con nosotros en WhatsApp">
-		<img src="image/whatsapp.png" alt="WhatsApp">
-	</a>
+<!-- FAQ Section -->
+<div class="faq-section">
+	<div class="container">
+		<div class="about-header">
+			<h2 class="about-title">Preguntas Frecuentes</h2>
+			<p class="about-subtitle">Encuentra respuestas a las dudas más comunes sobre nuestros servicios</p>
+		</div>
 
-	<!-- Rreload Image for Slider -->
-	<div class="preload hide">
-		<img alt="" src="image/slider-lg-a.jpg">
-		<img alt="" src="image/slider-lg-b.jpg">
+		<div class="faq-container">
+			<div class="faq-item">
+				<button class="faq-question">
+					¿Qué tipos de crédito puedo avalar?
+					<i class="fa fa-chevron-down faq-icon"></i>
+				</button>
+				<div class="faq-answer">
+					Ofrecemos avales para una amplia gama de productos crediticios incluyendo créditos de libranza, digitales, educativos, de vehículos, arrendamiento y retail. <a href="owr-service.html">Conoce todos nuestros servicios aquí</a>.
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question">
+					¿AvalTrust es una entidad financiera?
+					<i class="fa fa-chevron-down faq-icon"></i>
+				</button>
+				<div class="faq-answer">
+					AvalTrust opera como una entidad que respalda el cumplimiento de las obligaciones de crédito originadas por entidades financieras o acreedores. No otorgamos préstamos directamente, sino que actuamos como avalista, garantizando el pago de los créditos en caso de incumplimiento del deudor.
+				</div>
+			</div>
+
+			<div class="faq-item">
+				<button class="faq-question">
+					¿Qué necesito para solicitar un aval?
+					<i class="fa fa-chevron-down faq-icon"></i>
+				</button>
+				<div class="faq-answer">
+					En la mayoría de casos, no necesitas contactarnos directamente. Solo sigue estos pasos: 1. Acude a un intermediario financiero (banco, cooperativa, FinTech, etc.) que trabaje con AvalTrust. 2. Solicita tu crédito y menciona que deseas el respaldo de nuestro aval. 3. Ellos gestionarán todo con nosotros, simplificando tu proceso.
+				</div>
+			</div>
+		</div>
 	</div>
-	<!-- End -->
+</div>
 
-	<!-- JavaScript Bundle -->
-	<script src="js/jquery.bundle.js"></script>
-	<!-- Theme Script init() -->
-	<script src="js/script.js"></script>
-	<!-- End script -->
+<!-- Final CTA Section -->
+<div class="final-cta">
+	<div class="container">
+		<div class="final-cta-content">
+			<h2 class="final-cta-title" style="color:#fff">¿Necesitas aval para tu crédito?</h2>
+			<p class="final-cta-text">Habla con un asesor y empieza hoy mismo. Transformamos tu acceso al financiamiento con garantías innovadoras y seguras.</p>
+			<a href="contact.html" class="btn-final-cta">Hablar con un Asesor</a>
+		</div>
+	</div>
+</div>
+
+<!-- Footer Widget-->
+<div class="footer-widget section-pad-md">
+	<div class="container">
+		<div class="row">
+			<div class="widget-row row">
+				<div class="footer-col col-md-3 col-sm-6 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-text">
+						<div class="wgs-content">
+							<p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
+							<p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
+						</div>
+					</div>
+					<!-- End Widget -->
+				</div>
+				<div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-menu">
+						<h5 class="wgs-title">Somos tu Aval Para</h5>
+						<div class="wgs-content">
+							<ul class="menu">
+								<li><a>Créditos de libranzas</a></li>
+								<li><a>Créditos digitales</a></li>
+								<li><a>Créditos educativos</a></li>
+								<li><a>Créditos de vehículos</a></li>
+								<li><a>Créditos de arrendamiento</a></li>
+								<li><a>Créditos retail</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- End Widget -->
+				</div>
+				<div class="footer-col col-md-2 col-sm-6 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-menu">
+						<h5 class="wgs-title">Enlaces rápidos</h5>
+						<div class="wgs-content">
+							<ul class="menu">
+								<li><a href="#">Inicio</a></li>
+								<li><a href="#">Quienes Somos</a></li>
+								<li><a href="#">Personas</a></li>
+								<li><a href="#">Empresas</a></li>
+								<li><a href="#">Nuestro Servicio</a></li>
+								<li><a href="#">Contáctenos</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- End Widget -->
+				</div>
+
+				<div class="footer-col col-md-3 col-sm-6">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer">
+						<h5 class="wgs-title">Estamos para ayudarte</h5>
+						<div class="wgs-content">
+							<p>
+								Calle 70 sur # 43a-13<br>
+								Edificio Cantoluna<br>
+								Sabaneta, Antioquia.
+							</p>
+							<p><span>Teléfono</span>: (123) 1234 5678</p>
+							<ul class="social">
+								<li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
+								<li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
+								<li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- End Widget -->
+				</div>
+			</div><!-- Widget Row -->
+		</div>
+	</div>
+</div>
+<!-- End Footer Widget -->
+
+<!-- Copyright -->
+<div class="copyright">
+	<div class="container">
+		<div class="row">
+			<div class="row">
+				<div class="site-copy col-sm-7">
+					<p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
+				</div>
+				<div class="site-by col-sm-5 al-right">
+					<p>Comprometidos con transformar el acceso al crédito.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- JavaScript for FAQ -->
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const faqItems = document.querySelectorAll('.faq-item');
+
+		faqItems.forEach(item => {
+			const question = item.querySelector('.faq-question');
+			const answer = item.querySelector('.faq-answer');
+
+			question.addEventListener('click', () => {
+				const isActive = item.classList.contains('active');
+
+				// Close all FAQ items
+				faqItems.forEach(otherItem => {
+					otherItem.classList.remove('active');
+					otherItem.querySelector('.faq-answer').classList.remove('show');
+				});
+
+				// Toggle current item
+				if (!isActive) {
+					item.classList.add('active');
+					answer.classList.add('show');
+				}
+			});
+		});
+	});
+</script>
+
+<!-- Scripts -->
+<script src="js/jquery.bundle.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

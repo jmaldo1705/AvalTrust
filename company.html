@@ -9,206 +9,427 @@
 	<link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
 	<link id="whatsapp" rel="stylesheet" type="text/css" href="css/whatsapp.css">
 	<link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
+	<style>
+		.hero-stats {
+			background: linear-gradient(135deg, #1e93d0 0%, #0d7db8 100%);
+			color: white;
+			padding: 60px 0;
+		}
+		.stat-item {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		.stat-number {
+			font-size: 3em;
+			font-weight: bold;
+			display: block;
+		}
+		.stat-label {
+			font-size: 1.1em;
+			opacity: 0.9;
+		}
+		.benefit-card {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			margin-bottom: 30px;
+			box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+			transition: all 0.3s ease;
+			border-left: 4px solid #1e93d0;
+		}
+		.benefit-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		}
+		.process-timeline {
+			position: relative;
+			padding: 40px 0;
+		}
+		.timeline-item {
+			position: relative;
+			padding-left: 80px;
+			margin-bottom: 40px;
+		}
+		.timeline-item::before {
+			content: '';
+			position: absolute;
+			left: 30px;
+			top: 0;
+			bottom: -40px;
+			width: 2px;
+			background: #1e93d0;
+		}
+		.timeline-item:last-child::before {
+			display: none;
+		}
+		.timeline-number {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 60px;
+			height: 60px;
+			background: #1e93d0;
+			color: white;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: bold;
+			font-size: 1.2em;
+		}
+		.cta-section {
+			background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+			padding: 80px 0;
+			text-align: center;
+		}
+		.partnership-types {
+			background: #f8f9fa;
+			padding: 80px 0;
+		}
+		.partnership-card {
+			background: white;
+			border-radius: 15px;
+			padding: 40px 30px;
+			text-align: center;
+			height: 100%;
+			transition: all 0.3s ease;
+			border: 1px solid #e9ecef;
+		}
+		.partnership-card:hover {
+			border-color: #1e93d0;
+			transform: translateY(-10px);
+		}
+		.partnership-icon {
+			width: 80px;
+			height: 80px;
+			background: linear-gradient(135deg, #1e93d0, #0d7db8);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 20px;
+			color: white;
+			font-size: 2em;
+		}
+		.section-spacing { margin: 80px 0; }
+		.bg-gradient { background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); }
+	</style>
 </head>
 <body class="site-body style-v1">
-	<!-- Header -->
-	<header class="site-header header-s1 is-transparent is-sticky">
-		<!-- Navbar -->
-		<div class="navbar navbar-primary">
+<!-- Header -->
+<header class="site-header header-s1 is-transparent is-sticky">
+	<!-- Navbar -->
+	<div class="navbar navbar-primary">
+		<div class="container">
+			<!-- Logo -->
+			<a class="navbar-brand" href="./">
+				<img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
+				<img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
+			</a>
+			<!-- #end Logo -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
+					<span class="sr-only">Menu</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Q-Button for Mobile -->
+				<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
+			</div>
+			<!-- MainNav -->
+			<nav class="navbar-collapse collapse" id="mainnav">
+				<ul class="nav navbar-nav">
+					<li><a href="./">Inicio</a></li>
+					<li><a href="about-us.html">Quiénes Somos</a></li>
+					<li><a href="people.html">Personas</a></li>
+					<li><a href="company.html">Empresas</a></li>
+					<li><a href="owr-service.html">Nuestro Servicio</a></li>
+					<li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
+				</ul>
+			</nav>
+			<!-- #end MainNav -->
+		</div>
+	</div>
+	<!-- #end Navbar -->
+	<!-- Banner/Static -->
+	<div class="banner banner-static">
+		<div class="banner-cpn">
 			<div class="container">
-				<!-- Logo -->
-				<a class="navbar-brand" href="./">
-					<img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
-					<img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
-				</a>
-				<!-- #end Logo -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
-						<span class="sr-only">Menu</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Q-Button for Mobile -->
-					<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
+				<div class="content row">
+					<div class="banner-text">
+						<h1 class="page-title">Soluciones Empresariales</h1>
+						<p class="lead">Potenciamos el crecimiento de tu empresa con avales seguros y flexibles que abren nuevas oportunidades de financiamiento</p>
+					</div>
 				</div>
-				<!-- MainNav -->
-				<nav class="navbar-collapse collapse" id="mainnav">
-					<ul class="nav navbar-nav">
-						<li><a href="./">Inicio</a></li>
-						<li><a href="about-us.html">Quiénes Somos</a></li>
-						<li><a href="people.html">Personas</a></li>
-						<li><a href="company.html">Empresas</a></li>
-						<li><a href="owr-service.html">Nuestro Servicio</a></li>
-						<li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
-					</ul>
-				</nav>
-				<!-- #end MainNav -->
 			</div>
 		</div>
-		<!-- #end Navbar -->
-		<!-- Banner/Static -->
-		<div class="banner banner-static">
-			<div class="banner-cpn">
-				<div class="container">
-					<div class="content row">
-					
-						<div class="banner-text">
-							<h1 class="page-title">Empresas</h1>
-							<p>Tu respaldo financiero cuando más lo necesitas, con soluciones que construyen confianza</p>
-						</div>
-					</div>
+		<div class="banner-bg imagebg">
+			<img src="image/banner-inside-a.jpg" alt="" />
+		</div>
+	</div>
+	<!-- #end Banner/Static -->
+</header>
+<!-- End Header -->
+
+<!-- Hero Stats Section - Adjusted for New Company -->
+<div class="hero-stats">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-6">
+				<div class="stat-item">
+					<span class="stat-number">100%</span>
+					<span class="stat-label">Digital y Automatizado</span>
 				</div>
 			</div>
-			<div class="banner-bg imagebg">
-				<img src="image/banner-inside-a.jpg" alt="" />
+			<div class="col-md-3 col-sm-6">
+				<div class="stat-item">
+					<span class="stat-number">24h</span>
+					<span class="stat-label">Tiempo de Respuesta</span>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="stat-item">
+					<span class="stat-number">0</span>
+					<span class="stat-label">Papeleo Físico</span>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="stat-item">
+					<span class="stat-number">✓</span>
+					<span class="stat-label">Listo para Operar</span>
+				</div>
 			</div>
 		</div>
-		<!-- #end Banner/Static -->
-	</header>
-	<!-- End Header -->
-	<div class="section section-pad bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="wide-md center">
-						<h2 class="heading-lead">Nuestra Propuesta de Valor</h2>
-						<div class="feature boxed bg-white">
-							<div class="fbox-content text-center">
-								<p class="lead">Ofrecemos un sistema confiable de avales que reduce riesgos, fomenta la transparencia y agiliza procesos. Nuestro enfoque combina respaldo legal, eficiencia tecnológica y acompañamiento personalizado, para garantizar acuerdos seguros y sostenibles.</p>
-							</div>
-						</div>
+	</div>
+</div>
+
+<!-- Value Proposition Section -->
+<div class="section section-pad bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="text-center section-spacing">
+					<h2 class="heading-lead">¿Por qué las empresas elegirán AvalTrust?</h2>
+					<p class="lead text-muted">Estamos listos para transformar la manera en que las empresas acceden al financiamiento, ofreciendo soluciones de aval innovadoras que reducen barreras y aceleran el crecimiento empresarial.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="benefit-card">
+					<div class="text-center mb-4">
+						<i class="fa fa-rocket fa-3x" style="color: #1e93d0; margin-bottom: 20px;"></i>
+					</div>
+					<h3>Acceso Rápido al Financiamiento</h3>
+					<p>Eliminamos las trabas burocráticas tradicionales. Con nuestros avales, tu empresa podrá acceder a créditos en tiempo récord, permitiéndote aprovechar oportunidades de negocio cuando más lo necesites.</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="benefit-card">
+					<div class="text-center mb-4">
+						<i class="fa fa-shield fa-3x" style="color: #1e93d0; margin-bottom: 20px;"></i>
+					</div>
+					<h3>Respaldo Sólido y Confiable</h3>
+					<p>Nuestros avales están respaldados por un equipo experto y tecnología de vanguardia en análisis de riesgo, garantizando la seguridad tanto para tu empresa como para los prestamistas.</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="benefit-card">
+					<div class="text-center mb-4">
+						<i class="fa fa-line-chart fa-3x" style="color: #1e93d0; margin-bottom: 20px;"></i>
+					</div>
+					<h3>Impulso al Crecimiento</h3>
+					<p>Con acceso a financiamiento ágil y seguro, tu empresa podrá escalar operaciones, invertir en innovación y expandirse a nuevos mercados con la confianza que brinda nuestro respaldo.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Partnership Types Section -->
+<div class="partnership-types">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center section-spacing">
+				<h2 class="heading-lead">Tipos de Empresas que Respaldaremos</h2>
+				<p class="lead text-muted">Nuestras soluciones están diseñadas para adaptarse a diferentes sectores y necesidades empresariales</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-6">
+				<div class="partnership-card">
+					<div class="partnership-icon">
+						<i class="fa fa-mobile"></i>
+					</div>
+					<h3>Fintech y Startups</h3>
+					<p>Diseñamos nuestro respaldo especialmente para el ecosistema de innovación financiera, con avales especializados para plataformas digitales y empresas emergentes del sector tecnológico.</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="partnership-card">
+					<div class="partnership-icon">
+						<i class="fa fa-industry"></i>
+					</div>
+					<h3>PYMES Tradicionales</h3>
+					<p>Facilitaremos el acceso al crédito para pequeñas y medianas empresas de sectores tradicionales que buscan modernizar sus operaciones y expandir su alcance.</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<div class="partnership-card">
+					<div class="partnership-icon">
+						<i class="fa fa-shopping-cart"></i>
+					</div>
+					<h3>Comercio y Retail</h3>
+					<p>Apoyaremos empresas comerciales y de retail con soluciones de aval para financiar inventarios, expansión de puntos de venta y mejoras tecnológicas.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Process Section -->
+<div class="section section-pad bg-gradient">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 class="heading-lead">Proceso Simplificado para Empresas</h2>
+				<p class="lead text-muted">Hemos diseñado un proceso ágil y transparente que se adapta a las necesidades empresariales modernas.</p>
+
+				<div class="process-timeline">
+					<div class="timeline-item">
+						<div class="timeline-number">1</div>
+						<h4>Solicitud Digital</h4>
+						<p>Completa nuestra solicitud en línea con la información básica de tu empresa y las necesidades de financiamiento.</p>
+					</div>
+
+					<div class="timeline-item">
+						<div class="timeline-number">2</div>
+						<h4>Evaluación Rápida</h4>
+						<p>Nuestro equipo especializado evaluará tu solicitud utilizando tecnología avanzada de análisis de riesgo en máximo 24 horas.</p>
+					</div>
+
+					<div class="timeline-item">
+						<div class="timeline-number">3</div>
+						<h4>Estructuración del Aval</h4>
+						<p>Diseñaremos una solución de aval personalizada que se ajuste a tu perfil empresarial y objetivos de financiamiento.</p>
+					</div>
+
+					<div class="timeline-item">
+						<div class="timeline-number">4</div>
+						<h4>Activación y Monitoreo</h4>
+						<p>Una vez aprobado, activaremos tu aval y mantendremos un monitoreo continuo para garantizar el cumplimiento y éxito del acuerdo.</p>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-6">
+				<img class="img-responsive img-shadow" alt="Proceso empresarial" src="image/photo-sm-a.jpg" style="border-radius: 12px;">
+			</div>
+		</div>
+	</div>
+</div>
 
-			<!-- How It Works Section -->
-			<div class="row">
-				<div class="col-md-12">
-					<h2 class="heading-lead text-center">¿Cómo funciona el aval?</h2>
-					<div class="feature-row row">
-						<!-- Step 1 -->
-						<div class="col-md-4 col-sm-6">
-							<div class="feature boxed">
-								<div class="fbox-photo">
-									<i class="fa fa-handshake-o fa-3x" style="color: #1e93d0;"></i>
-								</div>
-								<div class="fbox-content">
-									<h3>Formalización del acuerdo</h3>
-									<p>Las partes interesadas (prestamista y solicitante) acuerdan los términos del contrato de mutuo y de la fianza, estableciendo así las condiciones del aval.</p>
-								</div>
-							</div>
-						</div>
+<!-- Services for Companies -->
+<div class="section section-pad">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center section-spacing">
+				<h2 class="heading-lead">Nuestros Servicios Empresariales</h2>
+				<p class="lead text-muted">Soluciones especializadas para diferentes necesidades de financiamiento empresarial</p>
+			</div>
+		</div>
 
-						<!-- Step 2 -->
-						<div class="col-md-4 col-sm-6">
-							<div class="feature boxed">
-								<div class="fbox-photo">
-									<i class="fa fa-check-circle fa-3x" style="color: #1e93d0;"></i>
-								</div>
-								<div class="fbox-content">
-									<h3>Validación de la información</h3>
-									<p>El intermediario verifica y valida los datos del acuerdo, y comunica a Avaltrust para que se autorice la emisión del aval conforme a lo pactado.</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Step 3 -->
-						<div class="col-md-4 col-sm-6">
-							<div class="feature boxed">
-								<div class="fbox-photo">
-									<i class="fa fa-money fa-3x" style="color: #1e93d0;"></i>
-								</div>
-								<div class="fbox-content">
-									<h3>Desembolso al usuario</h3>
-									<p>Una vez emitido el aval, se realiza el desembolso de los fondos al usuario beneficiario del contrato.</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Step 4 -->
-						<div class="col-md-6 col-sm-6">
-							<div class="feature boxed">
-								<div class="fbox-photo">
-									<i class="fa fa-bell fa-3x" style="color: #1e93d0;"></i>
-								</div>
-								<div class="fbox-content">
-									<h3>Notificación y pago del aval</h3>
-									<p>El intermediario financiero notifica la emisión del aval y se procede al pago del mismo, el cual es asumido por el usuario avalado.</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Step 5 -->
-						<div class="col-md-6 col-sm-6">
-							<div class="feature boxed">
-								<div class="fbox-photo">
-									<i class="fa fa-line-chart fa-3x" style="color: #1e93d0;"></i>
-								</div>
-								<div class="fbox-content">
-									<h3>Monitoreo y respaldo</h3>
-									<p>Avaltrust realiza un seguimiento continuo al cumplimiento de las obligaciones. En caso de incumplimiento, brindamos respaldo según lo estipulado, garantizando imparcialidad y protección para ambas partes.</p>
-								</div>
-							</div>
-						</div>
+		<div class="row">
+			<div class="col-md-6 col-lg-4">
+				<div class="feature boxed bg-white" style="height: 280px;">
+					<div class="fbox-icon text-center">
+						<i class="fa fa-credit-card fa-3x" style="color: #1e93d0;"></i>
+					</div>
+					<div class="fbox-content text-center">
+						<h3>Capital de Trabajo</h3>
+						<p>Avales para financiar operaciones diarias, compra de inventarios y gastos operacionales que mantengan tu negocio en funcionamiento.</p>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-6 col-lg-4">
+				<div class="feature boxed bg-white" style="height: 280px;">
+					<div class="fbox-icon text-center">
+						<i class="fa fa-building fa-3x" style="color: #1e93d0;"></i>
+					</div>
+					<div class="fbox-content text-center">
+						<h3>Expansión Empresarial</h3>
+						<p>Respaldo para proyectos de crecimiento, apertura de nuevas sedes, adquisición de equipos y modernización tecnológica.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-4">
+				<div class="feature boxed bg-white" style="height: 280px;">
+					<div class="fbox-icon text-center">
+						<i class="fa fa-handshake-o fa-3x" style="color: #1e93d0;"></i>
+					</div>
+					<div class="fbox-content text-center">
+						<h3>Proyectos Especiales</h3>
+						<p>Soluciones de aval para proyectos de innovación, contratos gubernamentales y oportunidades de negocio específicas.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-			<!-- Commitments Section -->
-			<div class="section section-pad bg-light">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center">
-								<h2 class="heading-lead">¿A qué nos comprometemos?</h2>
+<!-- Commitments Section Enhanced -->
+<div class="section section-pad bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="text-center section-spacing">
+					<h2 class="heading-lead">Nuestro Compromiso con las Empresas</h2>
+					<p class="lead text-muted">Más que un proveedor de avales, seremos tu socio estratégico en el crecimiento empresarial</p>
+				</div>
+				<!-- Feature Row -->
+				<div class="feature-row row">
+					<div class="col-md-3 col-sm-6">
+						<div class="feature feature-s6 boxed">
+							<div class="fbox-icon">
+								<em class="fa fa-shield fa-3x" style="color: #1e93d0;"></em>
 							</div>
-							<!-- Feature Row -->
-							<div class="feature-row row">
-								<div class="col-md-3 col-sm-6">
-									<div class="feature feature-s6 boxed">
-										<div class="fbox-icon">
-											<em class="fa fa-shield fa-3x" style="color: #1e93d0;"></em>
-										</div>
-										<div class="fbox-content">
-											<h3>Integridad</h3>
-											<p>Actuamos con integridad y transparencia en cada operación.</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-3 col-sm-6">
-									<div class="feature feature-s6 boxed">
-										<div class="fbox-icon">
-											<em class="fa fa-balance-scale fa-3x" style="color: #1e93d0;"></em>
-										</div>
-										<div class="fbox-content">
-											<h3>Protección</h3>
-											<p>Protegemos los intereses de todas las partes involucradas.</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-3 col-sm-6">
-									<div class="feature feature-s6 boxed">
-										<div class="fbox-icon">
-											<em class="fa fa-lightbulb-o fa-3x" style="color: #1e93d0;"></em>
-										</div>
-										<div class="fbox-content">
-											<h3>Soluciones</h3>
-											<p>Ofrecemos soluciones claras, seguras y accesibles.</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-3 col-sm-6">
-									<div class="feature feature-s6 boxed">
-										<div class="fbox-icon">
-											<em class="fa fa-users fa-3x" style="color: #1e93d0;"></em>
-										</div>
-										<div class="fbox-content">
-											<h3>Confianza</h3>
-											<p>Fomentamos la cultura del cumplimiento y la confianza.</p>
-										</div>
-									</div>
-								</div>
+							<div class="fbox-content">
+								<h3>Seguridad Total</h3>
+								<p>Protegeremos tu reputación empresarial con avales sólidos y procesos transparentes que generen confianza en el mercado.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="feature feature-s6 boxed">
+							<div class="fbox-icon">
+								<em class="fa fa-clock-o fa-3x" style="color: #1e93d0;"></em>
+							</div>
+							<div class="fbox-content">
+								<h3>Agilidad Empresarial</h3>
+								<p>Entendemos que el tiempo es dinero. Nuestros procesos están optimizados para la velocidad que requiere el mundo empresarial.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="feature feature-s6 boxed">
+							<div class="fbox-icon">
+								<em class="fa fa-cog fa-3x" style="color: #1e93d0;"></em>
+							</div>
+							<div class="fbox-content">
+								<h3>Personalización</h3>
+								<p>Cada empresa es única. Adaptaremos nuestras soluciones a tu sector, tamaño y objetivos específicos de crecimiento.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="feature feature-s6 boxed">
+							<div class="fbox-icon">
+								<em class="fa fa-users fa-3x" style="color: #1e93d0;"></em>
+							</div>
+							<div class="fbox-content">
+								<h3>Acompañamiento</h3>
+								<p>Te acompañaremos durante todo el proceso y más allá, ofreciendo asesoría continua para maximizar el valor de nuestro aval.</p>
 							</div>
 						</div>
 					</div>
@@ -216,117 +437,130 @@
 			</div>
 		</div>
 	</div>
-	<!-- Footer Widget-->
-	<div class="footer-widget section-pad-md">
-		<div class="container">
-			<div class="row">
+</div>
 
-				<div class="widget-row row">
-					<div class="footer-col col-md-3 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-text">
-							<div class="wgs-content">
-								<p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
-								<p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Somos tu Aval Para</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a>Créditos de libranzas</a></li>
-									<li><a>Créditos digitales</a></li>
-									<li><a>Créditos educativos</a></li>
-									<li><a>Créditos de vehículos</a></li>
-									<li><a>Créditos de arrendamiento</a></li>
-									<li><a>Créditos retail</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-2 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Enlaces rápidos</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a href="#">Inicio</a></li>
-									<li><a href="#">Quienes Somos</a></li>
-									<li><a href="#">Personas</a></li>
-									<li><a href="#">Empresas</a></li>
-									<li><a href="#">Nuestro Servicio</a></li>
-									<li><a href="#">Contáctenos</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-
-					<div class="footer-col col-md-3 col-sm-6">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer">
-							<h5 class="wgs-title">Estamos para ayudarte</h5>
-							<div class="wgs-content">
-								<p>
-									Calle 70 sur # 43a-13<br>
-									Edificio Cantoluna<br>
-									Sabaneta, Antioquia.
-								</p>
-								<p><span>Teléfono</span>: (123) 1234 5678</p>
-								<ul class="social">
-									<li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
-									<li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
-									<li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-
-				</div><!-- Widget Row -->
-
+<!-- CTA Section -->
+<div class="cta-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<h2 class="heading-lead">¿Listo para ser pionero en el futuro del financiamiento?</h2>
+				<p class="lead text-muted">Únete a la próxima generación de empresas que accederán a financiamiento seguro y ágil con AvalTrust.</p>
+				<div style="margin-top: 40px;">
+					<a href="contact.html" class="btn btn-primary btn-lg" style="margin-right: 20px; padding: 15px 40px;">Solicitar Información</a>
+					<a href="owr-service.html" class="btn btn-outline btn-lg" style="padding: 15px 40px;">Conocer Servicios</a>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Footer Widget -->
+</div>
 
-	<!-- Copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-
-				<div class="row">
-					<div class="site-copy col-sm-7">
-						<p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
+<!-- Footer Widget-->
+<div class="footer-widget section-pad-md">
+	<div class="container">
+		<div class="row">
+			<div class="widget-row row">
+				<div class="footer-col col-md-3 col-sm-6 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-text">
+						<div class="wgs-content">
+							<p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
+							<p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
+						</div>
 					</div>
-					<div class="site-by col-sm-5 al-right">
-						<p>Comprometidos con transformar el acceso al crédito.</p>
+					<!-- End Widget -->
+				</div>
+				<div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-menu">
+						<h5 class="wgs-title">Somos tu Aval Para</h5>
+						<div class="wgs-content">
+							<ul class="menu">
+								<li><a>Créditos de libranzas</a></li>
+								<li><a>Créditos digitales</a></li>
+								<li><a>Créditos educativos</a></li>
+								<li><a>Créditos de vehículos</a></li>
+								<li><a>Créditos de arrendamiento</a></li>
+								<li><a>Créditos retail</a></li>
+							</ul>
+						</div>
 					</div>
+					<!-- End Widget -->
+				</div>
+				<div class="footer-col col-md-2 col-sm-6 res-m-bttm">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer wgs-menu">
+						<h5 class="wgs-title">Enlaces rápidos</h5>
+						<div class="wgs-content">
+							<ul class="menu">
+								<li><a href="#">Inicio</a></li>
+								<li><a href="#">Quienes Somos</a></li>
+								<li><a href="#">Personas</a></li>
+								<li><a href="#">Empresas</a></li>
+								<li><a href="#">Nuestro Servicio</a></li>
+								<li><a href="#">Contáctenos</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- End Widget -->
 				</div>
 
+				<div class="footer-col col-md-3 col-sm-6">
+					<!-- Each Widget -->
+					<div class="wgs wgs-footer">
+						<h5 class="wgs-title">Estamos para ayudarte</h5>
+						<div class="wgs-content">
+							<p>
+								Calle 70 sur # 43a-13<br>
+								Edificio Cantoluna<br>
+								Sabaneta, Antioquia.
+							</p>
+							<p><span>Teléfono</span>: (123) 1234 5678</p>
+							<ul class="social">
+								<li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
+								<li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
+								<li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- End Widget -->
+				</div>
+			</div><!-- Widget Row -->
+		</div>
+	</div>
+</div>
+<!-- End Footer Widget -->
+
+<!-- Copyright -->
+<div class="copyright">
+	<div class="container">
+		<div class="row">
+			<div class="row">
+				<div class="site-copy col-sm-7">
+					<p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
+				</div>
+				<div class="site-by col-sm-5 al-right">
+					<p>Comprometidos con transformar el acceso al crédito.</p>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Copyright -->
+</div>
+<!-- End Copyright -->
 
-	<!-- Botón flotante de WhatsApp -->
-	<a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20servicios%20de%20AvalTrust"
-	   class="whatsapp-float"
-	   target="_blank"
-	   rel="noopener noreferrer"
-	   title="Chatea con nosotros en WhatsApp">
-		<img src="image/whatsapp.png" alt="WhatsApp">
-	</a>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20servicios%20empresariales%20de%20AvalTrust"
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Chatea con nosotros en WhatsApp">
+	<img src="image/whatsapp.png" alt="WhatsApp">
+</a>
 
-	<!-- JavaScript Bundle -->
-	<script src="js/jquery.bundle.js"></script>
-	<!-- Theme Script init() -->
-	<script src="js/script.js"></script>
-	<!-- End script -->
+<!-- JavaScript Bundle -->
+<script src="js/jquery.bundle.js"></script>
+<!-- Theme Script init() -->
+<script src="js/script.js"></script>
+<!-- End script -->
 </body>
 </html>

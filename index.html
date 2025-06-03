@@ -688,22 +688,22 @@
 		<div class="process-steps">
 			<div class="process-step">
 				<div class="process-number">1</div>
-				<h4>📝 Protege tus ingresos</h4>
+				<h4 style="color: #fff">📝 Protege tus ingresos</h4>
 				<p>Reduce el impacto de impagos y mantén un flujo de caja estable para garantizar la sostenibilidad de tu operación.</p>
 			</div>
 			<div class="process-step">
 				<div class="process-number">2</div>
-				<h4>🔍 Optimiza tu capital</h4>
+				<h4 style="color: #fff">🔍 Optimiza tu capital</h4>
 				<p>Libera recursos para innovar y crecer sin asumir todo el riesgo, maximizando el retorno de tu inversión.</p>
 			</div>
 			<div class="process-step">
 				<div class="process-number">3</div>
-				<h4>📄 Expande con confianza</h4>
+				<h4 style="color: #fff">📄 Expande con confianza</h4>
 				<p>Ofrece crédito de manera más audaz, respaldado por una red de seguridad que te permite crecer sin temor.</p>
 			</div>
 			<div class="process-step">
 				<div class="process-number">4</div>
-				<h4>📈 Atrae inversionistas</h4>
+				<h4 style="color: #fff">📈 Atrae inversionistas</h4>
 				<p>Demuestra solidez financiera y gestión inteligente del riesgo para atraer capital e impulsar tu crecimiento.</p>
 			</div>
 		</div>
@@ -888,33 +888,14 @@
 	</div>
 </div>
 
-<!-- JavaScript for FAQ -->
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const faqItems = document.querySelectorAll('.faq-item');
-
-		faqItems.forEach(item => {
-			const question = item.querySelector('.faq-question');
-			const answer = item.querySelector('.faq-answer');
-
-			question.addEventListener('click', () => {
-				const isActive = item.classList.contains('active');
-
-				// Close all FAQ items
-				faqItems.forEach(otherItem => {
-					otherItem.classList.remove('active');
-					otherItem.querySelector('.faq-answer').classList.remove('show');
-				});
-
-				// Toggle current item
-				if (!isActive) {
-					item.classList.add('active');
-					answer.classList.add('show');
-				}
-			});
-		});
-	});
-</script>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/1234567890?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20los%20servicios%20de%20aval%20para%20personas%20de%20AvalTrust"
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Chatea con nosotros en WhatsApp">
+	<img src="image/whatsapp.png" alt="WhatsApp">
+</a>
 
 <!-- Scripts -->
 <script src="js/jquery.bundle.js"></script>

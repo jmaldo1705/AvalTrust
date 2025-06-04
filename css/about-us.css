@@ -1,0 +1,576 @@
+/* Hero About Section */
+.hero-about {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: white;
+    padding: 140px 0 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+            radial-gradient(circle at 25% 25%, rgba(44, 125, 250, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(30, 147, 208, 0.1) 0%, transparent 50%);
+    animation: float 15s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.hero-about-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-about-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.image-placeholder {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.image-placeholder::before {
+    content: "Imagen 400x400px";
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.hero-about-square-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: none;
+}
+
+/* Cuando agregues una imagen real, usa esta clase para mostrarla */
+.image-placeholder.has-image {
+    background: none;
+    border: none;
+    backdrop-filter: none;
+}
+
+.image-placeholder.has-image::before {
+    display: none;
+}
+
+.image-placeholder.has-image .hero-about-square-image {
+    display: block;
+}
+
+.hero-about-square-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 35px 80px rgba(44, 125, 250, 0.2);
+}
+
+.hero-about-text {
+    padding-left: 40px;
+}
+
+.hero-badge-about {
+    background: rgba(44, 125, 250, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(44, 125, 250, 0.3);
+    border-radius: 50px;
+    padding: 12px 25px;
+    display: inline-block;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #00d4ff;
+}
+
+.hero-title-about {
+    font-size: 4em;
+    font-weight: 200;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #2C7DFA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle-about {
+    font-size: 1.4em;
+    opacity: 0.85;
+    line-height: 1.4;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+
+/* Story Section - Usando Bootstrap Grid */
+.story-section {
+    padding: 120px 0;
+    background: #ffffff;
+}
+
+.story-grid {
+    /* Removido CSS Grid, usaremos Bootstrap */
+}
+
+.story-content h2 {
+    font-size: 2.8em;
+    color: #1a1a2e;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.story-content p {
+    font-size: 1.1em;
+    color: #4a5568;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Values, Vision, Mission Section - Usando Bootstrap Grid */
+.values-vision-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.values-vision-section .text-center h2 {
+    font-size: 2.5em !important;
+    color: #1a1a2e !important;
+    margin-bottom: 20px !important;
+    font-weight: 300 !important;
+}
+
+.values-vision-section .text-center p {
+    font-size: 1.2em !important;
+    color: #4a5568 !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+}
+
+/* Ajustando el grid de valores para Bootstrap */
+.values-grid {
+    margin-top: 60px;
+    /* Removido CSS Grid personalizado */
+}
+
+.value-card {
+    background: white;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 5px solid #2C7DFA;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px; /* Para spacing en móviles */
+    height: 100%; /* Para que las tarjetas tengan la misma altura */
+}
+
+.value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #2C7DFA, #1e93d0);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover::before {
+    transform: scaleX(1);
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(44, 125, 250, 0.15);
+}
+
+.value-card h3 {
+    color: #1a1a2e;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.value-card p {
+    color: #4a5568;
+    line-height: 1.7;
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Team Section - Usando Bootstrap Grid */
+.team-section {
+    padding: 120px 0;
+    background: #ffffff;
+}
+
+.team-section h2 {
+    font-size: 2.5em;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.team-section > .container > p {
+    font-size: 1.2em;
+    color: #4a5568;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Ajustando el grid del equipo para Bootstrap */
+.team-grid {
+    margin-top: 60px;
+    /* Removido CSS Grid personalizado */
+}
+
+.team-member {
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f1f5f9;
+    margin-bottom: 30px; /* Para spacing en móviles */
+    height: 100%; /* Para que las tarjetas tengan la misma altura */
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(44, 125, 250, 0.1);
+    border-color: rgba(44, 125, 250, 0.2);
+}
+
+.team-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 25px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: #64748b;
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-info h4 {
+    color: #1a1a2e;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.team-info .position {
+    color: #2C7DFA;
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.team-info p {
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+            radial-gradient(circle at 30% 40%, rgba(44, 125, 250, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(30, 147, 208, 0.08) 0%, transparent 50%);
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section h2 {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.cta-section p {
+    font-size: 1.2em;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-cta {
+    background: linear-gradient(135deg, #2C7DFA, #1e93d0);
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 1.1em;
+}
+
+.btn-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(44, 125, 250, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-about-text {
+        padding-left: 20px;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .hero-title-about {
+        font-size: 3.2em;
+    }
+
+    .hero-subtitle-about {
+        font-size: 1.2em;
+    }
+
+    .image-placeholder {
+        max-width: 350px;
+        height: 350px;
+    }
+
+    .story-content {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .story-image {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-about {
+        padding: 100px 0 80px;
+    }
+
+    .hero-about-text {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+
+    .hero-title-about {
+        font-size: 2.5em;
+    }
+
+    .hero-subtitle-about {
+        font-size: 1.1em;
+    }
+
+    .image-placeholder {
+        max-width: 300px;
+        height: 300px;
+    }
+
+    .story-section,
+    .values-vision-section,
+    .team-section {
+        padding: 80px 0;
+    }
+
+    .story-content h2 {
+        font-size: 2.2em;
+    }
+
+    .story-content p {
+        font-size: 1em;
+    }
+
+    .values-vision-section .text-center h2 {
+        font-size: 2em !important;
+    }
+
+    .values-vision-section .text-center p {
+        font-size: 1.1em !important;
+    }
+
+    .value-card {
+        padding: 30px 25px;
+    }
+
+    .cta-section {
+        padding: 80px 0;
+    }
+
+    .cta-section h2 {
+        font-size: 2em;
+    }
+
+    .cta-section p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title-about {
+        font-size: 2.2em;
+    }
+
+    .hero-subtitle-about {
+        font-size: 1em;
+    }
+
+    .image-placeholder {
+        max-width: 280px;
+        height: 280px;
+    }
+
+    .story-content h2 {
+        font-size: 1.8em;
+    }
+
+    .values-vision-section .text-center h2 {
+        font-size: 1.8em !important;
+    }
+
+    .value-card {
+        padding: 25px 20px;
+    }
+
+    .value-card h3 {
+        font-size: 1.3em;
+    }
+
+    .team-member {
+        padding: 30px 20px;
+    }
+
+    .team-photo {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5em;
+    }
+
+    .cta-section h2 {
+        font-size: 1.8em;
+    }
+
+    .btn-cta {
+        padding: 15px 30px;
+        font-size: 1em;
+    }
+}
+
+/* Utilidades adicionales para Bootstrap compatibility */
+.row.align-items-center {
+    display: flex;
+    align-items: center;
+}
+
+/* Mejoras para compatibilidad con navegadores antiguos */
+.hero-about-square-image,
+.story-image img {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.value-card,
+.team-member {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.value-card:hover,
+.team-member:hover {
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+
+/* Asegurar que las columnas de Bootstrap funcionen correctamente */
+.values-grid .col-md-6,
+.values-grid .col-lg-4,
+.team-grid .col-md-4,
+.team-grid .col-sm-6 {
+    display: flex;
+    align-items: stretch;
+}
+
+.values-grid .col-md-6 .value-card,
+.values-grid .col-lg-4 .value-card,
+.team-grid .col-md-4 .team-member,
+.team-grid .col-sm-6 .team-member {
+    width: 100%;
+}

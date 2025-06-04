@@ -1,4 +1,4 @@
-/* Hero About Section */
+/* Estilos personalizados para la página About */
 .hero-about {
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
     color: white;
@@ -28,6 +28,7 @@
 .hero-about-content {
     position: relative;
     z-index: 2;
+    text-align: center;
 }
 
 .hero-about-image {
@@ -69,21 +70,20 @@
     border-radius: 18px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    display: none;
+    display: none; /* Se mostrará cuando agregues la imagen */
 }
 
-/* Cuando agregues una imagen real, usa esta clase para mostrarla */
-.image-placeholder.has-image {
+.image-placeholder:has(.hero-about-square-image) {
     background: none;
     border: none;
     backdrop-filter: none;
 }
 
-.image-placeholder.has-image::before {
+.image-placeholder:has(.hero-about-square-image)::before {
     display: none;
 }
 
-.image-placeholder.has-image .hero-about-square-image {
+.image-placeholder:has(.hero-about-square-image) .hero-about-square-image {
     display: block;
 }
 
@@ -92,9 +92,6 @@
     box-shadow: 0 35px 80px rgba(44, 125, 250, 0.2);
 }
 
-.hero-about-text {
-    padding-left: 40px;
-}
 
 .hero-badge-about {
     background: rgba(44, 125, 250, 0.2);
@@ -125,21 +122,28 @@
     opacity: 0.85;
     line-height: 1.4;
     margin-bottom: 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: 300;
 }
 
-/* Story Section - Usando Bootstrap Grid */
+/* Section moderna para historia */
 .story-section {
-    padding: 120px 0;
-    background: #ffffff;
+    background: white;
+    padding: 100px 0;
+    position: relative;
 }
 
 .story-grid {
-    /* Removido CSS Grid, usaremos Bootstrap */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
 }
 
 .story-content h2 {
-    font-size: 2.8em;
+    font-size: 2.5em;
     color: #1a1a2e;
     margin-bottom: 30px;
     font-weight: 300;
@@ -147,73 +151,41 @@
 
 .story-content p {
     font-size: 1.1em;
-    color: #4a5568;
     line-height: 1.8;
+    color: #4a5568;
     margin-bottom: 25px;
+}
+
+.story-image {
+    position: relative;
 }
 
 .story-image img {
     width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: cover;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
 }
 
-/* Values, Vision, Mission Section - Usando Bootstrap Grid */
+/* Sección de valores modernos */
 .values-vision-section {
-    padding: 120px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 100px 0;
 }
 
-.values-vision-section .text-center h2 {
-    font-size: 2.5em !important;
-    color: #1a1a2e !important;
-    margin-bottom: 20px !important;
-    font-weight: 300 !important;
-}
-
-.values-vision-section .text-center p {
-    font-size: 1.2em !important;
-    color: #4a5568 !important;
-    max-width: 600px !important;
-    margin: 0 auto !important;
-}
-
-/* Ajustando el grid de valores para Bootstrap */
 .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
     margin-top: 60px;
-    /* Removido CSS Grid personalizado */
 }
 
 .value-card {
     background: white;
-    padding: 40px 35px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
-    border-left: 5px solid #2C7DFA;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 30px; /* Para spacing en móviles */
-    height: 100%; /* Para que las tarjetas tengan la misma altura */
-}
-
-.value-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(135deg, #2C7DFA, #1e93d0);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.value-card:hover::before {
-    transform: scaleX(1);
+    border-top: 4px solid #2C7DFA;
 }
 
 .value-card:hover {
@@ -222,125 +194,117 @@
 }
 
 .value-card h3 {
+    font-size: 1.8em;
     color: #1a1a2e;
-    font-size: 1.5em;
-    font-weight: 600;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .value-card p {
     color: #4a5568;
     line-height: 1.7;
-    margin: 0;
-    font-size: 1em;
+    font-size: 1.05em;
 }
 
-/* Team Section - Usando Bootstrap Grid */
-.team-section {
-    padding: 120px 0;
-    background: #ffffff;
+/* Sección de valores con iconos */
+.our-values-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+    color: white;
+    padding: 100px 0;
+    position: relative;
 }
 
-.team-section h2 {
+.values-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.values-content h2 {
     font-size: 2.5em;
-    color: #1a1a2e;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: white;
     font-weight: 300;
-    text-align: center;
 }
 
-.team-section > .container > p {
-    font-size: 1.2em;
-    color: #4a5568;
-    text-align: center;
-    margin-bottom: 60px;
+.values-list {
+    display: grid;
+    gap: 20px;
 }
 
-/* Ajustando el grid del equipo para Bootstrap */
-.team-grid {
-    margin-top: 60px;
-    /* Removido CSS Grid personalizado */
-}
-
-.team-member {
-    text-align: center;
-    background: white;
-    border-radius: 20px;
-    padding: 40px 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.value-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-    border: 1px solid #f1f5f9;
-    margin-bottom: 30px; /* Para spacing en móviles */
-    height: 100%; /* Para que las tarjetas tengan la misma altura */
 }
 
-.team-member:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(44, 125, 250, 0.1);
-    border-color: rgba(44, 125, 250, 0.2);
+.value-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(10px);
 }
 
-.team-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 0 auto 25px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+.value-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2C7DFA, #00d4ff);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3em;
-    color: #64748b;
-}
-
-.team-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-info h4 {
-    color: #1a1a2e;
-    font-size: 1.3em;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.team-info .position {
-    color: #2C7DFA;
-    font-weight: 500;
-    margin-bottom: 15px;
-    font-size: 0.95em;
-}
-
-.team-info p {
-    color: #64748b;
-    line-height: 1.6;
-    margin: 0;
-    font-size: 0.9em;
-}
-
-/* CTA Section */
-.cta-section {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+    margin-right: 20px;
     color: white;
+    font-size: 1.3em;
+}
+
+.value-text {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.strategy-highlight {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.strategy-highlight h3 {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    color: #00d4ff;
+    font-weight: 600;
+}
+
+.strategy-highlight p {
+    line-height: 1.7;
+    opacity: 0.9;
+    font-size: 1.05em;
+}
+
+/* CTA mejorado */
+.cta-enhanced {
+    background: linear-gradient(135deg, #2C7DFA 0%, #1a1a2e 100%);
+    padding: 80px 0;
     text-align: center;
+    color: white;
     position: relative;
     overflow: hidden;
 }
 
-.cta-section::before {
+.cta-enhanced::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-            radial-gradient(circle at 30% 40%, rgba(44, 125, 250, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 70% 80%, rgba(30, 147, 208, 0.08) 0%, transparent 50%);
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="90" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="70" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
 }
 
 .cta-content {
@@ -348,229 +312,46 @@
     z-index: 2;
 }
 
-.cta-section h2 {
+.cta-enhanced h2 {
     font-size: 2.5em;
-    font-weight: 300;
     margin-bottom: 20px;
-    color: white;
+    font-weight: 300;
 }
 
-.cta-section p {
+.cta-enhanced p {
     font-size: 1.2em;
     opacity: 0.9;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.btn-cta {
-    background: linear-gradient(135deg, #2C7DFA, #1e93d0);
-    color: white;
+.btn-cta-enhanced {
+    background: white;
+    color: #2C7DFA;
     padding: 18px 40px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
-    font-size: 1.1em;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.btn-cta:hover {
+.btn-cta-enhanced:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(44, 125, 250, 0.3);
-    color: white;
-    text-decoration: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    color: #1a1a2e;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .hero-about-text {
-        padding-left: 20px;
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    .hero-title-about {
-        font-size: 3.2em;
-    }
-
-    .hero-subtitle-about {
-        font-size: 1.2em;
-    }
-
-    .image-placeholder {
-        max-width: 350px;
-        height: 350px;
-    }
-
-    .story-content {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .story-image {
-        text-align: center;
-    }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-    .hero-about {
-        padding: 100px 0 80px;
-    }
-
-    .hero-about-text {
-        padding-left: 0;
-        margin-top: 30px;
-    }
-
-    .hero-title-about {
-        font-size: 2.5em;
-    }
-
-    .hero-subtitle-about {
-        font-size: 1.1em;
-    }
-
-    .image-placeholder {
-        max-width: 300px;
-        height: 300px;
-    }
-
-    .story-section,
-    .values-vision-section,
-    .team-section {
-        padding: 80px 0;
-    }
-
-    .story-content h2 {
-        font-size: 2.2em;
-    }
-
-    .story-content p {
-        font-size: 1em;
-    }
-
-    .values-vision-section .text-center h2 {
-        font-size: 2em !important;
-    }
-
-    .values-vision-section .text-center p {
-        font-size: 1.1em !important;
-    }
-
-    .value-card {
-        padding: 30px 25px;
-    }
-
-    .cta-section {
-        padding: 80px 0;
-    }
-
-    .cta-section h2 {
-        font-size: 2em;
-    }
-
-    .cta-section p {
-        font-size: 1.1em;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title-about {
-        font-size: 2.2em;
-    }
-
-    .hero-subtitle-about {
-        font-size: 1em;
-    }
-
-    .image-placeholder {
-        max-width: 280px;
-        height: 280px;
-    }
-
-    .story-content h2 {
-        font-size: 1.8em;
-    }
-
-    .values-vision-section .text-center h2 {
-        font-size: 1.8em !important;
-    }
-
-    .value-card {
-        padding: 25px 20px;
-    }
-
-    .value-card h3 {
-        font-size: 1.3em;
-    }
-
-    .team-member {
-        padding: 30px 20px;
-    }
-
-    .team-photo {
-        width: 100px;
-        height: 100px;
-        font-size: 2.5em;
-    }
-
-    .cta-section h2 {
-        font-size: 1.8em;
-    }
-
-    .btn-cta {
-        padding: 15px 30px;
-        font-size: 1em;
-    }
-}
-
-/* Utilidades adicionales para Bootstrap compatibility */
-.row.align-items-center {
-    display: flex;
-    align-items: center;
-}
-
-/* Mejoras para compatibilidad con navegadores antiguos */
-.hero-about-square-image,
-.story-image img {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.value-card,
-.team-member {
-    -webkit-transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -o-transform: translateY(0);
-    transform: translateY(0);
-}
-
-.value-card:hover,
-.team-member:hover {
-    -webkit-transform: translateY(-10px);
-    -moz-transform: translateY(-10px);
-    -ms-transform: translateY(-10px);
-    -o-transform: translateY(-10px);
-    transform: translateY(-10px);
-}
-
-/* Asegurar que las columnas de Bootstrap funcionen correctamente */
-.values-grid .col-md-6,
-.values-grid .col-lg-4,
-.team-grid .col-md-4,
-.team-grid .col-sm-6 {
-    display: flex;
-    align-items: stretch;
-}
-
-.values-grid .col-md-6 .value-card,
-.values-grid .col-lg-4 .value-card,
-.team-grid .col-md-4 .team-member,
-.team-grid .col-sm-6 .team-member {
-    width: 100%;
+    .hero-title-about { font-size: 2.5em; }
+    .hero-subtitle-about { font-size: 1.2em; }
+    .story-grid { grid-template-columns: 1fr; gap: 50px; }
+    .values-showcase { grid-template-columns: 1fr; gap: 50px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .value-item { padding: 15px 20px; }
+    .value-text { font-size: 1.1em; }
 }

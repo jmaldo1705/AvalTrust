@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Blog | AvalTrust - Insights Financieros y Tendencias Fintech</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Descubre las últimas tendencias en fintech, consejos financieros y análisis del mercado crediticio colombiano en el blog de AvalTrust.">
+    <link rel="icon" href="image/favicon.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
+    <link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
+    <link id="whatsapp" rel="stylesheet" type="text/css" href="css/whatsapp.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
+    <style>
+        /* Estilos específicos para el blog */
+        .blog-page {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .blog-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="30" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0px); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .blog-hero-title {
+            font-size: 3.5em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .blog-hero-subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .blog-stat {
+            text-align: center;
+        }
+
+        .blog-stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .blog-stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .blog-main-content {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .blog-filters {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 12px 24px;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            background: white;
+            color: #718096;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            border-color: #2C7DFA;
+            background: #2C7DFA;
+            color: white;
+            text-decoration: none;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #2C7DFA;
+            box-shadow: 0 0 0 3px rgba(44, 125, 250, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .blog-card-featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 400px;
+        }
+
+        .blog-card-image {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .blog-card-featured .blog-card-image {
+            height: 100%;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #2C7DFA, #1a1a2e);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .blog-card-content {
+            padding: 30px;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.85em;
+            color: #718096;
+        }
+
+        .blog-card-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-card-author {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-card-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .blog-card-featured .blog-card-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .blog-card-excerpt {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .blog-card-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            padding: 4px 12px;
+            background: #f1f5f9;
+            color: #475569;
+            border-radius: 12px;
+            font-size: 0.8em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .blog-tag:hover {
+            background: #2C7DFA;
+            color: white;
+            text-decoration: none;
+        }
+
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #2C7DFA, #1a1a2e);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(44, 125, 250, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+
+        .blog-card-likes {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 40px;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .popular-posts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .popular-post {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .popular-post:last-child {
+            border-bottom: none;
+        }
+
+        .popular-post-image {
+            width: 80px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .popular-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popular-post-content h6 {
+            font-size: 0.9em;
+            color: #2d3748;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .popular-post-content span {
+            font-size: 0.8em;
+            color: #718096;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .newsletter-signup {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .newsletter-signup h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-signup p {
+            color: #718096;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+
+        .newsletter-btn {
+            background: #2C7DFA;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #1a1a2e;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .pagination-btn {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: #718096;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .pagination-btn:hover,
+        .pagination-btn.active {
+            border-color: #2C7DFA;
+            background: #2C7DFA;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-hero-title {
+                font-size: 2.5em;
+            }
+
+            .blog-stats {
+                gap: 30px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card-featured {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .blog-main-content {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body class="site-body style-v1 blog-page">
+<!-- Header -->
+<header class="site-header header-s1 is-transparent is-sticky">
+    <!-- Navbar -->
+    <div class="navbar navbar-primary">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="./">
+                <img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
+                <img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
+            </a>
+            <!-- #end Logo -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Q-Button for Mobile -->
+                <div class="quote-btn"><a class="btn" href="login.html">Sign in</a></div>
+            </div>
+            <!-- MainNav -->
+            <nav class="navbar-collapse collapse" id="mainnav">
+                <ul class="nav navbar-nav">
+                    <li><a href="./">Inicio</a></li>
+                    <li><a href="about-us.html">Quiénes Somos</a></li>
+                    <li class="dropdown"><a href="owr-service.html">Nuestro Servicio</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login-aliados.html">Portal Aliados</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="people.html">Avalados</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login-avalados.html">Portal Avalados</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="blog.html">Blog</a></li>
+                    <li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <!-- #end MainNav -->
+        </div>
+    </div>
+    <!-- #end Navbar -->
+</header>
+<!-- End Header -->
+
+<!-- Blog Hero Section -->
+<div class="blog-hero">
+    <div class="container">
+        <div class="blog-hero-content">
+            <h1 class="blog-hero-title" style="color: white;">AvalTrust Insights</h1>
+            <p class="blog-hero-subtitle">
+                Descubre las últimas tendencias en fintech, consejos financieros y análisis del mercado crediticio colombiano
+            </p>
+
+            <div class="blog-stats">
+                <div class="blog-stat">
+                    <span class="blog-stat-number">150+</span>
+                    <span class="blog-stat-label">Artículos</span>
+                </div>
+                <div class="blog-stat">
+                    <span class="blog-stat-number">25K+</span>
+                    <span class="blog-stat-label">Lectores</span>
+                </div>
+                <div class="blog-stat">
+                    <span class="blog-stat-number">98%</span>
+                    <span class="blog-stat-label">Satisfacción</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Main Content -->
+<div class="blog-main-content">
+    <div class="container">
+        <!-- Filters and Search -->
+        <div class="blog-filters">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="filter-tabs">
+                        <a href="#" class="filter-tab active" data-filter="all">Todos</a>
+                        <a href="#" class="filter-tab" data-filter="fintech">Fintech</a>
+                        <a href="#" class="filter-tab" data-filter="credito">Crédito</a>
+                        <a href="#" class="filter-tab" data-filter="avales">Avales</a>
+                        <a href="#" class="filter-tab" data-filter="regulacion">Regulación</a>
+                        <a href="#" class="filter-tab" data-filter="educacion">Educación Financiera</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Buscar artículos...">
+                        <button class="search-btn" type="button">🔍</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Blog Posts Grid -->
+                <div class="blog-grid">
+                    <!-- Featured Post -->
+                    <article class="blog-card blog-card-featured" data-category="fintech">
+                        <div class="blog-card-image">
+                            <img src="image/blog/fintech-colombia-2024.jpg" alt="El Futuro del Fintech en Colombia">
+                            <div class="blog-card-badge">Destacado</div>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 15 Mayo 2024</span>
+                                <span class="blog-card-author">👤 Ana García</span>
+                            </div>
+                            <h2 class="blog-card-title">El Futuro del Fintech en Colombia: Tendencias 2024</h2>
+                            <p class="blog-card-excerpt">
+                                Analizamos las principales tendencias que están transformando el sector fintech colombiano, desde la llegada de nuevas regulaciones hasta la adopción masiva de pagos digitales. Descubre cómo estas innovaciones están democratizando el acceso al crédito.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Fintech</a>
+                                <a href="#" class="blog-tag">Colombia</a>
+                                <a href="#" class="blog-tag">Tendencias</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 245</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Regular Posts -->
+                    <article class="blog-card" data-category="credito">
+                        <div class="blog-card-image">
+                            <img src="image/blog/avales-digitales.jpg" alt="Avales Digitales">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 10 Mayo 2024</span>
+                                <span class="blog-card-author">👤 Carlos Ruiz</span>
+                            </div>
+                            <h3 class="blog-card-title">¿Cómo Funcionan los Avales Digitales?</h3>
+                            <p class="blog-card-excerpt">
+                                Una guía completa sobre el funcionamiento de los avales digitales y su impacto en la inclusión financiera.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Avales</a>
+                                <a href="#" class="blog-tag">Digital</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 128</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="educacion">
+                        <div class="blog-card-image">
+                            <img src="image/blog/educacion-financiera.jpg" alt="Educación Financiera">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 8 Mayo 2024</span>
+                                <span class="blog-card-author">👤 María López</span>
+                            </div>
+                            <h3 class="blog-card-title">5 Claves para Mejorar tu Score Crediticio</h3>
+                            <p class="blog-card-excerpt">
+                                Consejos prácticos para mantener un buen historial crediticio y acceder a mejores oportunidades de financiamiento.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Score</a>
+                                <a href="#" class="blog-tag">Consejos</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 189</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="regulacion">
+                        <div class="blog-card-image">
+                            <img src="image/blog/regulacion-fintech.jpg" alt="Regulación Fintech">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 5 Mayo 2024</span>
+                                <span class="blog-card-author">👤 Diego Martínez</span>
+                            </div>
+                            <h3 class="blog-card-title">Nuevas Regulaciones Fintech: Lo que Debes Saber</h3>
+                            <p class="blog-card-excerpt">
+                                Análisis de las últimas regulaciones financieras y su impacto en el ecosistema fintech colombiano.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Regulación</a>
+                                <a href="#" class="blog-tag">Compliance</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 95</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="fintech">
+                        <div class="blog-card-image">
+                            <img src="image/blog/inclusion-financiera.jpg" alt="Inclusión Financiera">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 2 Mayo 2024</span>
+                                <span class="blog-card-author">👤 Sofía Herrera</span>
+                            </div>
+                            <h3 class="blog-card-title">La Revolución de la Inclusión Financiera en Colombia</h3>
+                            <p class="blog-card-excerpt">
+                                Cómo la tecnología está democratizando el acceso a servicios financieros en poblaciones tradicionalmente excluidas.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Inclusión</a>
+                                <a href="#" class="blog-tag">Tecnología</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 167</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="blog-card" data-category="credito">
+                        <div class="blog-card-image">
+                            <img src="image/blog/credito-digital.jpg" alt="Crédito Digital">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-date">📅 28 Abril 2024</span>
+                                <span class="blog-card-author">👤 Roberto Silva</span>
+                            </div>
+                            <h3 class="blog-card-title">Crédito Digital vs Crédito Tradicional: Comparativa</h3>
+                            <p class="blog-card-excerpt">
+                                Ventajas y desventajas de cada modalidad crediticia para ayudarte a tomar la mejor decisión financiera.
+                            </p>
+                            <div class="blog-card-tags">
+                                <a href="#" class="blog-tag">Crédito</a>
+                                <a href="#" class="blog-tag">Comparativa</a>
+                            </div>
+                            <div class="blog-card-footer">
+                                <a href="#" class="read-more-btn">Leer más →</a>
+                                <span class="blog-card-likes">❤️ 203</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="pagination-btn">←</a>
+                    <a href="#" class="pagination-btn active">1</a>
+                    <a href="#" class="pagination-btn">2</a>
+                    <a href="#" class="pagination-btn">3</a>
+                    <a href="#" class="pagination-btn">4</a>
+                    <a href="#" class="pagination-btn">→</a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <!-- Newsletter Signup -->
+                    <div class="sidebar-section">
+                        <div class="newsletter-signup">
+                            <h4>📧 Newsletter AvalTrust</h4>
+                            <p>Recibe las últimas noticias del sector fintech directamente en tu email</p>
+                            <form class="newsletter-form">
+                                <input type="email" class="newsletter-input" placeholder="Tu email">
+                                <button type="submit" class="newsletter-btn">Suscribir</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Popular Posts -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📈 Más Populares</h3>
+                        <ul class="popular-posts">
+                            <li class="popular-post">
+                                <div class="popular-post-image">
+                                    <img src="image/blog/thumb-1.jpg" alt="">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h6>Cómo AvalTrust está Transformando el Crédito en Colombia</h6>
+                                    <span>20 Mayo 2024</span>
+                                </div>
+                            </li>
+                            <li class="popular-post">
+                                <div class="popular-post-image">
+                                    <img src="image/blog/thumb-2.jpg" alt="">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h6>Guía Completa: Todo sobre los Avales Digitales</h6>
+                                    <span>18 Mayo 2024</span>
+                                </div>
+                            </li>
+                            <li class="popular-post">
+                                <div class="popular-post-image">
+                                    <img src="image/blog/thumb-3.jpg" alt="">
+                                </div>
+                                <div class="popular-post-content">
+                                    <h6>5 Mitos sobre el Crédito Digital Desmontados</h6>
+                                    <span>15 Mayo 2024</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tags Cloud -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🏷️ Temas Populares</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="blog-tag">Fintech</a>
+                            <a href="#" class="blog-tag">Avales</a>
+                            <a href="#" class="blog-tag">Crédito</a>
+                            <a href="#" class="blog-tag">Innovación</a>
+                            <a href="#" class="blog-tag">Colombia</a>
+                            <a href="#" class="blog-tag">Digital</a>
+                            <a href="#" class="blog-tag">Regulación</a>
+                            <a href="#" class="blog-tag">Score</a>
+                            <a href="#" class="blog-tag">Inclusión</a>
+                            <a href="#" class="blog-tag">Tecnología</a>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📂 Categorías</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
+                                    <span>Fintech</span>
+                                    <span>(24)</span>
+                                </a>
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
+                                    <span>Educación Financiera</span>
+                                    <span>(18)</span>
+                                </a>
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
+                                    <span>Avales Digitales</span>
+                                    <span>(15)</span>
+                                </a>
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
+                                    <span>Regulación</span>
+                                    <span>(12)</span>
+                                </a>
+                            </li>
+                            <li style="padding: 10px 0;">
+                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
+                                    <span>Casos de Éxito</span>
+                                    <span>(8)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Widget-->
+<div class="footer-widget section-pad-md">
+    <div class="container">
+        <div class="row">
+            <div class="widget-row row">
+                <div class="footer-col col-md-3 col-sm-6 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-text">
+                        <div class="wgs-content">
+                            <p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
+                            <p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito.</p>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+                <div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-menu">
+                        <h5 class="wgs-title">Enlaces Rápidos</h5>
+                        <div class="wgs-content">
+                            <ul class="menu">
+                                <li><a href="about-us.html">Quiénes Somos</a></li>
+                                <li><a href="owr-service.html">Nuestro Servicio</a></li>
+                                <li><a href="people.html">Avalados</a></li>
+                                <li><a href="contact.html">Contáctanos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+                <div class="footer-col col-md-2 col-sm-6 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-menu">
+                        <h5 class="wgs-title">Blog</h5>
+                        <div class="wgs-content">
+                            <ul class="menu">
+                                <li><a href="blog.html">Todos los Artículos</a></li>
+                                <li><a href="#">Fintech</a></li>
+                                <li><a href="#">Educación Financiera</a></li>
+                                <li><a href="#">Regulación</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+                <div class="footer-col col-md-3 col-sm-6">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-contact">
+                        <h5 class="wgs-title">Contáctanos</h5>
+                        <div class="wgs-content">
+                            <ul class="contact">
+                                <li><em class="fa fa-home"></em>Bogotá, Colombia</li>
+                                <li><em class="fa fa-phone"></em>(+57) 300 000 0000</li>
+                                <li><em class="fa fa-envelope"></em>info@avaltrust.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer Widget -->
+
+<!-- Footer -->
+<footer class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2024 AvalTrust. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-sm-6 text-right res-m-t">
+                <div class="footer-social">
+                    <a href="#"><em class="fa fa-linkedin"></em></a>
+                    <a href="#"><em class="fa fa-twitter"></em></a>
+                    <a href="#"><em class="fa fa-facebook"></em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer -->
+
+<script src="js/vendor.bundle.js"></script>
+<script src="js/scripts.js"></script>
+<script>
+    // Funcionalidad de filtros
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Remover clase active de todos los tabs
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // Agregar clase active al tab clickeado
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+
+                blogCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Funcionalidad de búsqueda
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-card-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm) || searchTerm === '') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Búsqueda en tiempo real
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-card-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm) || searchTerm === '') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Newsletter form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+
+            if (email) {
+                alert('¡Gracias por suscribirte! Pronto recibirás nuestros insights.');
+                this.querySelector('.newsletter-input').value = '';
+            }
+        });
+
+        // Animación de entrada para las cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        blogCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Portal Avalados | AvalTrust</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="image/favicon.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
+    <link rel="stylesheet" type="text/css" href="css/login-avalados.css">
+    <link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
+</head>
+<body class="login-page">
+<a href="index.html" class="back-home">
+    <span>←</span> Volver al inicio
+</a>
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Lado izquierdo - Información -->
+        <div class="login-left">
+            <div class="login-left-content">
+                <img src="image/logo-light.png" alt="AvalTrust" class="login-logo">
+                <h1 class="login-title" style="color: white;">Portal de Avalados</h1>
+                <p class="login-subtitle">
+                    Accede a tu información crediticia y gestiona tu perfil de manera segura
+                </p>
+
+                <ul class="login-features">
+                    <li>Consulta estado de crédito</li>
+                    <li>Historial de pagos</li>
+                    <li>Documentos digitales</li>
+                    <li>Soporte especializado</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lado derecho - Formulario -->
+        <div class="login-right">
+            <h2 class="login-form-title">Acceso Seguro</h2>
+            <p class="login-form-subtitle">Ingresa tus credenciales para acceder a tu portal</p>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div id="success-message" class="success-message" style="display: none;"></div>
+
+            <form id="loginForm" action="#" method="post">
+                <div class="form-group">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" class="form-control"
+                           placeholder="Ingresa tu usuario" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="numeroCredito" class="form-label">Número de Crédito</label>
+                    <input type="text" id="numeroCredito" name="numeroCredito"
+                           class="form-control" placeholder="Número de crédito" required
+                           pattern="[0-9]{8,15}" title="Debe contener entre 8 y 15 dígitos">
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember"> Recordar usuario
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotDialog()">¿Olvidaste tu usuario?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span id="btnText">Ingresar al Portal</span>
+                    <span id="btnLoading" style="display: none;">Verificando...</span>
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>¿Necesitas ayuda?</span>
+            </div>
+
+            <div class="help-options">
+                <a href="#" class="btn-help" onclick="showCreditNumberHelp()">
+                    📋 ¿No tienes tu número de crédito?
+                </a>
+                <a href="contact.html" class="btn-help">
+                    📞 Contactar soporte
+                </a>
+            </div>
+
+            <div class="security-notice">
+                🔒 Tu información está protegida con encriptación de nivel bancario
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        const usuarioInput = document.getElementById('usuario');
+        const numeroCreditoInput = document.getElementById('numeroCredito');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+
+        // Formatear número de crédito - solo números
+        numeroCreditoInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Manejo del formulario
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const usuario = usuarioInput.value.trim();
+            const numeroCredito = numeroCreditoInput.value.trim();
+
+            // Limpiar mensajes anteriores
+            hideMessages();
+
+            // Validaciones
+            if (!usuario) {
+                showError('Por favor ingresa tu nombre de usuario');
+                usuarioInput.focus();
+                return;
+            }
+
+            if (!numeroCredito) {
+                showError('Por favor ingresa tu número de crédito');
+                numeroCreditoInput.focus();
+                return;
+            }
+
+            if (numeroCredito.length < 8 || numeroCredito.length > 15) {
+                showError('El número de crédito debe tener entre 8 y 15 dígitos');
+                numeroCreditoInput.focus();
+                return;
+            }
+
+            // Mostrar estado de carga
+            showLoading();
+
+            // Simular autenticación
+            setTimeout(() => {
+                if (validateCredentials(usuario, numeroCredito)) {
+                    showSuccess('¡Bienvenido! Redirigiendo a tu portal personalizado...');
+                    setTimeout(() => {
+                        // Simular redirección al dashboard
+                        alert('¡Acceso autorizado!\n\nRedirigiendo al dashboard de avalados donde podrás:\n\n• Ver el estado de tu crédito\n• Consultar historial de pagos\n• Acceder a documentos\n• Contactar soporte especializado');
+                        hideLoading();
+                    }, 2000);
+                } else {
+                    showError('Usuario o número de crédito incorrecto. Verifica tu información.');
+                    hideLoading();
+                }
+            }, 2000);
+        });
+
+        function validateCredentials(usuario, numeroCredito) {
+            // Credenciales de demo para avalados
+            const validCredentials = [
+                { usuario: 'juan.perez', numeroCredito: '12345678' },
+                { usuario: 'maria.garcia', numeroCredito: '87654321' },
+                { usuario: 'carlos.lopez', numeroCredito: '11223344' },
+                { usuario: 'demo.avalado', numeroCredito: '99887766' }
+            ];
+
+            return validCredentials.some(cred =>
+                cred.usuario.toLowerCase() === usuario.toLowerCase() &&
+                cred.numeroCredito === numeroCredito
+            );
+        }
+
+        function showLoading() {
+            loginBtn.classList.add('loading');
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            loginBtn.disabled = true;
+        }
+
+        function hideLoading() {
+            loginBtn.classList.remove('loading');
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            loginBtn.disabled = false;
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+    });
+
+    // Funciones de ayuda
+    function showForgotDialog() {
+        alert('Para recuperar tu usuario:\n\n1. Contacta nuestro soporte al (+57) 300 000 0000\n2. Envía un email a avalados@avaltrust.com\n3. Proporciona tu número de documento y número de crédito\n\nTe ayudaremos a recuperar tu acceso de forma segura.');
+    }
+
+    function showCreditNumberHelp() {
+        alert('Tu número de crédito lo puedes encontrar en:\n\n1. El contrato de crédito original\n2. Tu último estado de cuenta\n3. El email de confirmación del crédito\n4. Contactando a tu entidad financiera\n\nSi necesitas ayuda, llámanos al (+57) 300 000 0000');
+    }
+</script>
+</body>
+</html>

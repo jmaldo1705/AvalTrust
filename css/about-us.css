@@ -354,4 +354,19 @@
     .values-grid { grid-template-columns: 1fr; }
     .value-item { padding: 15px 20px; }
     .value-text { font-size: 1.1em; }
+    .hero-about {
+        padding-top: 10px;
+    }
+    .hero-about-content .row {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .hero-about-text {
+        margin-bottom: 20px;
+    }
+
+    .hero-about-image {
+        margin-top: 10px;
+    }
 }

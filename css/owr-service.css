@@ -363,7 +363,7 @@
 .benefit-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #2C7DFA, #00b4d8);
+    background: linear-gradient(135deg, #2C7DFA, #1a1a2e);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -450,7 +450,7 @@
 .service-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #2C7DFA, #00b4d8);
+    background: linear-gradient(135deg, #2C7DFA, #1a1a2e);
     border-radius: 20px;
     display: flex;
     align-items: center;

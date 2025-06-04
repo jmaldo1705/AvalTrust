@@ -11,524 +11,8 @@
 	<link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
 	<link id="whatsapp" rel="stylesheet" type="text/css" href="css/whatsapp.css">
 	<link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
-	<style>
-		/* Hero Innovation Section */
-		.hero-innovation {
-			background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-			color: white;
-			min-height: 100vh;
-			display: flex;
-			align-items: center;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.hero-innovation::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background:
-					radial-gradient(circle at 20% 30%, rgba(44, 125, 250, 0.1) 0%, transparent 50%),
-					radial-gradient(circle at 80% 70%, rgba(251, 91, 69, 0.1) 0%, transparent 50%),
-					radial-gradient(circle at 40% 80%, rgba(44, 125, 250, 0.05) 0%, transparent 50%);
-			animation: pulse 8s ease-in-out infinite alternate;
-		}
-
-		@keyframes pulse {
-			0% { opacity: 0.8; }
-			100% { opacity: 1; }
-		}
-
-		.hero-content-wrapper {
-			position: relative;
-			z-index: 2;
-			width: 100%;
-		}
-
-		.hero-badge {
-			background: rgba(44, 125, 250, 0.2);
-			backdrop-filter: blur(10px);
-			border: 1px solid rgba(44, 125, 250, 0.3);
-			border-radius: 50px;
-			padding: 12px 25px;
-			display: inline-block;
-			margin-bottom: 30px;
-			font-size: 0.9em;
-			font-weight: 500;
-			color: #00d4ff;
-		}
-
-		.hero-main-title {
-			font-size: 4.5em;
-			font-weight: 200;
-			line-height: 1.1;
-			margin-bottom: 25px;
-			background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #2C7DFA 100%);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
-		}
-
-		.hero-subtitle {
-			font-size: 1.5em;
-			opacity: 0.85;
-			line-height: 1.4;
-			margin-bottom: 50px;
-			max-width: 600px;
-			font-weight: 300;
-		}
-
-		.hero-cta-group {
-			display: flex;
-			gap: 25px;
-			margin-bottom: 80px;
-		}
-
-		.btn-hero-primary {
-			background: linear-gradient(135deg, #2C7DFA 0%, #00b4d8 100%);
-			color: white;
-			padding: 18px 40px;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.4s ease;
-			box-shadow: 0 10px 30px rgba(44, 125, 250, 0.3);
-			border: none;
-		}
-
-		.btn-hero-primary:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 20px 40px rgba(44, 125, 250, 0.4);
-			color: white;
-		}
-
-		.btn-hero-secondary {
-			background: rgba(255, 255, 255, 0.1);
-			backdrop-filter: blur(10px);
-			border: 2px solid rgba(255, 255, 255, 0.3);
-			color: white;
-			padding: 16px 38px;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-		}
-
-		.btn-hero-secondary:hover {
-			background: rgba(255, 255, 255, 0.2);
-			border-color: rgba(255, 255, 255, 0.5);
-			color: white;
-		}
-
-		.floating-cards {
-			position: absolute;
-			top: 20%;
-			right: 5%;
-			width: 300px;
-			z-index: 1;
-		}
-
-		.floating-card {
-			background: rgba(255, 255, 255, 0.1);
-			backdrop-filter: blur(15px);
-			border: 1px solid rgba(255, 255, 255, 0.2);
-			border-radius: 20px;
-			padding: 25px;
-			margin-bottom: 20px;
-			animation: float-cards 6s ease-in-out infinite;
-		}
-
-		.floating-card:nth-child(2) {
-			animation-delay: -2s;
-		}
-
-		.floating-card:nth-child(3) {
-			animation-delay: -4s;
-		}
-
-		@keyframes float-cards {
-			0%, 100% { transform: translateY(0px) rotate(0deg); }
-			50% { transform: translateY(-20px) rotate(1deg); }
-		}
-
-		/* About AvalTrust Section */
-		.about-avaltrust {
-			background: #ffffff;
-			padding: 120px 0;
-			position: relative;
-		}
-
-		.about-header {
-			text-align: center;
-			margin-bottom: 80px;
-		}
-
-		.about-title {
-			font-size: 3.2em;
-			color: #1a1a2e;
-			margin-bottom: 25px;
-			font-weight: 300;
-		}
-
-		.about-subtitle {
-			font-size: 1.3em;
-			color: #666;
-			max-width: 700px;
-			margin: 0 auto;
-			line-height: 1.6;
-		}
-
-		.features-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 40px;
-			margin-top: 60px;
-		}
-
-		.feature-item {
-			display: flex;
-			align-items: flex-start;
-			padding: 30px;
-			background: white;
-			border-radius: 15px;
-			box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-			transition: all 0.3s ease;
-		}
-
-		.feature-item:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-		}
-
-		.feature-icon {
-			font-size: 2em;
-			color: #2C7DFA;
-			margin-right: 20px;
-			min-width: 50px;
-		}
-
-		.feature-content h4 {
-			font-size: 1.3em;
-			color: #1a1a2e;
-			margin-bottom: 10px;
-			font-weight: 600;
-		}
-
-		.feature-content p {
-			color: #666;
-			line-height: 1.6;
-			margin: 0;
-		}
-
-		/* Services Section */
-		.services-section {
-			background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-			padding: 120px 0;
-		}
-
-		.services-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-			gap: 30px;
-			margin-top: 60px;
-		}
-
-		.service-card {
-			background: white;
-			border-radius: 20px;
-			padding: 40px 30px;
-			text-align: center;
-			box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-			transition: all 0.4s ease;
-			border: 1px solid #f0f0f0;
-		}
-
-		.service-card:hover {
-			transform: translateY(-10px);
-			box-shadow: 0 20px 60px rgba(44, 125, 250, 0.15);
-			border-color: #2C7DFA;
-		}
-
-		.service-icon {
-			font-size: 3em;
-			margin-bottom: 25px;
-			color: #2C7DFA;
-		}
-
-		.service-title {
-			font-size: 1.4em;
-			color: #1a1a2e;
-			margin-bottom: 15px;
-			font-weight: 600;
-		}
-
-		.service-description {
-			color: #666;
-			line-height: 1.6;
-			margin-bottom: 25px;
-		}
-
-		.btn-service {
-			background: linear-gradient(135deg, #2C7DFA 0%, #00b4d8 100%);
-			color: white;
-			padding: 12px 30px;
-			border-radius: 25px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-			border: none;
-			display: inline-block;
-		}
-
-		.btn-service:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 10px 25px rgba(44, 125, 250, 0.3);
-			color: white;
-		}
-
-		/* Why FinTech Section */
-		.why-fintech-section {
-			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-			color: white;
-			padding: 120px 0;
-		}
-
-		.process-steps {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 40px;
-			margin-top: 60px;
-		}
-
-		.process-step {
-			text-align: center;
-			padding: 30px 20px;
-		}
-
-		.process-number {
-			width: 80px;
-			height: 80px;
-			background: linear-gradient(135deg, #2C7DFA, #00b4d8);
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin: 0 auto 25px;
-			font-size: 1.8em;
-			font-weight: bold;
-			color: white;
-		}
-
-		.process-step h4 {
-			font-size: 1.3em;
-			margin-bottom: 15px;
-			font-weight: 600;
-		}
-
-		.process-step p {
-			opacity: 0.9;
-			line-height: 1.6;
-		}
-
-		/* Testimonials Section */
-		.testimonials-section {
-			background: #ffffff;
-			padding: 120px 0;
-		}
-
-		.testimonials-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-			gap: 40px;
-			margin-top: 60px;
-		}
-
-		.testimonial-card {
-			background: #f8f9fa;
-			border-radius: 20px;
-			padding: 40px 30px;
-			text-align: center;
-			position: relative;
-			border-left: 4px solid #2C7DFA;
-		}
-
-		.testimonial-quote {
-			font-size: 1.2em;
-			font-style: italic;
-			color: #1a1a2e;
-			margin-bottom: 25px;
-			line-height: 1.6;
-		}
-
-		.testimonial-author {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 15px;
-		}
-
-		.testimonial-avatar {
-			width: 50px;
-			height: 50px;
-			background: #2C7DFA;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			font-size: 1.5em;
-		}
-
-		.testimonial-info h5 {
-			margin: 0;
-			color: #1a1a2e;
-			font-weight: 600;
-		}
-
-		.testimonial-info span {
-			color: #666;
-			font-size: 0.9em;
-		}
-
-		/* FAQ Section */
-		.faq-section {
-			background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-			padding: 120px 0;
-		}
-
-		.faq-container {
-			max-width: 800px;
-			margin: 0 auto;
-		}
-
-		.faq-item {
-			background: white;
-			border-radius: 15px;
-			margin-bottom: 20px;
-			box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-			overflow: hidden;
-		}
-
-		.faq-question {
-			padding: 25px 30px;
-			background: white;
-			border: none;
-			width: 100%;
-			text-align: left;
-			font-size: 1.1em;
-			font-weight: 600;
-			color: #1a1a2e;
-			cursor: pointer;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			transition: all 0.3s ease;
-		}
-
-		.faq-question:hover {
-			background: #f8f9fa;
-		}
-
-		.faq-answer {
-			padding: 0 30px 25px;
-			color: #666;
-			line-height: 1.6;
-			display: none;
-		}
-
-		.faq-answer.show {
-			display: block;
-		}
-
-		.faq-icon {
-			transition: transform 0.3s ease;
-		}
-
-		.faq-item.active .faq-icon {
-			transform: rotate(180deg);
-		}
-
-		/* Final CTA Section */
-		.final-cta {
-			background: linear-gradient(135deg, #0d7db8 0%, #0f192a 100%);
-			color: white;
-			padding: 100px 0;
-			text-align: center;
-			position: relative;
-			overflow: hidden;
-		}
-
-		.final-cta::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 60,35 100,35 70,57 80,100 50,75 20,100 30,57 0,35 40,35" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
-			animation: sparkle 10s linear infinite;
-		}
-
-		@keyframes sparkle {
-			0% { transform: translateX(0); }
-			100% { transform: translateX(100px); }
-		}
-
-		.final-cta-content {
-			position: relative;
-			z-index: 2;
-		}
-
-		.final-cta-title {
-			font-size: 3.5em;
-			font-weight: 300;
-			margin-bottom: 25px;
-			line-height: 1.2;
-		}
-
-		.final-cta-text {
-			font-size: 1.3em;
-			margin-bottom: 50px;
-			opacity: 0.95;
-			max-width: 600px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.btn-final-cta {
-			background: white;
-			color: #0f192a;
-			padding: 20px 50px;
-			border-radius: 50px;
-			font-size: 1.2em;
-			font-weight: 600;
-			text-decoration: none;
-			transition: all 0.4s ease;
-			box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-		}
-
-		.btn-final-cta:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-			color: #00b4d8;
-		}
-
-		/* Responsive */
-		@media (max-width: 768px) {
-			.hero-main-title { font-size: 3em; }
-			.hero-cta-group { flex-direction: column; align-items: center; }
-			.floating-cards { display: none; }
-			.about-title { font-size: 2.5em; }
-			.final-cta-title { font-size: 2.5em; }
-			.features-grid { grid-template-columns: 1fr; }
-			.services-grid { grid-template-columns: 1fr; }
-			.process-steps { grid-template-columns: 1fr; }
-			.testimonials-grid { grid-template-columns: 1fr; }
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="site-body style-v1">
 <!-- Header -->
@@ -557,11 +41,18 @@
 				<ul class="nav navbar-nav">
 					<li><a href="./">Inicio</a></li>
 					<li><a href="about-us.html">Quiénes Somos</a></li>
-					<li><a href="people.html">Personas</a></li>
-					<li><a href="company.html">Empresas</a></li>
-					<li><a href="owr-service.html">Nuestro Servicio</a></li>
-					<li><a href="contact.html">Contáctanos</a></li>
-					<li class="quote-btn"><a class="btn" href="contact.html">Solicita tu aval</a></li>
+					<li class="dropdown"><a href="owr-service.html">Nuestro Servicio</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Portal Aliados</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a href="people.html">Avalados</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Portal Avalados</a></li>
+						</ul>
+					</li>
+					<li><a href="blog.html">Blog</a></li>
+					<li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
 				</ul>
 			</nav>
 			<!-- #end MainNav -->
@@ -585,27 +76,35 @@
 						<a href="about-us.html" class="btn-hero-secondary">Descubre Cómo</a>
 					</div>
 				</div>
+				<div class="col-lg-4">
+					<div class="hero-image">
+						<!-- Aquí irá tu imagen cuadrada -->
+						<img src="image/futiristic-woman.jpg" alt="Innovación AvalTrust" class="hero-square-image">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Floating Cards -->
-	<div class="floating-cards">
-		<div class="floating-card">
-			<h4 style="color: white; margin-bottom: 10px;">💡 Innovación</h4>
-			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Primera plataforma de garantías diseñada 100% para Fintech</p>
+	<!-- Professional Feature Cards -->
+	<div class="professional-features">
+		<div class="feature-card">
+			<div class="feature-icon">💡</div>
+			<h4>Innovación</h4>
+			<p>Primera plataforma de garantías diseñada 100% para Fintech</p>
 		</div>
-		<div class="floating-card">
-			<h4 style="color: white; margin-bottom: 10px;">⚡ Velocidad</h4>
-			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Respuestas en máximo 24 horas</p>
+		<div class="feature-card">
+			<div class="feature-icon">⚡</div>
+			<h4>Velocidad</h4>
+			<p>Respuestas en máximo 24 horas</p>
 		</div>
-		<div class="floating-card">
-			<h4 style="color: white; margin-bottom: 10px;">🎯 Impacto</h4>
-			<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9em;">Transformando vidas a través del acceso al crédito</p>
+		<div class="feature-card">
+			<div class="feature-icon">🎯</div>
+			<h4>Impacto</h4>
+			<p>Transformando vidas a través del acceso al crédito</p>
 		</div>
 	</div>
 </div>
-
 <!-- About AvalTrust Section -->
 <div class="about-avaltrust">
 	<div class="container">
@@ -616,21 +115,21 @@
 
 		<div class="features-grid">
 			<div class="feature-item">
-				<div class="feature-icon">✓</div>
+				<div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
 				<div class="feature-content">
 					<h4>Soluciones 100% digitales</h4>
 					<p>Todas nuestras soluciones están completamente digitalizadas, eliminando la burocracia y acelerando los procesos de manera significativa.</p>
 				</div>
 			</div>
 			<div class="feature-item">
-				<div class="feature-icon">✓</div>
+				<div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
 				<div class="feature-content">
 					<h4>Atención personalizada</h4>
 					<p>Ofrecemos un servicio adaptado a las necesidades específicas de cada cliente, con asesoría especializada en cada paso del proceso.</p>
 				</div>
 			</div>
 			<div class="feature-item">
-				<div class="feature-icon">✓</div>
+				<div class="feature-icon"><i class="fa-solid fa-user-shield"></i></div>
 				<div class="feature-content">
 					<h4>Avales diseñados para cada perfil</h4>
 					<p>Nuestros avales están diseñados tanto para personas como para empresas, alineados con su perfil de riesgo específico.</p>

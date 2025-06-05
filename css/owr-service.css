@@ -593,7 +593,7 @@
 
 /* Modelo de Cobertura Crediticia */
 .coverage-model-section {
-    background: linear-gradient(135deg, #1e3cd0 0%, #000d55 100%);
+    background: linear-gradient(135deg, #2c5282 0%, #1a1a2e 50%, #16213e 100%);
     padding: 80px 0;
     position: relative;
 }

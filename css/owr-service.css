@@ -590,3 +590,126 @@
         font-size: 2em;
     }
 }
+
+/* Modelo de Cobertura Crediticia */
+.coverage-model-section {
+    background: linear-gradient(135deg, #1e3cd0 0%, #000d55 100%);
+    padding: 80px 0;
+    position: relative;
+}
+
+.coverage-model-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 13, 85, 0.1);
+    pointer-events: none;
+}
+
+.coverage-steps {
+    margin-top: 60px;
+    position: relative;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.step-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.step-item.warning {
+    border-left: 4px solid #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.step-item.warning:hover {
+    background: rgba(255, 107, 53, 0.15);
+}
+
+.step-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 25px;
+    min-width: 80px;
+}
+
+.step-emoji {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.step-num {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.step-content {
+    flex: 1;
+    color: white;
+}
+
+.step-title {
+    color: white;
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.step-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .step-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+
+    .step-number {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .step-emoji {
+        font-size: 2em;
+    }
+
+    .step-title {
+        font-size: 1.2em;
+    }
+
+    .step-description {
+        font-size: 1em;
+    }
+}

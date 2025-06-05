@@ -90,28 +90,6 @@
 <!-- Blog Main Content -->
 <div class="blog-main-content">
     <div class="container">
-        <!-- Filters and Search -->
-        <div class="blog-filters">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="filter-tabs">
-                        <a href="#" class="filter-tab active" data-filter="all">Todos</a>
-                        <a href="#" class="filter-tab" data-filter="fintech">Fintech</a>
-                        <a href="#" class="filter-tab" data-filter="credito">Crédito</a>
-                        <a href="#" class="filter-tab" data-filter="avales">Avales</a>
-                        <a href="#" class="filter-tab" data-filter="regulacion">Regulación</a>
-                        <a href="#" class="filter-tab" data-filter="educacion">Educación Financiera</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="search-box">
-                        <input type="text" class="search-input" placeholder="Buscar artículos...">
-                        <button class="search-btn" type="button">🔍</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-lg-8">
                 <!-- Blog Posts Grid -->
@@ -119,17 +97,16 @@
                     <!-- Featured Post -->
                     <article class="blog-card blog-card-featured" data-category="fintech">
                         <div class="blog-card-image">
-                            <img src="image/blog/fintech-colombia-2024.jpg" alt="El Futuro del Fintech en Colombia">
-                            <div class="blog-card-badge">Destacado</div>
+                            <img src="image/noticia.png" alt="El Futuro del Fintech en Colombia">
                         </div>
                         <div class="blog-card-content">
                             <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 15 Mayo 2024</span>
-                                <span class="blog-card-author">👤 Ana García</span>
+                                <span class="blog-card-date">📅 6 Junio 2025</span>
+                                <span class="blog-card-author">👤 Ingrid Alcazar</span>
                             </div>
-                            <h2 class="blog-card-title">El Futuro del Fintech en Colombia: Tendencias 2024</h2>
+                            <h2 class="blog-card-title">Fianzas en la ley</h2>
                             <p class="blog-card-excerpt">
-                                Analizamos las principales tendencias que están transformando el sector fintech colombiano, desde la llegada de nuevas regulaciones hasta la adopción masiva de pagos digitales. Descubre cómo estas innovaciones están democratizando el acceso al crédito.
+                                En AvalTrust aplicamos el principio legal de la fianza para respaldar obligaciones crediticias con avales digitales. Actuamos como fiadores profesionales bajo normas claras, cubriendo pagos incumplidos y activando un fondo de cobertura para su recuperación legal.
                             </p>
                             <div class="blog-card-tags">
                                 <a href="#" class="blog-tag">Fintech</a>
@@ -137,249 +114,69 @@
                                 <a href="#" class="blog-tag">Tendencias</a>
                             </div>
                             <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 245</span>
+                                <a href="#" class="read-more-btn" onclick="openArticleModal(1)">Leer más →</a>
                             </div>
                         </div>
                     </article>
-
-                    <!-- Regular Posts -->
-                    <article class="blog-card" data-category="credito">
-                        <div class="blog-card-image">
-                            <img src="image/blog/avales-digitales.jpg" alt="Avales Digitales">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 10 Mayo 2024</span>
-                                <span class="blog-card-author">👤 Carlos Ruiz</span>
-                            </div>
-                            <h3 class="blog-card-title">¿Cómo Funcionan los Avales Digitales?</h3>
-                            <p class="blog-card-excerpt">
-                                Una guía completa sobre el funcionamiento de los avales digitales y su impacto en la inclusión financiera.
-                            </p>
-                            <div class="blog-card-tags">
-                                <a href="#" class="blog-tag">Avales</a>
-                                <a href="#" class="blog-tag">Digital</a>
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 128</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="blog-card" data-category="educacion">
-                        <div class="blog-card-image">
-                            <img src="image/blog/educacion-financiera.jpg" alt="Educación Financiera">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 8 Mayo 2024</span>
-                                <span class="blog-card-author">👤 María López</span>
-                            </div>
-                            <h3 class="blog-card-title">5 Claves para Mejorar tu Score Crediticio</h3>
-                            <p class="blog-card-excerpt">
-                                Consejos prácticos para mantener un buen historial crediticio y acceder a mejores oportunidades de financiamiento.
-                            </p>
-                            <div class="blog-card-tags">
-                                <a href="#" class="blog-tag">Score</a>
-                                <a href="#" class="blog-tag">Consejos</a>
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 189</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="blog-card" data-category="regulacion">
-                        <div class="blog-card-image">
-                            <img src="image/blog/regulacion-fintech.jpg" alt="Regulación Fintech">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 5 Mayo 2024</span>
-                                <span class="blog-card-author">👤 Diego Martínez</span>
-                            </div>
-                            <h3 class="blog-card-title">Nuevas Regulaciones Fintech: Lo que Debes Saber</h3>
-                            <p class="blog-card-excerpt">
-                                Análisis de las últimas regulaciones financieras y su impacto en el ecosistema fintech colombiano.
-                            </p>
-                            <div class="blog-card-tags">
-                                <a href="#" class="blog-tag">Regulación</a>
-                                <a href="#" class="blog-tag">Compliance</a>
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 95</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="blog-card" data-category="fintech">
-                        <div class="blog-card-image">
-                            <img src="image/blog/inclusion-financiera.jpg" alt="Inclusión Financiera">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 2 Mayo 2024</span>
-                                <span class="blog-card-author">👤 Sofía Herrera</span>
-                            </div>
-                            <h3 class="blog-card-title">La Revolución de la Inclusión Financiera en Colombia</h3>
-                            <p class="blog-card-excerpt">
-                                Cómo la tecnología está democratizando el acceso a servicios financieros en poblaciones tradicionalmente excluidas.
-                            </p>
-                            <div class="blog-card-tags">
-                                <a href="#" class="blog-tag">Inclusión</a>
-                                <a href="#" class="blog-tag">Tecnología</a>
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 167</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="blog-card" data-category="credito">
-                        <div class="blog-card-image">
-                            <img src="image/blog/credito-digital.jpg" alt="Crédito Digital">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span class="blog-card-date">📅 28 Abril 2024</span>
-                                <span class="blog-card-author">👤 Roberto Silva</span>
-                            </div>
-                            <h3 class="blog-card-title">Crédito Digital vs Crédito Tradicional: Comparativa</h3>
-                            <p class="blog-card-excerpt">
-                                Ventajas y desventajas de cada modalidad crediticia para ayudarte a tomar la mejor decisión financiera.
-                            </p>
-                            <div class="blog-card-tags">
-                                <a href="#" class="blog-tag">Crédito</a>
-                                <a href="#" class="blog-tag">Comparativa</a>
-                            </div>
-                            <div class="blog-card-footer">
-                                <a href="#" class="read-more-btn">Leer más →</a>
-                                <span class="blog-card-likes">❤️ 203</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination">
-                    <a href="#" class="pagination-btn">←</a>
-                    <a href="#" class="pagination-btn active">1</a>
-                    <a href="#" class="pagination-btn">2</a>
-                    <a href="#" class="pagination-btn">3</a>
-                    <a href="#" class="pagination-btn">4</a>
-                    <a href="#" class="pagination-btn">→</a>
                 </div>
             </div>
 
             <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sidebar">
-                    <!-- Newsletter Signup -->
+                    <!-- Sobre Nuestro Blog -->
                     <div class="sidebar-section">
-                        <div class="newsletter-signup">
-                            <h4>📧 Newsletter AvalTrust</h4>
-                            <p>Recibe las últimas noticias del sector fintech directamente en tu email</p>
-                            <form class="newsletter-form">
-                                <input type="email" class="newsletter-input" placeholder="Tu email">
-                                <button type="submit" class="newsletter-btn">Suscribir</button>
-                            </form>
+                        <div class="about-blog">
+                            <h4>📝 Blog AvalTrust</h4>
+                            <p>Compartimos insights sobre el sector fintech, educación financiera y las últimas tendencias en avales digitales para mantenerte informado.</p>
                         </div>
                     </div>
 
-                    <!-- Popular Posts -->
+                    <!-- Información -->
                     <div class="sidebar-section">
-                        <h3 class="sidebar-title">📈 Más Populares</h3>
-                        <ul class="popular-posts">
-                            <li class="popular-post">
-                                <div class="popular-post-image">
-                                    <img src="image/blog/thumb-1.jpg" alt="">
-                                </div>
-                                <div class="popular-post-content">
-                                    <h6>Cómo AvalTrust está Transformando el Crédito en Colombia</h6>
-                                    <span>20 Mayo 2024</span>
-                                </div>
-                            </li>
-                            <li class="popular-post">
-                                <div class="popular-post-image">
-                                    <img src="image/blog/thumb-2.jpg" alt="">
-                                </div>
-                                <div class="popular-post-content">
-                                    <h6>Guía Completa: Todo sobre los Avales Digitales</h6>
-                                    <span>18 Mayo 2024</span>
-                                </div>
-                            </li>
-                            <li class="popular-post">
-                                <div class="popular-post-image">
-                                    <img src="image/blog/thumb-3.jpg" alt="">
-                                </div>
-                                <div class="popular-post-content">
-                                    <h6>5 Mitos sobre el Crédito Digital Desmontados</h6>
-                                    <span>15 Mayo 2024</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Tags Cloud -->
-                    <div class="sidebar-section">
-                        <h3 class="sidebar-title">🏷️ Temas Populares</h3>
-                        <div class="tag-cloud">
-                            <a href="#" class="blog-tag">Fintech</a>
-                            <a href="#" class="blog-tag">Avales</a>
-                            <a href="#" class="blog-tag">Crédito</a>
-                            <a href="#" class="blog-tag">Innovación</a>
-                            <a href="#" class="blog-tag">Colombia</a>
-                            <a href="#" class="blog-tag">Digital</a>
-                            <a href="#" class="blog-tag">Regulación</a>
-                            <a href="#" class="blog-tag">Score</a>
-                            <a href="#" class="blog-tag">Inclusión</a>
-                            <a href="#" class="blog-tag">Tecnología</a>
+                        <h3 class="sidebar-title">📋 Información</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <strong>Publicamos contenido sobre:</strong>
+                                <ul class="simple-list">
+                                    <li>Innovación fintech</li>
+                                    <li>Educación financiera</li>
+                                    <li>Avales digitales</li>
+                                    <li>Tendencias crediticias</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Categories -->
+                    <!-- Recursos -->
                     <div class="sidebar-section">
-                        <h3 class="sidebar-title">📂 Categorías</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
-                                    <span>Fintech</span>
-                                    <span>(24)</span>
-                                </a>
-                            </li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
-                                    <span>Educación Financiera</span>
-                                    <span>(18)</span>
-                                </a>
-                            </li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
-                                    <span>Avales Digitales</span>
-                                    <span>(15)</span>
-                                </a>
-                            </li>
-                            <li style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
-                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
-                                    <span>Regulación</span>
-                                    <span>(12)</span>
-                                </a>
-                            </li>
-                            <li style="padding: 10px 0;">
-                                <a href="#" style="display: flex; justify-content: space-between; text-decoration: none; color: #718096;">
-                                    <span>Casos de Éxito</span>
-                                    <span>(8)</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <h3 class="sidebar-title">🔗 Enlaces Útiles</h3>
+                        <div class="links-list">
+                            <a href="owr-service.html" class="sidebar-link">
+                                🛡️ Nuestros Servicios
+                            </a>
+                            <a href="about-us.html" class="sidebar-link">
+                                🏢 Quiénes Somos
+                            </a>
+                            <a href="people.html" class="sidebar-link">
+                                👥 Avalados
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-cta">
+                            <div class="cta-content">
+                                <h4>💬 ¿Tienes Preguntas?</h4>
+                                <p>Nuestro equipo está listo para ayudarte con información sobre nuestros servicios de aval.</p>
+                                <a href="contact.html" class="cta-button">Contáctanos</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -394,7 +191,7 @@
                     <div class="wgs wgs-footer wgs-text">
                         <div class="wgs-content">
                             <p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
-                            <p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito.</p>
+                            <p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
                         </div>
                     </div>
                     <!-- End Widget -->
@@ -402,13 +199,15 @@
                 <div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
                     <!-- Each Widget -->
                     <div class="wgs wgs-footer wgs-menu">
-                        <h5 class="wgs-title">Enlaces Rápidos</h5>
+                        <h5 class="wgs-title">Somos tu Aval Para</h5>
                         <div class="wgs-content">
                             <ul class="menu">
-                                <li><a href="about-us.html">Quiénes Somos</a></li>
-                                <li><a href="owr-service.html">Nuestro Servicio</a></li>
-                                <li><a href="people.html">Avalados</a></li>
-                                <li><a href="contact.html">Contáctanos</a></li>
+                                <li><a>Créditos de libranzas</a></li>
+                                <li><a>Créditos digitales</a></li>
+                                <li><a>Créditos educativos</a></li>
+                                <li><a>Créditos de vehículos</a></li>
+                                <li><a>Créditos de arrendamiento</a></li>
+                                <li><a>Créditos retail</a></li>
                             </ul>
                         </div>
                     </div>
@@ -417,59 +216,67 @@
                 <div class="footer-col col-md-2 col-sm-6 res-m-bttm">
                     <!-- Each Widget -->
                     <div class="wgs wgs-footer wgs-menu">
-                        <h5 class="wgs-title">Blog</h5>
+                        <h5 class="wgs-title">Enlaces rápidos</h5>
                         <div class="wgs-content">
                             <ul class="menu">
-                                <li><a href="blog.html">Todos los Artículos</a></li>
-                                <li><a href="#">Fintech</a></li>
-                                <li><a href="#">Educación Financiera</a></li>
-                                <li><a href="#">Regulación</a></li>
+                                <li><a href="#">Inicio</a></li>
+                                <li><a href="#">Quienes Somos</a></li>
+                                <li><a href="#">Personas</a></li>
+                                <li><a href="#">Empresas</a></li>
+                                <li><a href="#">Nuestro Servicio</a></li>
+                                <li><a href="#">Contáctenos</a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- End Widget -->
                 </div>
+
                 <div class="footer-col col-md-3 col-sm-6">
                     <!-- Each Widget -->
-                    <div class="wgs wgs-footer wgs-contact">
-                        <h5 class="wgs-title">Contáctanos</h5>
+                    <div class="wgs wgs-footer">
+                        <h5 class="wgs-title">Estamos para ayudarte</h5>
                         <div class="wgs-content">
-                            <ul class="contact">
-                                <li><em class="fa fa-home"></em>Bogotá, Colombia</li>
-                                <li><em class="fa fa-phone"></em>(+57) 300 000 0000</li>
-                                <li><em class="fa fa-envelope"></em>info@avaltrust.com</li>
+                            <p>
+                                Calle 70 sur # 43a-13<br>
+                                Edificio Cantoluna<br>
+                                Sabaneta, Antioquia.
+                            </p>
+                            <p><span>Teléfono</span>: (123) 1234 5678</p>
+                            <ul class="social">
+                                <li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
+                                <li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
+                                <li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- End Widget -->
                 </div>
-            </div>
+            </div><!-- Widget Row -->
         </div>
     </div>
 </div>
 <!-- End Footer Widget -->
 
-<!-- Footer -->
-<footer class="footer-bottom">
+<!-- Copyright -->
+<div class="copyright">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <p>&copy; 2024 AvalTrust. Todos los derechos reservados.</p>
-            </div>
-            <div class="col-sm-6 text-right res-m-t">
-                <div class="footer-social">
-                    <a href="#"><em class="fa fa-linkedin"></em></a>
-                    <a href="#"><em class="fa fa-twitter"></em></a>
-                    <a href="#"><em class="fa fa-facebook"></em></a>
+            <div class="row">
+                <div class="site-copy col-sm-7">
+                    <p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
+                </div>
+                <div class="site-by col-sm-5 al-right">
+                    <p>Comprometidos con transformar el acceso al crédito.</p>
                 </div>
             </div>
         </div>
     </div>
-</footer>
+</div>
 <!-- End Footer -->
 
-<script src="js/vendor.bundle.js"></script>
-<script src="js/scripts.js"></script>
+<script src="js/jquery.bundle.js"></script>
+<script src="js/script.js"></script>
+<script src="js/blog.js"></script>
 <script>
     // Funcionalidad de filtros
     document.addEventListener('DOMContentLoaded', function() {
@@ -568,5 +375,19 @@
         });
     });
 </script>
+<!-- Modal del Artículo -->
+<div id="articleModal" class="article-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-modal" onclick="closeArticleModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div id="modalArticleContent">
+                <!-- El contenido se cargará dinámicamente -->
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -315,7 +315,80 @@
 <!-- Script para mostrar mensaje de confirmación -->
 <script>
 	$(document).ready(function() {
+		// Función para validar todos los campos obligatorios
+		function validateRequiredFields() {
+			var isValid = true;
+			var requiredFields = $('.form-control.required');
+
+			requiredFields.each(function() {
+				var fieldValue = $(this).val().trim();
+				if (fieldValue === '') {
+					isValid = false;
+					// Agregar clase de error visual (opcional)
+					$(this).addClass('field-error');
+				} else {
+					// Remover clase de error si el campo está lleno
+					$(this).removeClass('field-error');
+				}
+			});
+
+			return isValid;
+		}
+
+		// Función para validar email
+		function validateEmail(email) {
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			return emailRegex.test(email);
+		}
+
+		// Función para mostrar mensaje de error
+		function showErrorMessage(message) {
+			// Ocultar otros mensajes
+			$('#loading-message').hide();
+			$('#success-message').hide();
+
+			// Mostrar mensaje de error
+			if ($('#error-message').length === 0) {
+				$('#submit-btn').after('<div id="error-message" class="form-results" style="display: none;"><div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #f5c6cb;"><i class="fa fa-exclamation-triangle" style="margin-right: 10px;"></i><span id="error-text"></span></div></div>');
+			}
+
+			$('#error-text').text(message);
+			$('#error-message').show();
+
+			// Ocultar mensaje de error después de 5 segundos
+			setTimeout(function() {
+				$('#error-message').fadeOut();
+			}, 5000);
+		}
+
+		// Remover errores visuales cuando el usuario empiece a escribir
+		$('.form-control.required').on('input', function() {
+			$(this).removeClass('field-error');
+			$('#error-message').hide();
+		});
+
 		$('#quote-request').on('submit', function(e) {
+			// Prevenir el envío inmediato
+			e.preventDefault();
+
+			// Validar campos obligatorios
+			if (!validateRequiredFields()) {
+				showErrorMessage('Por favor, completa todos los campos obligatorios marcados con *');
+				return false;
+			}
+
+			// Validar formato de email
+			var email = $('input[name="Correo"]').val().trim();
+			if (!validateEmail(email)) {
+				showErrorMessage('Por favor, ingresa un correo electrónico válido');
+				$('input[name="Correo"]').addClass('field-error');
+				return false;
+			}
+
+			// Si todas las validaciones pasan, proceder con el envío
+			// Ocultar mensajes de error
+			$('#error-message').hide();
+
 			// Mostrar mensaje de carga
 			$('#loading-message').show();
 			$('#success-message').hide();
@@ -332,12 +405,10 @@
 					document.getElementById('quote-request').submit();
 				}, 3000);
 			}, 1000);
-
-			// Prevenir el envío inmediato para mostrar los mensajes
-			e.preventDefault();
 		});
 	});
 </script>
+
 
 </body>
 </html>

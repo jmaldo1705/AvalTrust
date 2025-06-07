@@ -79,31 +79,56 @@
 					<h2 class="contact-form-title">Envíanos un Mensaje</h2>
 					<p class="contact-form-description">¿Necesitas más información sobre nuestros servicios? Completa el formulario y nuestro equipo se pondrá en contacto contigo a la brevedad.</p>
 
-					<form id="quote-request" class="modern-form" action="form/quote-request.php" method="post">
+					<!-- Formulario actualizado con Formsubmit -->
+					<form id="quote-request" class="modern-form" action="https://formsubmit.co/comercial@avaltrust.co" method="POST">
+
 						<div class="form-group row">
 							<div class="form-field col-md-6">
-								<input name="quote-request-name" type="text" placeholder="Nombre Completo *" class="form-control required">
+								<input name="Nombre" type="text" placeholder="Nombre Completo *" class="form-control required" required>
 							</div>
 							<div class="form-field col-md-6">
-								<input name="quote-request-company" type="text" placeholder="Empresa / Organización" class="form-control">
+								<input name="Empresa" type="text" placeholder="Empresa / Organización" class="form-control">
 							</div>
 						</div>
+
 						<div class="form-group row">
 							<div class="form-field col-md-6">
-								<input name="quote-request-email" type="email" placeholder="Correo Electrónico *" class="form-control required email">
+								<input name="Correo" type="email" placeholder="Correo Electrónico *" class="form-control required" required>
 							</div>
 							<div class="form-field col-md-6">
-								<input name="quote-request-phone" type="text" placeholder="Teléfono *" class="form-control required">
+								<input name="Teléfono" type="text" placeholder="Teléfono *" class="form-control required" required>
 							</div>
 						</div>
+
 						<div class="form-group">
 							<div class="form-field">
-								<textarea name="quote-request-message" placeholder="Cuéntanos cómo podemos ayudarte *" class="txtarea form-control required"></textarea>
+								<textarea name="Mensaje" placeholder="Cuéntanos cómo podemos ayudarte *" class="txtarea form-control required" required></textarea>
 							</div>
 						</div>
-						<input type="text" class="hidden" name="form-anti-honeypot" value="">
-						<button type="submit" class="modern-submit-btn">Enviar Mensaje</button>
-						<div class="form-results"></div>
+
+						<!-- Configuraciones ocultas de Formsubmit -->
+						<input type="hidden" name="_subject" value="Nuevo mensaje desde la web de AvalTrust">
+						<input type="hidden" name="_next" value="https://avaltrust.co/contact.html">
+						<input type="hidden" name="_captcha" value="false">
+
+						<button type="submit" class="modern-submit-btn" id="submit-btn">Enviar Mensaje</button>
+
+						<!-- Mensaje de éxito -->
+						<div id="success-message" class="form-results" style="display: none;">
+							<div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #c3e6cb;">
+								<i class="fa fa-check-circle" style="margin-right: 10px;"></i>
+								<strong>¡Mensaje enviado exitosamente!</strong><br>
+								Hemos recibido tu mensaje. Nuestro equipo se pondrá en contacto contigo a la brevedad.
+							</div>
+						</div>
+
+						<!-- Mensaje de cargando -->
+						<div id="loading-message" class="form-results" style="display: none;">
+							<div class="alert alert-info" style="background-color: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #bee5eb;">
+								<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>
+								Enviando mensaje...
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -286,5 +311,33 @@
 <!-- Theme Script init() -->
 <script src="js/script.js"></script>
 <!-- End script -->
+
+<!-- Script para mostrar mensaje de confirmación -->
+<script>
+	$(document).ready(function() {
+		$('#quote-request').on('submit', function(e) {
+			// Mostrar mensaje de carga
+			$('#loading-message').show();
+			$('#success-message').hide();
+			$('#submit-btn').prop('disabled', true).text('Enviando...');
+
+			// Simular un pequeño delay para mostrar el mensaje de éxito
+			setTimeout(function() {
+				$('#loading-message').hide();
+				$('#success-message').show();
+
+				// Esperar 3 segundos antes de proceder con el envío real
+				setTimeout(function() {
+					// El formulario se enviará normalmente después de mostrar el mensaje
+					document.getElementById('quote-request').submit();
+				}, 3000);
+			}, 1000);
+
+			// Prevenir el envío inmediato para mostrar los mensajes
+			e.preventDefault();
+		});
+	});
+</script>
+
 </body>
 </html>

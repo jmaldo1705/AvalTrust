@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Calculadora de Cobertura | AvalTrust - Estimación en 30 Minutos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Recibe en menos de 30 minutos una estimación de cobertura garantizada para tu negocio con AvalTrust.">
+    <link rel="icon" href="image/favicon.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
+    <link id="style-css" rel="stylesheet" type="text/css" href="css/style-azure.css">
+    <link id="whatsapp" rel="stylesheet" type="text/css" href="css/whatsapp.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
+    <link rel="stylesheet" type="text/css" href="css/calculadora.css">
+</head>
+<body class="site-body style-v1 calculadora-page">
+<!-- Header -->
+<header class="site-header header-s1 is-transparent is-sticky">
+    <!-- Navbar -->
+    <div class="navbar navbar-primary">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="./">
+                <img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo2x.png 2x">
+                <img class="logo logo-light" alt="" src="image/logo-light.png" srcset="image/logo-light2x.png 2x">
+            </a>
+            <!-- #end Logo -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav" aria-expanded="false">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Q-Button for Mobile -->
+                <div class="quote-btn"><a class="btn" href="login.html">Sign in</a></div>
+            </div>
+            <!-- MainNav -->
+            <nav class="navbar-collapse collapse" id="mainnav">
+                <ul class="nav navbar-nav">
+                    <li><a href="./">Inicio</a></li>
+                    <li><a href="about-us.html">Quiénes Somos</a></li>
+                    <li class="dropdown"><a href="owr-service.html">Nuestro Servicio</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login-aliados.html">PORTAL ALIADOS</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="people.html">Avalados</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="login-avalados.html">PORTAL AVALADOS</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li class="quote-btn"><a class="btn" href="contact.html">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <!-- #end MainNav -->
+        </div>
+    </div>
+    <!-- #end Navbar -->
+</header>
+<!-- End Header -->
+
+<!-- Hero Section -->
+<div class="calculadora-hero">
+    <div class="container">
+        <div class="calculadora-hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="hero-calculadora-text">
+                        <div class="hero-badge-calculadora">⚡ Estimación Rápida</div>
+                        <h1 class="hero-title-calculadora">Calculadora de Cobertura AvalTrust</h1>
+                        <p class="hero-subtitle-calculadora">
+                            <strong>Recibe en menos de 30 minutos</strong> una estimación de cobertura garantizada para tu negocio
+                        </p>
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">⏱️</span>
+                                <span>Respuesta en 30 min</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📊</span>
+                                <span>Análisis personalizado</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🔒</span>
+                                <span>Sin compromiso</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Calculator Section -->
+<div class="calculadora-main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Calculator Form -->
+                <div class="calculadora-card">
+                    <div class="calculadora-header">
+                        <h2 class="calculadora-title">📩 Solo necesitas completar los siguientes datos empresariales:</h2>
+                    </div>
+
+                    <form class="calculadora-form" id="calculadoraForm">
+                        <!-- Datos del Aliado -->
+                        <div class="form-section">
+                            <h3 class="section-title">🔹 Datos del Aliado</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nombreCompleto">Nombre completo (persona natural con rol decisorio)</label>
+                                        <input type="text" id="nombreCompleto" class="form-control" placeholder="Ejemplo: Laura Sánchez" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="correoEmpresarial">Correo empresarial (no se acepta personal)</label>
+                                        <input type="email" id="correoEmpresarial" class="form-control" placeholder="Ejemplo: laura.sanchez@midistribuidora.com" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="celularCorporativo">Celular corporativo</label>
+                                        <input type="tel" id="celularCorporativo" class="form-control" placeholder="Ejemplo: +57 300 1234567" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cargoDesempena">Cargo que desempeña</label>
+                                        <input type="text" id="cargoDesempena" class="form-control" placeholder="Ejemplo: Directora Financiera" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Parámetros Financieros -->
+                        <div class="form-section">
+                            <h3 class="section-title">🔹 Parámetros Financieros de tu Portafolio</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="valorPromedio">Valor promedio del crédito</label>
+                                        <div class="input-group">
+                                            <span class="input-prefix">$</span>
+                                            <input type="number" id="valorPromedio" class="form-control" placeholder="Entre $0 - $100.000.000" min="0" max="100000000" required>
+                                        </div>
+                                        <small class="form-hint">Entre $0 - $100.000.000</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="porcentajeDefault">Porcentaje de default a los 90 días</label>
+                                        <div class="input-group">
+                                            <input type="number" id="porcentajeDefault" class="form-control" placeholder="Ejemplo: 6.5" min="0" max="100" step="0.1" required>
+                                            <span class="input-suffix">%</span>
+                                        </div>
+                                        <small class="form-hint">Ejemplo: 6.5%</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="numeroCuotas">Número de cuotas por crédito</label>
+                                        <select id="numeroCuotas" class="form-control" required>
+                                            <option value="">Seleccionar cuotas</option>
+                                            <option value="1">1 cuota</option>
+                                            <option value="6">6 cuotas</option>
+                                            <option value="12">12 cuotas</option>
+                                            <option value="18">18 cuotas</option>
+                                            <option value="24">24 cuotas</option>
+                                            <option value="36">36 cuotas</option>
+                                            <option value="48">48 cuotas</option>
+                                        </select>
+                                        <small class="form-hint">Ejemplo: 12, 24, 36...</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="creditosPorMes">Número promedio de créditos otorgados por mes</label>
+                                        <input type="number" id="creditosPorMes" class="form-control" placeholder="Ejemplo: 180" min="1" required>
+                                        <small class="form-hint">Ejemplo: 180 créditos/mes</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón de Cálculo -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn-calcular">
+                                <span class="btn-icon">👉</span>
+                                Generar estimación ahora
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Qué Recibirás -->
+                <div class="beneficios-card">
+                    <h3 class="beneficios-title">✅ ¿Qué recibirás?</h3>
+                    <p class="beneficios-subtitle">Al finalizar, en menos de 30 minutos te enviaremos al correo registrado:</p>
+                    <div class="beneficios-list">
+                        <div class="beneficio-item">
+                            <span class="beneficio-icon">📊</span>
+                            <div class="beneficio-content">
+                                <strong>Un informe personalizado de cobertura estimada</strong>
+                            </div>
+                        </div>
+                        <div class="beneficio-item">
+                            <span class="beneficio-icon">🔐</span>
+                            <div class="beneficio-content">
+                                <strong>Una propuesta preliminar sin compromiso como Aliado AvalTrust</strong>
+                            </div>
+                        </div>
+                        <div class="beneficio-item">
+                            <span class="beneficio-icon">🚀</span>
+                            <div class="beneficio-content">
+                                <strong>Una vista previa de cómo nuestras garantías digitales pueden mejorar tu operación</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje de Éxito -->
+                <div class="mensaje-exito" id="mensajeExito" style="display: none;">
+                    <div class="exito-content">
+                        <div class="exito-icon">✅</div>
+                        <h3>¡Solicitud enviada exitosamente!</h3>
+                        <p>Hemos recibido tu información y nuestro equipo está procesando tu estimación de cobertura.</p>
+                        <div class="exito-detalles">
+                            <div class="detalle-item">
+                                <strong>📧 Correo de confirmación:</strong>
+                                <span id="correoConfirmacion">-</span>
+                            </div>
+                            <div class="detalle-item">
+                                <strong>⏱️ Tiempo estimado de respuesta:</strong>
+                                <span>Menos de 30 minutos</span>
+                            </div>
+                        </div>
+                        <div class="exito-acciones">
+                            <button type="button" class="btn-nueva-estimacion" onclick="nuevaEstimacion()">
+                                Nueva Estimación
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action Final -->
+<div class="cta-final">
+    <div class="container">
+        <div class="cta-content">
+            <h2>💡 ¡Haz parte de la evolución en respaldo financiero digital!</h2>
+            <p>Transforma tu riesgo en oportunidad, tu cartera en crecimiento, y tu confianza en respaldo.</p>
+            <div class="cta-features">
+                <div class="cta-feature">
+                    <span class="cta-icon">🔄</span>
+                    <span>Transforma tu riesgo en oportunidad</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-icon">📈</span>
+                    <span>Tu cartera en crecimiento</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-icon">🤝</span>
+                    <span>Tu confianza en respaldo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Widget-->
+<div class="footer-widget section-pad-md">
+    <div class="container">
+        <div class="row">
+            <div class="widget-row row">
+                <div class="footer-col col-md-3 col-sm-6 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-text">
+                        <div class="wgs-content">
+                            <p><img src="image/logo-light.png" srcset="image/logo-light2x.png 2x" alt=""></p>
+                            <p>Impulsamos la inclusión financiera con soluciones innovadoras de aval y garantía, facilitando un acceso seguro y confiable al crédito para personas, empresas y plataformas Fintech en Colombia.</p>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+                <div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-menu">
+                        <h5 class="wgs-title">Somos tu Aval Para</h5>
+                        <div class="wgs-content">
+                            <ul class="menu">
+                                <li><a>Créditos de libranzas</a></li>
+                                <li><a>Créditos digitales</a></li>
+                                <li><a>Créditos educativos</a></li>
+                                <li><a>Créditos de vehículos</a></li>
+                                <li><a>Créditos de arrendamiento</a></li>
+                                <li><a>Créditos retail</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+                <div class="footer-col col-md-2 col-sm-6 res-m-bttm">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer wgs-menu">
+                        <h5 class="wgs-title">Enlaces rápidos</h5>
+                        <div class="wgs-content">
+                            <ul class="menu">
+                                <li><a href="index.html">Inicio</a></li>
+                                <li><a href="about-us.html">Quienes Somos</a></li>
+                                <li><a href="owr-service.html">Nuestro Servicio</a></li>
+                                <li><a href="people.html">Avalados</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contáctenos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+
+                <div class="footer-col col-md-3 col-sm-6">
+                    <!-- Each Widget -->
+                    <div class="wgs wgs-footer">
+                        <h5 class="wgs-title">Estamos para ayudarte</h5>
+                        <div class="wgs-content">
+                            <p>
+                                Calle 70 sur # 43a-13<br>
+                                Edificio Cantoluna<br>
+                                Sabaneta, Antioquia.
+                            </p>
+                            <p><span>Teléfono</span>: 302 765 7434</p>
+                            <ul class="social">
+                                <li><a href="#"><em class="fa fa-facebook" aria-hidden="true"></em></a></li>
+                                <li><a href="#"><em class="fa fa-twitter" aria-hidden="true"></em></a></li>
+                                <li><a href="#"><em class="fa fa-linkedin" aria-hidden="true"></em></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Widget -->
+                </div>
+            </div><!-- Widget Row -->
+        </div>
+    </div>
+</div>
+<!-- End Footer Widget -->
+
+<!-- Copyright -->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="site-copy col-sm-7">
+                    <p>&copy; 2025 AvalTrust. <a href="#">Política de privacidad</a></p>
+                </div>
+                <div class="site-by col-sm-5 al-right">
+                    <p>Comprometidos con transformar el acceso al crédito.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer -->
+
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/573027657434?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20la%20calculadora%20de%20cobertura%20de%20AvalTrust"
+   class="whatsapp-float"
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Chatea con nosotros en WhatsApp">
+    <img src="image/whatsapp.png" alt="WhatsApp">
+</a>
+
+<script src="js/jquery.bundle.js"></script>
+<script src="js/script.js"></script>
+<script src="js/calculadora.js"></script>
+</body>
+</html>

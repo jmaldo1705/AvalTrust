@@ -1,349 +1,652 @@
+// Calculadora de Cobertura AvalTrust - JavaScript Mejorado
+class CalculadoraCobertura {
+    constructor() {
+        this.currentStep = 1;
+        this.totalSteps = 3;
+        this.formData = {};
+        this.validators = new FormValidators();
 
-// Calculadora de Cobertura AvalTrust
-
-document.addEventListener('DOMContentLoaded', function() {
-    const formulario = document.getElementById('calculadoraForm');
-    const mensajeExito = document.getElementById('mensajeExito');
-
-    // Manejar envío del formulario
-    formulario.addEventListener('submit', function(e) {
-        e.preventDefault();
-        procesarSolicitudCobertura();
-    });
-
-    // Función principal para procesar la solicitud
-    function procesarSolicitudCobertura() {
-        const datos = obtenerDatosFormulario();
-
-        if (!validarDatos(datos)) {
-            return;
-        }
-
-        // Mostrar estado de carga
-        mostrarEstadoCarga();
-
-        // Simular envío de datos (aquí iría la integración real)
-        setTimeout(() => {
-            enviarDatos(datos);
-            mostrarMensajeExito(datos.correoEmpresarial);
-            ocultarEstadoCarga();
-        }, 2000);
+        this.init();
     }
 
-    // Obtener datos del formulario
-    function obtenerDatosFormulario() {
-        return {
-            nombreCompleto: document.getElementById('nombreCompleto').value.trim(),
-            correoEmpresarial: document.getElementById('correoEmpresarial').value.trim(),
-            celularCorporativo: document.getElementById('celularCorporativo').value.trim(),
-            cargoDesempena: document.getElementById('cargoDesempena').value.trim(),
-            valorPromedio: parseFloat(document.getElementById('valorPromedio').value) || 0,
-            porcentajeDefault: parseFloat(document.getElementById('porcentajeDefault').value) || 0,
-            numeroCuotas: parseInt(document.getElementById('numeroCuotas').value) || 0,
-            creditosPorMes: parseInt(document.getElementById('creditosPorMes').value) || 0
-        };
+    init() {
+        this.setupEventListeners();
+        this.updateProgressBar();
+        this.initializeTooltips();
+        this.setupDynamicFeedback();
     }
 
-    // Validar datos del formulario
-    function validarDatos(datos) {
-        let esValido = true;
-
-        // Limpiar errores previos
-        limpiarErrores();
-
-        // Validar nombre completo
-        if (!datos.nombreCompleto || datos.nombreCompleto.length < 5) {
-            mostrarError('nombreCompleto', 'El nombre completo debe tener al menos 5 caracteres');
-            esValido = false;
+    setupEventListeners() {
+        // Form submission
+        const form = document.getElementById('calculadoraForm');
+        if (form) {
+            form.addEventListener('submit', this.handleSubmit.bind(this));
         }
 
-        // Validar correo empresarial
-        if (!validarCorreoEmpresarial(datos.correoEmpresarial)) {
-            mostrarError('correoEmpresarial', 'Debe ser un correo empresarial válido (no personal como gmail, hotmail, etc.)');
-            esValido = false;
-        }
+        // Real-time validation
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('blur', this.validateField.bind(this));
+            input.addEventListener('input', this.handleInputChange.bind(this));
+        });
 
-        // Validar celular corporativo
-        if (!validarCelular(datos.celularCorporativo)) {
-            mostrarError('celularCorporativo', 'Formato de celular inválido. Ejemplo: +57 300 1234567');
-            esValido = false;
+        // Terms checkbox
+        const termsCheckbox = document.getElementById('acceptTerms');
+        if (termsCheckbox) {
+            termsCheckbox.addEventListener('change', this.validateTerms.bind(this));
         }
-
-        // Validar cargo
-        if (!datos.cargoDesempena || datos.cargoDesempena.length < 3) {
-            mostrarError('cargoDesempena', 'El cargo debe tener al menos 3 caracteres');
-            esValido = false;
-        }
-
-        // Validar valor promedio
-        if (datos.valorPromedio <= 0 || datos.valorPromedio > 100000000) {
-            mostrarError('valorPromedio', 'El valor debe estar entre $1 y $100.000.000');
-            esValido = false;
-        }
-
-        // Validar porcentaje de default
-        if (datos.porcentajeDefault < 0 || datos.porcentajeDefault > 100) {
-            mostrarError('porcentajeDefault', 'El porcentaje debe estar entre 0% y 100%');
-            esValido = false;
-        }
-
-        // Validar número de cuotas
-        if (datos.numeroCuotas <= 0) {
-            mostrarError('numeroCuotas', 'Debe seleccionar el número de cuotas');
-            esValido = false;
-        }
-
-        // Validar créditos por mes
-        if (datos.creditosPorMes <= 0) {
-            mostrarError('creditosPorMes', 'Debe ingresar un número válido de créditos por mes');
-            esValido = false;
-        }
-
-        return esValido;
     }
 
-    // Validar correo empresarial
-    function validarCorreoEmpresarial(correo) {
-        const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const dominiosPersonales = [
-            'gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com',
-            'live.com', 'icloud.com', 'aol.com', 'protonmail.com'
+    setupDynamicFeedback() {
+        // Valor promedio feedback
+        const valorPromedio = document.getElementById('valorPromedio');
+        if (valorPromedio) {
+            valorPromedio.addEventListener('input', this.updateValorPromedioFeedback.bind(this));
+        }
+
+        // Porcentaje default feedback
+        const porcentajeDefault = document.getElementById('porcentajeDefault');
+        if (porcentajeDefault) {
+            porcentajeDefault.addEventListener('input', this.updateRiskIndicator.bind(this));
+        }
+
+        // Créditos por mes feedback
+        const creditosPorMes = document.getElementById('creditosPorMes');
+        if (creditosPorMes) {
+            creditosPorMes.addEventListener('input', this.updateVolumeFeedback.bind(this));
+        }
+    }
+
+    nextStep(step) {
+        if (this.validateCurrentStep()) {
+            this.showStep(step);
+            this.updateProgressBar();
+
+            if (step === 3) {
+                this.updateSummary();
+                this.calculateEstimation();
+            }
+        }
+    }
+
+    previousStep(step) {
+        this.showStep(step);
+        this.updateProgressBar();
+    }
+
+    showStep(step) {
+        // Hide all steps
+        document.querySelectorAll('.form-step').forEach(stepEl => {
+            stepEl.classList.remove('active');
+        });
+
+        // Show target step
+        const targetStep = document.getElementById(`step${step}`);
+        if (targetStep) {
+            targetStep.classList.add('active');
+        }
+
+        // Update step indicators
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.classList.remove('active', 'completed');
+        });
+
+        document.querySelectorAll('.step-item').forEach((item, index) => {
+            const stepNumber = index + 1;
+            if (stepNumber < step) {
+                item.classList.add('completed');
+            } else if (stepNumber === step) {
+                item.classList.add('active');
+            }
+        });
+
+        this.currentStep = step;
+
+        // Smooth scroll to top of form
+        document.querySelector('.calculadora-card').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    updateProgressBar() {
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            const percentage = (this.currentStep / this.totalSteps) * 100;
+            progressFill.style.width = `${percentage}%`;
+        }
+    }
+
+    validateCurrentStep() {
+        const currentStepEl = document.querySelector('.form-step.active');
+        if (!currentStepEl) return false;
+
+        const inputs = currentStepEl.querySelectorAll('.form-control[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!this.validateField({ target: input })) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            this.showToast('Por favor completa todos los campos requeridos', 'error');
+        }
+
+        return isValid;
+    }
+
+    validateField(event) {
+        const field = event.target;
+        const validation = field.dataset.validation;
+        const value = field.value.trim();
+
+        if (!validation) return true;
+
+        const rules = validation.split('|');
+        let isValid = true;
+        let errorMessage = '';
+
+        for (const rule of rules) {
+            const [ruleName, ruleValue] = rule.split(':');
+            const validationResult = this.validators.validate(ruleName, value, ruleValue);
+
+            if (!validationResult.isValid) {
+                isValid = false;
+                errorMessage = validationResult.message;
+                break;
+            }
+        }
+
+        this.showFieldValidation(field, isValid, errorMessage);
+        return isValid;
+    }
+
+    showFieldValidation(field, isValid, message) {
+        const validationEl = field.parentNode.querySelector('.validation-message');
+
+        field.classList.remove('valid', 'invalid');
+        field.classList.add(isValid ? 'valid' : 'invalid');
+
+        if (validationEl) {
+            validationEl.classList.remove('show', 'error', 'success');
+
+            if (!isValid && message) {
+                validationEl.textContent = message;
+                validationEl.classList.add('show', 'error');
+            } else if (isValid && field.value.trim() !== '') {
+                validationEl.textContent = '✓ Campo válido';
+                validationEl.classList.add('show', 'success');
+            }
+        }
+    }
+
+    handleInputChange(event) {
+        const field = event.target;
+
+        // Clear validation message on input
+        const validationEl = field.parentNode.querySelector('.validation-message');
+        if (validationEl && field.value.trim() === '') {
+            validationEl.classList.remove('show');
+            field.classList.remove('valid', 'invalid');
+        }
+    }
+
+    updateValorPromedioFeedback() {
+        const input = document.getElementById('valorPromedio');
+        const feedback = document.getElementById('valorPromedioFeedback');
+
+        if (!input || !feedback) return;
+
+        const valor = parseFloat(input.value) || 0;
+
+        feedback.classList.remove('show', 'low', 'medium', 'high');
+
+        if (valor > 0) {
+            let category, message;
+
+            if (valor < 1000000) {
+                category = 'low';
+                message = 'Microcrédito - Ideal para emprendimientos pequeños';
+            } else if (valor < 10000000) {
+                category = 'medium';
+                message = 'Crédito empresarial - Perfecto para PYMES en crecimiento';
+            } else {
+                category = 'high';
+                message = 'Crédito corporativo - Solución para grandes empresas';
+            }
+
+            feedback.textContent = message;
+            feedback.classList.add('show', category);
+        }
+    }
+
+    updateRiskIndicator() {
+        const input = document.getElementById('porcentajeDefault');
+        const indicator = document.getElementById('riskIndicator');
+
+        if (!input || !indicator) return;
+
+        const porcentaje = parseFloat(input.value) || 0;
+
+        indicator.classList.remove('show', 'low-risk', 'medium-risk', 'high-risk');
+
+        if (porcentaje >= 0) {
+            let riskLevel, message;
+
+            if (porcentaje <= 3) {
+                riskLevel = 'low-risk';
+                message = '🟢 Excelente perfil de riesgo - Prima competitiva';
+            } else if (porcentaje <= 8) {
+                riskLevel = 'medium-risk';
+                message = '🟡 Perfil de riesgo moderado - Prima estándar';
+            } else {
+                riskLevel = 'high-risk';
+                message = '🔴 Perfil de alto riesgo - Prima premium';
+            }
+
+            indicator.textContent = message;
+            indicator.classList.add('show', riskLevel);
+        }
+    }
+
+    updateVolumeFeedback() {
+        const input = document.getElementById('creditosPorMes');
+        const feedback = document.getElementById('volumeFeedback');
+
+        if (!input || !feedback) return;
+
+        const volumen = parseInt(input.value) || 0;
+
+        feedback.classList.remove('show', 'low', 'medium', 'high');
+
+        if (volumen > 0) {
+            let category, message;
+
+            if (volumen < 50) {
+                category = 'low';
+                message = 'Volumen bajo - Ideal para empresas iniciando';
+            } else if (volumen < 200) {
+                category = 'medium';
+                message = 'Volumen medio - Perfecto para empresas establecidas';
+            } else {
+                category = 'high';
+                message = 'Alto volumen - Descuentos especiales disponibles';
+            }
+
+            feedback.textContent = message;
+            feedback.classList.add('show', category);
+        }
+    }
+
+    updateSummary() {
+        const personalData = this.obtenerDatosPersonales();
+        const financialData = this.obtenerDatosFinancieros();
+
+        this.updatePersonalSummary(personalData);
+        this.updateFinancialSummary(financialData);
+
+        // Store data for submission
+        this.formData = { ...personalData, ...financialData };
+    }
+
+    updatePersonalSummary(data) {
+        const container = document.getElementById('personalSummary');
+        if (!container) return;
+
+        const items = [
+            { label: 'Nombre', value: data.nombreCompleto },
+            { label: 'Cargo', value: this.getCargoLabel(data.cargoDesempena) },
+            { label: 'Empresa', value: data.nombreEmpresa },
+            { label: 'Correo', value: data.correoEmpresarial },
+            { label: 'Teléfono', value: data.celularCorporativo }
         ];
 
-        if (!regexCorreo.test(correo)) {
+        container.innerHTML = items.map(item => `
+            <div class="summary-item">
+                <span class="summary-label">${item.label}:</span>
+                <span class="summary-value">${item.value || 'No especificado'}</span>
+            </div>
+        `).join('');
+    }
+
+    updateFinancialSummary(data) {
+        const container = document.getElementById('financialSummary');
+        if (!container) return;
+
+        const items = [
+            { label: 'Valor promedio', value: this.formatCurrency(data.valorPromedio) },
+            { label: 'Plazo', value: `${data.numeroCuotas} cuotas` },
+            { label: 'Tasa de mora', value: `${data.porcentajeDefault}%` },
+            { label: 'Volumen mensual', value: `${data.creditosPorMes} créditos` }
+        ];
+
+        container.innerHTML = items.map(item => `
+            <div class="summary-item">
+                <span class="summary-label">${item.label}:</span>
+                <span class="summary-value">${item.value || 'No especificado'}</span>
+            </div>
+        `).join('');
+    }
+
+    calculateEstimation() {
+        const data = this.formData;
+
+        // Simulación de cálculo (en producción conectaría con API)
+        setTimeout(() => {
+            const valorPromedio = parseFloat(data.valorPromedio) || 0;
+            const creditosPorMes = parseInt(data.creditosPorMes) || 0;
+            const porcentajeDefault = parseFloat(data.porcentajeDefault) || 0;
+
+            // Cálculo básico de cobertura
+            const coberturaBase = valorPromedio * creditosPorMes;
+            const factorRiesgo = 1 + (porcentajeDefault / 100);
+            const coberturalEstimada = coberturaBase * factorRiesgo;
+
+            // Cálculo de prima (aproximadamente 2-5% del valor cubierto)
+            const tasaPrima = Math.max(2, Math.min(5, porcentajeDefault * 0.8)) / 100;
+            const primaEstimada = coberturalEstimada * tasaPrima;
+
+            // Actualizar UI
+            document.getElementById('coberturaEstimada').textContent = this.formatCurrency(coberturalEstimada);
+            document.getElementById('primaEstimada').textContent = this.formatCurrency(primaEstimada);
+        }, 1500);
+    }
+
+    validateTerms() {
+        const checkbox = document.getElementById('acceptTerms');
+        const validation = document.getElementById('termsValidation');
+
+        if (!checkbox || !validation) return;
+
+        validation.classList.remove('show', 'error');
+
+        if (!checkbox.checked) {
+            validation.textContent = 'Debes aceptar los términos y condiciones para continuar';
+            validation.classList.add('show', 'error');
             return false;
         }
 
-        const dominio = correo.split('@')[1].toLowerCase();
-        return !dominiosPersonales.includes(dominio);
+        return true;
     }
 
-    // Validar celular
-    function validarCelular(celular) {
-        // Acepta formatos como +57 300 1234567, 300 1234567, 3001234567
-        const regexCelular = /^(\+57\s?)?[3][0-9]{2}\s?[0-9]{3}\s?[0-9]{4}$/;
-        return regexCelular.test(celular.replace(/\s+/g, ' '));
-    }
+    async handleSubmit(event) {
+        event.preventDefault();
 
-    // Mostrar error en campo específico
-    function mostrarError(campo, mensaje) {
-        const input = document.getElementById(campo);
-        const grupo = input.closest('.form-group');
-
-        input.classList.add('error');
-
-        // Crear o actualizar mensaje de error
-        let errorMsg = grupo.querySelector('.error-message');
-        if (!errorMsg) {
-            errorMsg = document.createElement('div');
-            errorMsg.className = 'error-message';
-            grupo.appendChild(errorMsg);
+        if (!this.validateTerms()) {
+            return;
         }
-        errorMsg.textContent = mensaje;
-        errorMsg.classList.add('show');
+
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.querySelector('.btn-text').textContent;
+
+        // Show loading state
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        try {
+            // Simulación de envío (en producción conectaría con API)
+            await this.simulateSubmission();
+
+            // Show success message
+            this.showSuccessMessage();
+
+        } catch (error) {
+            this.showToast('Error al enviar la solicitud. Por favor intenta nuevamente.', 'error');
+        } finally {
+            // Reset button state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
     }
 
-    // Limpiar todos los errores
-    function limpiarErrores() {
-        const inputs = document.querySelectorAll('.form-control');
-        const errores = document.querySelectorAll('.error-message');
+    async simulateSubmission() {
+        // Simular delay de red
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
-        inputs.forEach(input => {
-            input.classList.remove('error', 'success');
-        });
+        // Aquí se enviaría la data real a tu API
+        console.log('Datos a enviar:', this.formData);
 
-        errores.forEach(error => {
-            error.classList.remove('show');
-        });
+        return { success: true };
     }
 
-    // Mostrar estado de carga
-    function mostrarEstadoCarga() {
-        const boton = document.querySelector('.btn-calcular');
-        boton.classList.add('loading');
-        boton.disabled = true;
-        boton.innerHTML = '<span class="btn-icon">⏳</span>Procesando solicitud...';
-    }
-
-    // Ocultar estado de carga
-    function ocultarEstadoCarga() {
-        const boton = document.querySelector('.btn-calcular');
-        boton.classList.remove('loading');
-        boton.disabled = false;
-        boton.innerHTML = '<span class="btn-icon">👉</span>Generar estimación ahora';
-    }
-
-    // Enviar datos (aquí se integraría con el backend)
-    function enviarDatos(datos) {
-        // Aquí iría la integración real con el backend
-        console.log('Datos a enviar:', datos);
-
-        // Ejemplo de integración con API:
-        /*
-        fetch('/api/calcular-cobertura', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(datos)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Respuesta del servidor:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-        */
-
-        // Ejemplo de envío por email usando EmailJS o similar:
-        /*
-        emailjs.send('tu_service_id', 'tu_template_id', {
-            to_email: 'contacto@avaltrust.com',
-            from_name: datos.nombreCompleto,
-            from_email: datos.correoEmpresarial,
-            cargo: datos.cargoDesempena,
-            celular: datos.celularCorporativo,
-            valor_promedio: formatearPesos(datos.valorPromedio),
-            porcentaje_default: datos.porcentajeDefault + '%',
-            numero_cuotas: datos.numeroCuotas,
-            creditos_mes: datos.creditosPorMes
-        });
-        */
-    }
-
-    // Mostrar mensaje de éxito
-    function mostrarMensajeExito(correo) {
-        // Ocultar formulario
+    showSuccessMessage() {
+        // Hide form
         document.querySelector('.calculadora-card').style.display = 'none';
-        document.querySelector('.beneficios-card').style.display = 'none';
 
-        // Mostrar mensaje de éxito
-        mensajeExito.style.display = 'block';
-        document.getElementById('correoConfirmacion').textContent = correo;
+        // Show success message
+        const successEl = document.getElementById('mensajeExito');
+        if (successEl) {
+            successEl.style.display = 'block';
 
-        // Scroll suave al mensaje
-        mensajeExito.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
+            // Update confirmation email
+            const emailEl = document.getElementById('correoConfirmacion');
+            if (emailEl && this.formData.correoEmpresarial) {
+                emailEl.textContent = this.formData.correoEmpresarial;
+            }
+
+            // Scroll to success message
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     }
 
-    // Formatear números como pesos colombianos
-    function formatearPesos(valor) {
+    showToast(message, type = 'info') {
+        // Simple toast notification
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <span class="toast-icon">${type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️'}</span>
+                <span class="toast-message">${message}</span>
+            </div>
+        `;
+
+        // Add styles if not exists
+        if (!document.getElementById('toast-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'toast-styles';
+            styles.textContent = `
+                .toast {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: white;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                    padding: 16px 20px;
+                    z-index: 10000;
+                    max-width: 400px;
+                    animation: slideInRight 0.3s ease;
+                }
+                .toast-error { border-left: 4px solid #ef4444; }
+                .toast-success { border-left: 4px solid #10b981; }
+                .toast-info { border-left: 4px solid #3b82f6; }
+                .toast-content { display: flex; align-items: center; gap: 10px; }
+                .toast-message { color: #1f2937; font-weight: 500; }
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+
+        document.body.appendChild(toast);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideInRight 0.3s ease reverse';
+            setTimeout(() => toast.remove(), 300);
+        }, 5000);
+    }
+
+    // Utility methods
+    obtenerDatosPersonales() {
+        return {
+            nombreCompleto: document.getElementById('nombreCompleto')?.value.trim() || '',
+            correoEmpresarial: document.getElementById('correoEmpresarial')?.value.trim() || '',
+            celularCorporativo: document.getElementById('celularCorporativo')?.value.trim() || '',
+            cargoDesempena: document.getElementById('cargoDesempena')?.value || '',
+            nombreEmpresa: document.getElementById('nombreEmpresa')?.value.trim() || ''
+        };
+    }
+
+    obtenerDatosFinancieros() {
+        return {
+            valorPromedio: parseFloat(document.getElementById('valorPromedio')?.value) || 0,
+            porcentajeDefault: parseFloat(document.getElementById('porcentajeDefault')?.value) || 0,
+            numeroCuotas: parseInt(document.getElementById('numeroCuotas')?.value) || 0,
+            creditosPorMes: parseInt(document.getElementById('creditosPorMes')?.value) || 0
+        };
+    }
+
+    getCargoLabel(value) {
+        const cargos = {
+            'gerente-general': 'Gerente General',
+            'director-financiero': 'Director(a) Financiero',
+            'gerente-comercial': 'Gerente Comercial',
+            'propietario': 'Propietario/Socio',
+            'director-credito': 'Director(a) de Crédito',
+            'otro': 'Otro cargo directivo'
+        };
+        return cargos[value] || value;
+    }
+
+    formatCurrency(amount) {
         return new Intl.NumberFormat('es-CO', {
             style: 'currency',
             currency: 'COP',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(valor);
+            minimumFractionDigits: 0
+        }).format(amount);
     }
 
-    // Validación en tiempo real
-    const inputs = document.querySelectorAll('.form-control');
-    inputs.forEach(input => {
-        input.addEventListener('input', function() {
-            if (this.classList.contains('error')) {
-                this.classList.remove('error');
-                const errorMsg = this.closest('.form-group').querySelector('.error-message');
-                if (errorMsg) {
-                    errorMsg.classList.remove('show');
-                }
-            }
-        });
+    initializeTooltips() {
+        // Implementar tooltips si es necesario
+    }
+}
 
-        input.addEventListener('blur', function() {
-            if (this.value.trim() !== '') {
-                this.classList.add('success');
-            }
-        });
-    });
+// Form Validators Class
+class FormValidators {
+    validate(rule, value, ruleValue) {
+        switch (rule) {
+            case 'required':
+                return {
+                    isValid: value.length > 0,
+                    message: 'Este campo es obligatorio'
+                };
 
-    // Formateo automático de números
-    document.getElementById('valorPromedio').addEventListener('input', function() {
-        let valor = this.value.replace(/\D/g, '');
-        if (valor) {
-            // Limitar a 100 millones
-            if (parseInt(valor) > 100000000) {
-                valor = '100000000';
-            }
-            this.value = valor;
+            case 'email':
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return {
+                    isValid: emailRegex.test(value),
+                    message: 'Ingresa un correo electrónico válido'
+                };
+
+            case 'businessEmail':
+                const personalDomains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com', 'live.com'];
+                const domain = value.split('@')[1]?.toLowerCase();
+                return {
+                    isValid: !personalDomains.includes(domain),
+                    message: 'Usa un correo empresarial, no personal'
+                };
+
+            case 'phone':
+                const phoneRegex = /^\+?[\d\s\-\(\)]{10,}$/;
+                return {
+                    isValid: phoneRegex.test(value),
+                    message: 'Ingresa un número de teléfono válido'
+                };
+
+            case 'number':
+                return {
+                    isValid: !isNaN(value) && value !== '',
+                    message: 'Ingresa un número válido'
+                };
+
+            case 'min':
+                const minValue = parseFloat(ruleValue);
+                const numValue = parseFloat(value);
+                return {
+                    isValid: numValue >= minValue,
+                    message: `El valor mínimo es ${minValue}`
+                };
+
+            case 'max':
+                const maxValue = parseFloat(ruleValue);
+                const maxNumValue = parseFloat(value);
+                return {
+                    isValid: maxNumValue <= maxValue,
+                    message: `El valor máximo es ${maxValue}`
+                };
+
+            case 'minLength':
+                const minLength = parseInt(ruleValue);
+                return {
+                    isValid: value.length >= minLength,
+                    message: `Mínimo ${minLength} caracteres`
+                };
+
+            default:
+                return { isValid: true, message: '' };
         }
-    });
+    }
+}
 
-    document.getElementById('celularCorporativo').addEventListener('input', function() {
-        let valor = this.value.replace(/\D/g, '');
-        if (valor.startsWith('57')) {
-            valor = valor.substring(2);
-        }
-        if (valor.length >= 10) {
-            valor = valor.substring(0, 10);
-            this.value = '+57 ' + valor.substring(0, 3) + ' ' + valor.substring(3, 6) + ' ' + valor.substring(6);
-        }
-    });
+// Global functions
+function nextStep(step) {
+    if (window.calculadora) {
+        window.calculadora.nextStep(step);
+    }
+}
 
-    // Autocompletado de dominios empresariales comunes
-    document.getElementById('correoEmpresarial').addEventListener('input', function() {
-        const valor = this.value.toLowerCase();
-        if (valor.includes('@')) {
-            const partes = valor.split('@');
-            if (partes[1] && partes[1].length > 0) {
-                // Aquí podrías implementar sugerencias de dominios empresariales
-            }
-        }
-    });
-});
+function previousStep(step) {
+    if (window.calculadora) {
+        window.calculadora.previousStep(step);
+    }
+}
 
-// Función para nueva estimación
 function nuevaEstimacion() {
-    // Mostrar formulario nuevamente
-    document.querySelector('.calculadora-card').style.display = 'block';
-    document.querySelector('.beneficios-card').style.display = 'block';
-
-    // Ocultar mensaje de éxito
-    document.getElementById('mensajeExito').style.display = 'none';
-
-    // Limpiar formulario
+    // Reset form
     document.getElementById('calculadoraForm').reset();
 
-    // Limpiar errores
-    const inputs = document.querySelectorAll('.form-control');
-    inputs.forEach(input => {
-        input.classList.remove('error', 'success');
+    // Reset validation states
+    document.querySelectorAll('.form-control').forEach(input => {
+        input.classList.remove('valid', 'invalid');
     });
 
-    const errores = document.querySelectorAll('.error-message');
-    errores.forEach(error => {
-        error.classList.remove('show');
+    document.querySelectorAll('.validation-message').forEach(msg => {
+        msg.classList.remove('show');
     });
 
-    // Scroll al inicio del formulario
+    // Hide success message and show form
+    document.getElementById('mensajeExito').style.display = 'none';
+    document.querySelector('.calculadora-card').style.display = 'block';
+
+    // Go to first step
+    if (window.calculadora) {
+        window.calculadora.showStep(1);
+    }
+
+    // Scroll to form
     document.querySelector('.calculadora-card').scrollIntoView({
         behavior: 'smooth',
         block: 'start'
     });
 }
 
-// Validaciones adicionales para mejora de UX
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Prevenir envío de formulario con Enter en inputs de texto
-    const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
-    textInputs.forEach(input => {
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const siguiente = input.closest('.form-group').nextElementSibling?.querySelector('.form-control');
-                if (siguiente) {
-                    siguiente.focus();
-                }
-            }
-        });
-    });
-
-    // Analytics o tracking (opcional)
-    const formulario = document.getElementById('calculadoraForm');
-    formulario.addEventListener('submit', function() {
-        // Aquí puedes agregar código de tracking como Google Analytics
-        // gtag('event', 'form_submit', { form_name: 'calculadora_cobertura' });
-    });
+    window.calculadora = new CalculadoraCobertura();
 });
+
+// Legacy function for compatibility
+function obtenerDatosFormulario() {
+    if (window.calculadora) {
+        return {
+            ...window.calculadora.obtenerDatosPersonales(),
+            ...window.calculadora.obtenerDatosFinancieros()
+        };
+    }
+    return {};
+}

@@ -84,13 +84,192 @@
     transition: all 0.4s ease;
     box-shadow: 0 10px 30px rgba(44, 125, 250, 0.3);
     border: none;
+    position: relative;
+    overflow: hidden;
+
+    /* Animación de pulso continuo */
+    animation: heroButtonPulse 3s infinite;
+}
+
+/* Efecto de brillo que se mueve por el botón */
+.btn-hero-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+    );
+    transition: left 0.8s ease;
+}
+
+.btn-hero-primary::after {
+    content: '✨';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.7;
+    animation: sparkle 2s infinite alternate;
 }
 
 .btn-hero-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(44, 125, 250, 0.4);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+            0 20px 40px rgba(44, 125, 250, 0.4),
+            0 0 20px rgba(44, 125, 250, 0.6);
     color: white;
+    animation: heroButtonHover 0.6s ease forwards;
 }
+
+/* Efecto de brillo al hover */
+.btn-hero-primary:hover::before {
+    left: 100%;
+}
+
+/* Efecto de ondas al hacer clic */
+.btn-hero-primary:active {
+    transform: translateY(-3px) scale(1.02);
+    animation: ripple 0.6s linear;
+}
+
+/* Keyframes para las animaciones */
+@keyframes heroButtonPulse {
+    0%, 100% {
+        box-shadow:
+                0 10px 30px rgba(44, 125, 250, 0.3),
+                0 0 0 0 rgba(44, 125, 250, 0.4);
+    }
+    50% {
+        box-shadow:
+                0 15px 35px rgba(44, 125, 250, 0.4),
+                0 0 0 8px rgba(44, 125, 250, 0.1);
+    }
+}
+
+@keyframes heroButtonHover {
+    0% {
+        background: linear-gradient(135deg, #2C7DFA 0%, #00b4d8 100%);
+    }
+    100% {
+        background: linear-gradient(135deg, #1e40af 0%, #0284c7 50%, #06b6d4 100%);
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        opacity: 0.5;
+        transform: translateY(-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.2) rotate(180deg);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow:
+                0 20px 40px rgba(44, 125, 250, 0.4),
+                0 0 0 0 rgba(44, 125, 250, 0.6);
+    }
+    100% {
+        box-shadow:
+                0 25px 50px rgba(44, 125, 250, 0.2),
+                0 0 0 20px rgba(44, 125, 250, 0);
+    }
+}
+
+/* Efecto adicional: gradiente animado de fondo */
+.btn-hero-primary {
+    background-size: 200% 200%;
+    animation: heroButtonPulse 3s infinite, gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Efecto especial: llamada de atención adicional */
+.btn-hero-primary {
+    /* Sombra interna para mayor profundidad */
+    box-shadow:
+            0 10px 30px rgba(44, 125, 250, 0.3),
+            inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Animación de "bounce" sutil al cargar la página */
+.hero-cta-group {
+    animation: fadeInBounce 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efecto de magnetismo - el botón "atrae" el cursor */
+.btn-hero-primary:hover {
+    cursor: pointer;
+    /* Efecto de magnetismo visual */
+    filter: brightness(1.1) saturate(1.2);
+}
+
+/* Estados de focus para accesibilidad */
+.btn-hero-primary:focus {
+    outline: none;
+    box-shadow:
+            0 20px 40px rgba(44, 125, 250, 0.4),
+            0 0 0 4px rgba(44, 125, 250, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Versión responsive para móviles */
+@media (max-width: 768px) {
+    .btn-hero-primary {
+        padding: 16px 35px;
+        font-size: 1rem;
+        /* Animación más sutil en móviles */
+        animation: heroButtonPulseMobile 4s infinite;
+    }
+
+    .btn-hero-primary:hover {
+        transform: translateY(-3px) scale(1.02);
+    }
+
+    @keyframes heroButtonPulseMobile {
+        0%, 100% {
+            box-shadow: 0 8px 25px rgba(44, 125, 250, 0.25);
+        }
+        50% {
+            box-shadow: 0 12px 30px rgba(44, 125, 250, 0.35);
+        }
+    }
+}
+
 
 .btn-hero-secondary {
     background: rgba(255, 255, 255, 0.1);

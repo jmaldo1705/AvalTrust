@@ -318,7 +318,7 @@ class CalculadoraCobertura {
         const items = [
             { label: 'Valor promedio', value: this.formatCurrency(data.valorPromedio) },
             { label: 'Plazo', value: `${data.numeroCuotas} cuotas` },
-            { label: 'Tasa de mora', value: `${data.porcentajeDefault}%` },
+            { label: 'Tasa de impagos', value: `${data.porcentajeDefault}%` },
             { label: 'Volumen mensual', value: `${data.creditosPorMes} créditos` }
         ];
 
@@ -342,11 +342,10 @@ class CalculadoraCobertura {
             // Cálculo básico de cobertura
             const coberturaBase = valorPromedio * creditosPorMes;
             const factorRiesgo = 1 + (porcentajeDefault / 100);
-            const coberturalEstimada = coberturaBase * factorRiesgo;
+            const coberturalEstimada = coberturaBase;
 
             // Cálculo de prima (aproximadamente 2-5% del valor cubierto)
-            const tasaPrima = Math.max(2, Math.min(5, porcentajeDefault * 0.8)) / 100;
-            const primaEstimada = coberturalEstimada * tasaPrima;
+            const primaEstimada = (coberturalEstimada * 0.05) * 1.19;
 
             // Actualizar UI
             document.getElementById('coberturaEstimada').textContent = this.formatCurrency(coberturalEstimada);

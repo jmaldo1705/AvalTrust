@@ -341,11 +341,11 @@ class CalculadoraCobertura {
 
             // Cálculo básico de cobertura
             const coberturaBase = valorPromedio * creditosPorMes;
-            const factorRiesgo = 1 + (porcentajeDefault / 100);
+            const factorRiesgo = porcentajeDefault / 100;
             const coberturalEstimada = coberturaBase;
 
             // Cálculo de prima (aproximadamente 2-5% del valor cubierto)
-            const primaEstimada = (coberturalEstimada * 0.05) * 1.19;
+            const primaEstimada = (coberturalEstimada * factorRiesgo) * 1.19;
 
             // Actualizar UI
             document.getElementById('coberturaEstimada').textContent = this.formatCurrency(coberturalEstimada);

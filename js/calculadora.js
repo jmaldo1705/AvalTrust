@@ -6,6 +6,15 @@ class CalculadoraCobertura {
         this.formData = {};
         this.validators = new FormValidators();
 
+        // Configuración del servicio de correo
+        this.emailConfig = {
+            endpoint: 'http://181.50.73.28:8080/api/mail/send',
+            credentials: {
+                username: 'comercial@avaltrust.co',
+                password: 'beivpwodpbcuszrx'
+            }
+        };
+
         this.init();
     }
 
@@ -385,19 +394,325 @@ class CalculadoraCobertura {
         submitBtn.disabled = true;
 
         try {
-            // Simulación de envío (en producción conectaría con API)
-            await this.simulateSubmission();
+            // Enviar email con los datos reales
+            await this.sendCalculadoraEmail();
 
             // Show success message
             this.showSuccessMessage();
 
         } catch (error) {
+            console.error('Error al enviar el email:', error);
             this.showToast('Error al enviar la solicitud. Por favor intenta nuevamente.', 'error');
-        } finally {
-            // Reset button state
+
+            // Reset button state on error
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
         }
+    }
+
+    async sendCalculadoraEmail() {
+        // Obtener los datos actuales del formulario
+        const personalData = this.obtenerDatosPersonales();
+        const financialData = this.obtenerDatosFinancieros();
+        const allData = { ...personalData, ...financialData };
+
+        // Calcular estimaciones
+        const estimaciones = this.calculateFinalEstimation(allData);
+
+        // Preparar datos adicionales
+        const additionalData = {
+            fechaHora: new Date().toLocaleString('es-CO', {
+                timeZone: 'America/Bogota',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }),
+            ipCliente: await this.getUserIP(),
+            userAgent: navigator.userAgent
+        };
+
+        // Generar el HTML del email con todos los datos
+        const htmlBody = this.generateEmailHTML({
+            ...allData,
+            ...estimaciones,
+            ...additionalData
+        });
+
+        // Preparar el payload para el servicio
+        const emailPayload = {
+            to: ["comercial@avaltrust.co"],
+            cc: ["jmaldonado1705@gmail.com"],
+            subject: `Nueva Solicitud de Calculadora de Cobertura - ${allData.nombreEmpresa || 'Cliente Potencial'}`,
+            htmlBody: htmlBody,
+            credentials: this.emailConfig.credentials
+        };
+
+        // Enviar el email
+        const response = await fetch(this.emailConfig.endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailPayload)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error del servidor: ${response.status} ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Email enviado exitosamente:', result);
+
+        return result;
+    }
+
+    calculateFinalEstimation(data) {
+        const valorPromedio = parseFloat(data.valorPromedio) || 0;
+        const creditosPorMes = parseInt(data.creditosPorMes) || 0;
+        const porcentajeDefault = parseFloat(data.porcentajeDefault) || 0;
+
+        // Cálculo básico de cobertura
+        const coberturaBase = valorPromedio * creditosPorMes;
+        const factorRiesgo = Math.max(porcentajeDefault / 100, 0.02); // Mínimo 2%
+        const coberturaEstimada = coberturaBase;
+
+        // Cálculo de prima (2-8% del valor cubierto según el riesgo)
+        let factorPrima;
+        if (porcentajeDefault <= 3) {
+            factorPrima = 0.02; // 2% para bajo riesgo
+        } else if (porcentajeDefault <= 8) {
+            factorPrima = 0.04; // 4% para riesgo medio
+        } else {
+            factorPrima = 0.06; // 6% para alto riesgo
+        }
+
+        const primaEstimada = (coberturaEstimada * factorPrima) * 1.19; // Incluye IVA
+
+        return {
+            coberturaEstimada: this.formatCurrency(coberturaEstimada),
+            primaEstimada: this.formatCurrency(primaEstimada),
+            factorRiesgo: (factorRiesgo * 100).toFixed(2) + '%',
+            factorPrima: (factorPrima * 100).toFixed(2) + '%'
+        };
+    }
+
+    async getUserIP() {
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        } catch (error) {
+            return 'No disponible';
+        }
+    }
+
+    generateEmailHTML(data) {
+        return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Calculadora de Cobertura - AvalTrust</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .email-container { max-width: 700px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .email-header { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 40px 30px; text-align: center; position: relative; }
+        .email-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%); pointer-events: none; }
+        .logo { font-size: 32px; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; }
+        .header-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; position: relative; z-index: 2; }
+        .header-subtitle { font-size: 16px; opacity: 0.9; position: relative; z-index: 2; }
+        .status-badge { display: inline-block; background: rgba(16,185,129,0.15); color: #10b981; padding: 8px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; margin: 20px 0; border: 1px solid rgba(16,185,129,0.3); }
+        .email-content { padding: 40px 30px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 20px; }
+        .message-text { color: #6b7280; margin-bottom: 30px; line-height: 1.7; }
+        .data-section { background: #f8fafc; border-radius: 15px; padding: 30px; margin: 30px 0; border-left: 5px solid #1e3a8a; }
+        .section-title { color: #1f2937; font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .data-grid { display: grid; gap: 15px; }
+        .data-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; }
+        .data-label { font-weight: 600; color: #374151; font-size: 14px; }
+        .data-value { font-weight: 700; color: #1f2937; font-size: 15px; }
+        .results-section { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; border-radius: 15px; padding: 30px; margin: 30px 0; position: relative; overflow: hidden; }
+        .results-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%); pointer-events: none; }
+        .results-section .section-title { color: #fff; position: relative; z-index: 2; }
+        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; position: relative; z-index: 2; }
+        .result-card { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 25px 20px; text-align: center; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); }
+        .result-label { font-size: 14px; opacity: 0.9; margin-bottom: 10px; font-weight: 500; }
+        .result-value { font-size: 24px; font-weight: 800; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .cta-section { background: #f8fafc; border-radius: 15px; padding: 30px; text-align: center; margin: 30px 0; border: 1px solid #e5e7eb; }
+        .cta-title { color: #1f2937; font-size: 20px; font-weight: 700; margin-bottom: 15px; }
+        .cta-text { color: #6b7280; margin-bottom: 25px; line-height: 1.6; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 8px 20px rgba(30,58,138,0.3); }
+        .email-footer { background: #1a1a2e; color: #fff; padding: 40px 30px; text-align: center; }
+        .footer-logo { font-size: 24px; font-weight: 800; margin-bottom: 15px; color: #fff; }
+        .footer-text { color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .contact-info { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 25px; }
+        .contact-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.9); font-size: 14px; }
+        .footer-note { color: rgba(255,255,255,0.6); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
+        @media (max-width: 600px) {
+            .email-container { margin: 10px; border-radius: 15px; }
+            .email-header, .email-content, .email-footer { padding: 25px 20px; }
+            .results-grid { grid-template-columns: 1fr; gap: 15px; }
+            .contact-info { flex-direction: column; gap: 15px; }
+            .data-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="logo">AvalTrust</div>
+            <div class="header-title">Nueva Solicitud de Calculadora</div>
+            <div class="header-subtitle">Estimación de Cobertura Crediticia</div>
+            <div class="status-badge">✅ Solicitud Recibida</div>
+        </div>
+        
+        <div class="email-content">
+            <div class="greeting">¡Hola Equipo AvalTrust! 👋</div>
+            
+            <div class="message-text">
+                Se ha recibido una nueva solicitud a través de la calculadora de cobertura en el sitio web. 
+                A continuación encontrarás todos los detalles proporcionados por el cliente para generar 
+                la estimación personalizada.
+            </div>
+            
+            <div class="data-section">
+                <div class="section-title">
+                    <span>👤</span> Información del Representante
+                </div>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <span class="data-label">Nombre Completo:</span>
+                        <span class="data-value">${data.nombreCompleto || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Cargo:</span>
+                        <span class="data-value">${this.getCargoLabel(data.cargoDesempena) || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Empresa:</span>
+                        <span class="data-value">${data.nombreEmpresa || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Correo Empresarial:</span>
+                        <span class="data-value">${data.correoEmpresarial || 'N/A'}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Teléfono Corporativo:</span>
+                        <span class="data-value">${data.celularCorporativo || 'N/A'}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-section">
+                <div class="section-title">
+                    <span>📊</span> Parámetros Financieros
+                </div>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <span class="data-label">Valor Promedio por Crédito:</span>
+                        <span class="data-value">${this.formatCurrency(data.valorPromedio || 0)}</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Número de Cuotas:</span>
+                        <span class="data-value">${data.numeroCuotas || 'N/A'} cuotas</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Tasa de Impagos:</span>
+                        <span class="data-value">${data.porcentajeDefault || 0}%</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Volumen Mensual:</span>
+                        <span class="data-value">${data.creditosPorMes || 'N/A'} créditos</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <div class="section-title">
+                    <span>🎯</span> Estimación Preliminar Generada
+                </div>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-label">Cobertura Mensual Estimada</div>
+                        <div class="result-value">${data.coberturaEstimada || 'N/A'}</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Prima Aproximada</div>
+                        <div class="result-value">${data.primaEstimada || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-title">⚡ Próximos Pasos</div>
+                <div class="cta-text">
+                    Es momento de contactar al cliente para afinar los detalles y presentar una propuesta 
+                    comercial personalizada. El tiempo de respuesta prometido es de menos de 30 minutos.
+                </div>
+                <a href="mailto:${data.correoEmpresarial || ''}" class="cta-button">
+                    📞 Contactar Cliente
+                </a>
+            </div>
+            
+            <div class="message-text">
+                <strong>📅 Fecha y Hora de Solicitud:</strong> ${data.fechaHora || 'N/A'}<br>
+                <strong>🌐 IP del Cliente:</strong> ${data.ipCliente || 'N/A'}<br>
+                <strong>💻 User Agent:</strong> ${data.userAgent || 'N/A'}
+            </div>
+        </div>
+        
+        <div class="email-footer">
+            <div class="footer-logo">AvalTrust</div>
+            <div class="footer-text">
+                Transformando el acceso al crédito con soluciones innovadoras de aval y garantía.
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Calle 70 sur # 43a-13, Edificio Cantoluna, Sabaneta</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>302 765 7434</span>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <span>comercial@avaltrust.co</span>
+                </div>
+            </div>
+            
+            <div class="footer-note">
+                Este correo fue generado automáticamente por el sistema de calculadora de cobertura de AvalTrust.<br>
+                © 2025 AvalTrust. Todos los derechos reservados.
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+    }
+
+    calculateEstimation() {
+        const data = this.formData;
+
+        // Simulación de cálculo con datos reales
+        setTimeout(() => {
+            const estimaciones = this.calculateFinalEstimation(data);
+
+            // Actualizar UI con las estimaciones calculadas
+            document.getElementById('coberturaEstimada').textContent = estimaciones.coberturaEstimada;
+            document.getElementById('primaEstimada').textContent = estimaciones.primaEstimada;
+
+            // Guardar las estimaciones en formData para el envío
+            this.formData.coberturaEstimada = estimaciones.coberturaEstimada;
+            this.formData.primaEstimada = estimaciones.primaEstimada;
+            this.formData.factorRiesgo = estimaciones.factorRiesgo;
+            this.formData.factorPrima = estimaciones.factorPrima;
+        }, 1500);
     }
 
     async simulateSubmission() {

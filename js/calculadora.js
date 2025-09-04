@@ -8,7 +8,7 @@ class CalculadoraCobertura {
 
         // Configuración del servicio de correo
         this.emailConfig = {
-            endpoint: 'http://181.50.73.28:8080/api/mail/send',
+            endpoint: 'https://backend.avaltrust.co/api/mail/send',
             credentials: {
                 username: 'comercial@avaltrust.co',
                 password: 'beivpwodpbcuszrx'
@@ -694,25 +694,6 @@ class CalculadoraCobertura {
     </div>
 </body>
 </html>`;
-    }
-
-    calculateEstimation() {
-        const data = this.formData;
-
-        // Simulación de cálculo con datos reales
-        setTimeout(() => {
-            const estimaciones = this.calculateFinalEstimation(data);
-
-            // Actualizar UI con las estimaciones calculadas
-            document.getElementById('coberturaEstimada').textContent = estimaciones.coberturaEstimada;
-            document.getElementById('primaEstimada').textContent = estimaciones.primaEstimada;
-
-            // Guardar las estimaciones en formData para el envío
-            this.formData.coberturaEstimada = estimaciones.coberturaEstimada;
-            this.formData.primaEstimada = estimaciones.primaEstimada;
-            this.formData.factorRiesgo = estimaciones.factorRiesgo;
-            this.formData.factorPrima = estimaciones.factorPrima;
-        }, 1500);
     }
 
     async simulateSubmission() {

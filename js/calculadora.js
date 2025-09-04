@@ -437,7 +437,6 @@ class CalculadoraCobertura {
         // Preparar el payload para el servicio
         const emailPayload = {
             to: ["comercial@avaltrust.co"],
-            cc: ["jmaldonado1705@gmail.com"],
             subject: `Nueva Solicitud de Calculadora de Cobertura - ${allData.nombreEmpresa || 'Cliente Potencial'}`,
             htmlBody: htmlBody,
             credentials: this.emailConfig.credentials
@@ -473,7 +472,6 @@ class CalculadoraCobertura {
         };
     }
 
-    // Método unificado para los cálculos
     calculateFinalEstimationValues(data) {
         const valorPromedio = parseFloat(data.valorPromedio) || 0;
         const creditosPorMes = parseInt(data.creditosPorMes) || 0;
@@ -481,34 +479,22 @@ class CalculadoraCobertura {
 
         // Cálculo básico de cobertura
         const coberturaBase = valorPromedio * creditosPorMes;
-        const factorRiesgo = Math.max(porcentajeDefault / 100, 0.02); // Mínimo 2%
-        const coberturaEstimada = coberturaBase;
+        const factorRiesgo = porcentajeDefault / 100;
 
         // Cálculo de prima (2-8% del valor cubierto según el riesgo)
-        let factorPrima;
-        if (porcentajeDefault <= 3) {
-            factorPrima = 0.02; // 2% para bajo riesgo
-        } else if (porcentajeDefault <= 8) {
-            factorPrima = 0.04; // 4% para riesgo medio
-        } else {
-            factorPrima = 0.06; // 6% para alto riesgo
-        }
-
-        const primaEstimada = (coberturaEstimada * factorPrima) * 1.19; // Incluye IVA
+        const primaEstimada = (coberturaBase * factorRiesgo) * 1.19; // Incluye IVA
 
         console.log("Valores de cálculo unificados:");
         console.log("coberturaBase", coberturaBase);
         console.log("factorRiesgo", factorRiesgo);
-        console.log("factorPrima", factorPrima);
         console.log("primaEstimada", primaEstimada);
 
         return {
-            coberturaEstimadaFormatted: this.formatCurrency(coberturaEstimada),
+            coberturaEstimadaFormatted: this.formatCurrency(coberturaBase),
             primaEstimadaFormatted: this.formatCurrency(primaEstimada),
-            coberturaEstimadaRaw: coberturaEstimada,
+            coberturaEstimadaRaw: coberturaBase,
             primaEstimadaRaw: primaEstimada,
             factorRiesgo: (factorRiesgo * 100).toFixed(2) + '%',
-            factorPrima: (factorPrima * 100).toFixed(2) + '%'
         };
     }
 

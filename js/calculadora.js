@@ -344,21 +344,14 @@ class CalculadoraCobertura {
 
         // Simulación de cálculo (en producción conectaría con API)
         setTimeout(() => {
-            const valorPromedio = parseFloat(data.valorPromedio) || 0;
-            const creditosPorMes = parseInt(data.creditosPorMes) || 0;
-            const porcentajeDefault = parseFloat(data.porcentajeDefault) || 0;
+            // Usar el mismo método de cálculo que se envía por correo
+            const estimaciones = this.calculateFinalEstimationValues(data);
 
-            // Cálculo básico de cobertura
-            const coberturaBase = valorPromedio * creditosPorMes;
-            const factorRiesgo = porcentajeDefault / 100;
-            const coberturalEstimada = coberturaBase;
+            console.log("Mostrando en UI:", estimaciones);
 
-            // Cálculo de prima (aproximadamente 2-5% del valor cubierto)
-            const primaEstimada = (coberturalEstimada * factorRiesgo) * 1.19;
-
-            // Actualizar UI
-            document.getElementById('coberturaEstimada').textContent = this.formatCurrency(coberturalEstimada);
-            document.getElementById('primaEstimada').textContent = this.formatCurrency(primaEstimada);
+            // Actualizar UI con los valores calculados
+            document.getElementById('coberturaEstimada').textContent = estimaciones.coberturaEstimadaFormatted;
+            document.getElementById('primaEstimada').textContent = estimaciones.primaEstimadaFormatted;
         }, 1500);
     }
 
@@ -416,7 +409,7 @@ class CalculadoraCobertura {
         const financialData = this.obtenerDatosFinancieros();
         const allData = { ...personalData, ...financialData };
 
-        // Calcular estimaciones
+        // Calcular estimaciones usando el método unificado
         const estimaciones = this.calculateFinalEstimation(allData);
 
         // Preparar datos adicionales
@@ -470,6 +463,18 @@ class CalculadoraCobertura {
     }
 
     calculateFinalEstimation(data) {
+        const estimaciones = this.calculateFinalEstimationValues(data);
+
+        return {
+            coberturaEstimada: estimaciones.coberturaEstimadaFormatted,
+            primaEstimada: estimaciones.primaEstimadaFormatted,
+            factorRiesgo: estimaciones.factorRiesgo,
+            factorPrima: estimaciones.factorPrima
+        };
+    }
+
+    // Método unificado para los cálculos
+    calculateFinalEstimationValues(data) {
         const valorPromedio = parseFloat(data.valorPromedio) || 0;
         const creditosPorMes = parseInt(data.creditosPorMes) || 0;
         const porcentajeDefault = parseFloat(data.porcentajeDefault) || 0;
@@ -491,9 +496,17 @@ class CalculadoraCobertura {
 
         const primaEstimada = (coberturaEstimada * factorPrima) * 1.19; // Incluye IVA
 
+        console.log("Valores de cálculo unificados:");
+        console.log("coberturaBase", coberturaBase);
+        console.log("factorRiesgo", factorRiesgo);
+        console.log("factorPrima", factorPrima);
+        console.log("primaEstimada", primaEstimada);
+
         return {
-            coberturaEstimada: this.formatCurrency(coberturaEstimada),
-            primaEstimada: this.formatCurrency(primaEstimada),
+            coberturaEstimadaFormatted: this.formatCurrency(coberturaEstimada),
+            primaEstimadaFormatted: this.formatCurrency(primaEstimada),
+            coberturaEstimadaRaw: coberturaEstimada,
+            primaEstimadaRaw: primaEstimada,
             factorRiesgo: (factorRiesgo * 100).toFixed(2) + '%',
             factorPrima: (factorPrima * 100).toFixed(2) + '%'
         };

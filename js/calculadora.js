@@ -8,7 +8,7 @@ class CalculadoraCobertura {
 
         // Configuración del servicio de correo
         this.emailConfig = {
-            endpoint: 'https://backend.avaltrust.co/api/mail/send',
+            endpoint: 'https://avaltrustback-production.up.railway.app/api/mail/send',
             credentials: {
                 username: 'comercial@avaltrust.co',
                 password: 'beivpwodpbcuszrx'

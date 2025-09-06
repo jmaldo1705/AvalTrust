@@ -6,17 +6,13 @@ class CalculadoraCobertura {
         this.formData = {};
         this.validators = new FormValidators();
 
-        // Configuración del servicio de correo
         this.emailConfig = {
-            endpoint: 'https://avaltrustback-production.up.railway.app/api/mail/send',
-            credentials: {
-                username: 'comercial@avaltrust.co',
-                password: 'beivpwodpbcuszrx'
-            }
+            endpoint: 'https://avaltrustback-production.up.railway.app/api/mail/send-simple'
         };
 
         this.init();
     }
+
 
     init() {
         this.setupEventListeners();
@@ -409,10 +405,8 @@ class CalculadoraCobertura {
         const financialData = this.obtenerDatosFinancieros();
         const allData = { ...personalData, ...financialData };
 
-        // Calcular estimaciones usando el método unificado
         const estimaciones = this.calculateFinalEstimation(allData);
 
-        // Preparar datos adicionales
         const additionalData = {
             fechaHora: new Date().toLocaleString('es-CO', {
                 timeZone: 'America/Bogota',
@@ -434,13 +428,16 @@ class CalculadoraCobertura {
             ...additionalData
         });
 
-        // Preparar el payload para el servicio
+        // Preparar el payload SIN credenciales - según tu nuevo formato
         const emailPayload = {
             to: ["comercial@avaltrust.co"],
-            subject: `Nueva Solicitud de Calculadora de Cobertura - ${allData.nombreEmpresa || 'Cliente Potencial'}`,
-            htmlBody: htmlBody,
-            credentials: this.emailConfig.credentials
+            cc: [],
+            bcc: [],
+            subject: `Nueva Solicitud de Calculadora - ${allData.nombreEmpresa || 'Cliente Potencial'}`,
+            htmlBody: htmlBody
         };
+
+        console.log('Enviando email payload:', emailPayload);
 
         // Enviar el email
         const response = await fetch(this.emailConfig.endpoint, {
@@ -460,6 +457,7 @@ class CalculadoraCobertura {
 
         return result;
     }
+
 
     calculateFinalEstimation(data) {
         const estimaciones = this.calculateFinalEstimationValues(data);
@@ -544,7 +542,9 @@ class CalculadoraCobertura {
         .cta-section { background: #f8fafc; border-radius: 15px; padding: 30px; text-align: center; margin: 30px 0; border: 1px solid #e5e7eb; }
         .cta-title { color: #1f2937; font-size: 20px; font-weight: 700; margin-bottom: 15px; }
         .cta-text { color: #6b7280; margin-bottom: 25px; line-height: 1.6; }
-        .cta-button { display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 8px 20px rgba(30,58,138,0.3); }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 16px; box-shadow: 0 8px 20px rgba(30,58,138,0.3); transition: all 0.3s ease; }
+        .cta-button:hover { color: #fff; text-decoration: none; transform: translateY(-2px); box-shadow: 0 12px 25px rgba(30,58,138,0.4); }
+        .cta-button:focus, .cta-button:active { color: #fff; text-decoration: none; }
         .email-footer { background: #1a1a2e; color: #fff; padding: 40px 30px; text-align: center; }
         .footer-logo { font-size: 24px; font-weight: 800; margin-bottom: 15px; color: #fff; }
         .footer-text { color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }

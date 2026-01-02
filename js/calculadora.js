@@ -673,7 +673,7 @@ class CalculadoraCobertura {
             <div class="contact-info">
                 <div class="contact-item">
                     <span>📍</span>
-                    <span>Calle 70 sur # 43a-13, Edificio Cantoluna, Sabaneta</span>
+                    <span>CR 46 B 74 SUR 03, Edificio Cantoluna, Sabaneta</span>
                 </div>
                 <div class="contact-item">
                     <span>📱</span>

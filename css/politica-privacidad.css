@@ -1,34 +1,34 @@
-/* Términos y Condiciones - Estilos */
+/* Política de Privacidad - Estilos */
 
 /* Page Header */
-.page-header-terms {
+.page-header-privacy {
     background: linear-gradient(135deg, #1a3a5c 0%, #0d2233 100%);
     padding: 120px 0 60px;
     margin-bottom: 0;
 }
 
-.page-title-terms {
+.page-title-privacy {
     color: #ffffff;
-    font-size: 2.5em;
+    font-size: 2.2em;
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.page-subtitle-terms {
+.page-subtitle-privacy {
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.1em;
     text-align: center;
     margin-bottom: 0;
 }
 
-/* Terms Content */
-.terms-content {
+/* Privacy Content */
+.privacy-content {
     background-color: #f8f9fa;
     padding: 60px 0;
 }
 
-.terms-intro {
+.privacy-intro {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
@@ -37,15 +37,15 @@
     border-left: 4px solid #1a3a5c;
 }
 
-.terms-intro p {
+.privacy-intro p {
     font-size: 1.1em;
     line-height: 1.8;
     color: #555;
     margin-bottom: 0;
 }
 
-/* Terms Sections */
-.terms-section {
+/* Privacy Sections */
+.privacy-section {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
@@ -53,7 +53,7 @@
     margin-bottom: 25px;
 }
 
-.terms-section h2 {
+.privacy-section h2 {
     color: #1a3a5c;
     font-size: 1.5em;
     font-weight: 600;
@@ -62,7 +62,7 @@
     border-bottom: 2px solid #e9ecef;
 }
 
-.terms-section h3 {
+.privacy-section h3 {
     color: #40454b;
     font-size: 1.2em;
     font-weight: 600;
@@ -70,25 +70,35 @@
     margin-bottom: 15px;
 }
 
-.terms-section p {
+.privacy-section p {
     color: #555;
     line-height: 1.8;
     margin-bottom: 15px;
     text-align: justify;
 }
 
-.terms-section p:last-child {
+.privacy-section p:last-child {
     margin-bottom: 0;
 }
 
-/* Terms List */
-.terms-list {
+.privacy-section a {
+    color: #1a3a5c;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.privacy-section a:hover {
+    color: #0d2233;
+}
+
+/* Privacy List */
+.privacy-list {
     list-style: none;
     padding-left: 0;
     margin-bottom: 20px;
 }
 
-.terms-list li {
+.privacy-list li {
     position: relative;
     padding-left: 25px;
     margin-bottom: 12px;
@@ -96,7 +106,7 @@
     line-height: 1.7;
 }
 
-.terms-list li::before {
+.privacy-list li::before {
     content: "•";
     position: absolute;
     left: 0;
@@ -105,19 +115,35 @@
     font-weight: bold;
 }
 
-.terms-list li strong {
+.privacy-list li strong {
     color: #40454b;
 }
 
-/* Terms Footer */
-.terms-footer {
+/* Definitions list styling */
+.privacy-list.definitions li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+}
+
+/* Privacy Note */
+.privacy-note {
+    background-color: #f0f4f8;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 3px solid #1a3a5c;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Privacy Footer */
+.privacy-footer {
     text-align: center;
     padding: 40px 0 20px;
     margin-top: 30px;
     border-top: 1px solid #e9ecef;
 }
 
-.terms-footer p {
+.privacy-footer p {
     color: #888;
     font-size: 1em;
     font-weight: 500;
@@ -125,42 +151,42 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .page-header-terms {
+    .page-header-privacy {
         padding: 100px 0 40px;
     }
 
-    .page-title-terms {
-        font-size: 1.8em;
+    .page-title-privacy {
+        font-size: 1.6em;
     }
 
-    .terms-content {
+    .privacy-content {
         padding: 40px 0;
     }
 
-    .terms-intro,
-    .terms-section {
+    .privacy-intro,
+    .privacy-section {
         padding: 20px;
     }
 
-    .terms-section h2 {
+    .privacy-section h2 {
         font-size: 1.3em;
     }
 
-    .terms-section h3 {
+    .privacy-section h3 {
         font-size: 1.1em;
     }
 }
 
 @media (max-width: 480px) {
-    .page-title-terms {
-        font-size: 1.5em;
+    .page-title-privacy {
+        font-size: 1.4em;
     }
 
-    .page-subtitle-terms {
+    .page-subtitle-privacy {
         font-size: 0.95em;
     }
 
-    .terms-intro p {
+    .privacy-intro p {
         font-size: 1em;
     }
 }

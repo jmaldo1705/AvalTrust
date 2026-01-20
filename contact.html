@@ -113,7 +113,7 @@
 							<div class="validation-message-contact" id="termsValidationContact"></div>
 						</div>
 
-						<button type="submit" class="modern-submit-btn" id="submit-btn">Enviar Mensaje</button>
+						<button type="submit" class="modern-submit-btn" id="submit-btn" disabled>Enviar Mensaje</button>
 
 						<!-- Mensaje de éxito -->
 						<div id="success-message" class="form-results" style="display: none;">
@@ -324,6 +324,34 @@
 	$(document).ready(function() {
 		const API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
 
+		// Función para verificar si el formulario está completo y habilitar/deshabilitar el botón
+		function checkFormCompletion() {
+			var allFieldsFilled = true;
+			var termsAccepted = $('#acceptTermsContact').is(':checked');
+			var emailValid = true;
+
+			// Verificar campos requeridos
+			$('.form-control.required').each(function() {
+				if ($(this).val().trim() === '') {
+					allFieldsFilled = false;
+				}
+			});
+
+			// Verificar formato de email si tiene valor
+			var emailValue = $('input[name="Correo"]').val().trim();
+			if (emailValue !== '') {
+				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				emailValid = emailRegex.test(emailValue);
+			}
+
+			// Habilitar o deshabilitar el botón
+			if (allFieldsFilled && termsAccepted && emailValid) {
+				$('#submit-btn').prop('disabled', false);
+			} else {
+				$('#submit-btn').prop('disabled', true);
+			}
+		}
+
 		// Función para validar todos los campos obligatorios
 		function validateRequiredFields() {
 			var isValid = true;
@@ -468,16 +496,21 @@
 </html>`;
 		}
 
-		// Remover errores visuales cuando el usuario empiece a escribir
+		// Remover errores visuales cuando el usuario empiece a escribir y verificar completitud
 		$('.form-control.required').on('input', function() {
 			$(this).removeClass('field-error');
 			$('#error-message').hide();
+			checkFormCompletion();
 		});
 
-		// Limpiar validación de términos al marcar el checkbox
+		// Limpiar validación de términos al marcar el checkbox y verificar completitud
 		$('#acceptTermsContact').on('change', function() {
 			$('#termsValidationContact').removeClass('show error');
+			checkFormCompletion();
 		});
+
+		// Verificar estado inicial del formulario
+		checkFormCompletion();
 
 		$('#quote-request').on('submit', async function(e) {
 			e.preventDefault();
@@ -544,10 +577,13 @@
 				// Éxito
 				$('#loading-message').hide();
 				$('#success-message').show();
-				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
+				$('#submit-btn').prop('disabled', true).text('Enviar Mensaje');
 
 				// Limpiar formulario
 				$('#quote-request')[0].reset();
+				
+				// Deshabilitar botón ya que el formulario está vacío
+				checkFormCompletion();
 
 			} catch (error) {
 				console.error('Error al enviar:', error);

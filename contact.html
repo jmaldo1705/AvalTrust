@@ -322,7 +322,9 @@
 <!-- Script para mostrar mensaje de confirmación -->
 <script>
 	$(document).ready(function() {
-		const API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+		var API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+
+		console.log('Script de contacto cargado correctamente');
 
 		// Función para verificar si el formulario está completo y habilitar/deshabilitar el botón
 		function checkFormCompletion() {
@@ -410,7 +412,7 @@
 
 		// Función para generar el HTML del email
 		function generateEmailHTML(data) {
-			const fechaHora = new Date().toLocaleString('es-CO', {
+			var fechaHora = new Date().toLocaleString('es-CO', {
 				timeZone: 'America/Bogota',
 				year: 'numeric',
 				month: 'long',
@@ -419,81 +421,66 @@
 				minute: '2-digit'
 			});
 
-			return `<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Mensaje de Contacto - AvalTrust</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
-        .email-container { max-width: 650px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .email-header { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 40px 30px; text-align: center; }
-        .logo { font-size: 32px; font-weight: 800; margin-bottom: 15px; }
-        .header-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
-        .header-subtitle { font-size: 16px; opacity: 0.9; }
-        .email-content { padding: 40px 30px; }
-        .greeting { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 20px; }
-        .data-section { background: #f8fafc; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #1e3a8a; }
-        .section-title { color: #1f2937; font-size: 16px; font-weight: 700; margin-bottom: 15px; }
-        .data-item { display: flex; justify-content: space-between; padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e5e7eb; }
-        .data-label { font-weight: 600; color: #374151; }
-        .data-value { color: #1f2937; }
-        .message-section { background: #f0f9ff; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #0ea5e9; }
-        .message-content { background: #fff; padding: 20px; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; }
-        .email-footer { background: #1a1a2e; color: #fff; padding: 30px; text-align: center; }
-        .footer-logo { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
-        .footer-text { color: rgba(255,255,255,0.7); font-size: 13px; }
-    </style>
-</head>
-<body>
-    <div class="email-container">
-        <div class="email-header">
-            <div class="logo">AvalTrust</div>
-            <div class="header-title">Nuevo Mensaje de Contacto</div>
-            <div class="header-subtitle">Recibido desde el formulario web</div>
-        </div>
-        <div class="email-content">
-            <div class="greeting">¡Hola Equipo AvalTrust! 👋</div>
-            <p style="color: #6b7280; margin-bottom: 25px;">Se ha recibido un nuevo mensaje a través del formulario de contacto del sitio web.</p>
-            
-            <div class="data-section">
-                <div class="section-title">👤 Información del Contacto</div>
-                <div class="data-item">
-                    <span class="data-label">Nombre:</span>
-                    <span class="data-value">${data.nombre}</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Empresa:</span>
-                    <span class="data-value">${data.empresa || 'No especificada'}</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Correo:</span>
-                    <span class="data-value">${data.correo}</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Teléfono:</span>
-                    <span class="data-value">${data.telefono}</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Fecha/Hora:</span>
-                    <span class="data-value">${fechaHora}</span>
-                </div>
-            </div>
-            
-            <div class="message-section">
-                <div class="section-title">💬 Mensaje</div>
-                <div class="message-content">${data.mensaje}</div>
-            </div>
-        </div>
-        <div class="email-footer">
-            <div class="footer-logo">AvalTrust</div>
-            <div class="footer-text">Este mensaje fue enviado desde el formulario de contacto de avaltrust.co</div>
-        </div>
-    </div>
-</body>
-</html>`;
+			var html = '<!DOCTYPE html>';
+			html += '<html lang="es">';
+			html += '<head>';
+			html += '<meta charset="utf-8">';
+			html += '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+			html += '<title>Nuevo Mensaje de Contacto - AvalTrust</title>';
+			html += '<style>';
+			html += '* { margin: 0; padding: 0; box-sizing: border-box; }';
+			html += 'body { font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }';
+			html += '.email-container { max-width: 650px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }';
+			html += '.email-header { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 40px 30px; text-align: center; }';
+			html += '.logo { font-size: 32px; font-weight: 800; margin-bottom: 15px; }';
+			html += '.header-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }';
+			html += '.header-subtitle { font-size: 16px; opacity: 0.9; }';
+			html += '.email-content { padding: 40px 30px; }';
+			html += '.greeting { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 20px; }';
+			html += '.data-section { background: #f8fafc; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #1e3a8a; }';
+			html += '.section-title { color: #1f2937; font-size: 16px; font-weight: 700; margin-bottom: 15px; }';
+			html += '.data-item { display: flex; justify-content: space-between; padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e5e7eb; }';
+			html += '.data-label { font-weight: 600; color: #374151; }';
+			html += '.data-value { color: #1f2937; }';
+			html += '.message-section { background: #f0f9ff; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #0ea5e9; }';
+			html += '.message-content { background: #fff; padding: 20px; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; }';
+			html += '.email-footer { background: #1a1a2e; color: #fff; padding: 30px; text-align: center; }';
+			html += '.footer-logo { font-size: 20px; font-weight: 800; margin-bottom: 10px; }';
+			html += '.footer-text { color: rgba(255,255,255,0.7); font-size: 13px; }';
+			html += '</style>';
+			html += '</head>';
+			html += '<body>';
+			html += '<div class="email-container">';
+			html += '<div class="email-header">';
+			html += '<div class="logo">AvalTrust</div>';
+			html += '<div class="header-title">Nuevo Mensaje de Contacto</div>';
+			html += '<div class="header-subtitle">Recibido desde el formulario web</div>';
+			html += '</div>';
+			html += '<div class="email-content">';
+			html += '<div class="greeting">Hola Equipo AvalTrust!</div>';
+			html += '<p style="color: #6b7280; margin-bottom: 25px;">Se ha recibido un nuevo mensaje a traves del formulario de contacto del sitio web.</p>';
+			html += '<div class="data-section">';
+			html += '<div class="section-title">Informacion del Contacto</div>';
+			html += '<div class="data-item"><span class="data-label">Nombre:</span><span class="data-value">' + data.nombre + '</span></div>';
+			html += '<div class="data-item"><span class="data-label">Empresa:</span><span class="data-value">' + (data.empresa || 'No especificada') + '</span></div>';
+			html += '<div class="data-item"><span class="data-label">Correo:</span><span class="data-value">' + data.correo + '</span></div>';
+			html += '<div class="data-item"><span class="data-label">Telefono:</span><span class="data-value">' + data.telefono + '</span></div>';
+			html += '<div class="data-item"><span class="data-label">Fecha/Hora:</span><span class="data-value">' + fechaHora + '</span></div>';
+			html += '</div>';
+			html += '<div class="message-section">';
+			html += '<div class="section-title">Mensaje</div>';
+			html += '<div class="message-content">' + data.mensaje + '</div>';
+			html += '</div>';
+			html += '</div>';
+			html += '<div class="email-footer">';
+			html += '<div class="footer-logo">AvalTrust</div>';
+			html += '<div class="footer-text">Este mensaje fue enviado desde el formulario de contacto de avaltrust.co</div>';
+			html += '</div>';
+			html += '</div>';
+			html += '</body>';
+			html += '</html>';
+			
+			return html;
 		}
 
 		// Remover errores visuales cuando el usuario empiece a escribir y verificar completitud

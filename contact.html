@@ -503,27 +503,35 @@
 			e.preventDefault();
 			e.stopPropagation();
 
-			console.log('Formulario enviado - iniciando proceso');
+			console.log('=== INICIO ENVIO FORMULARIO ===');
 
 			// Validar campos obligatorios
+			console.log('Validando campos...');
 			if (!validateRequiredFields()) {
+				console.log('Error: campos obligatorios incompletos');
 				showErrorMessage('Por favor, completa todos los campos obligatorios marcados con *');
 				return false;
 			}
 
 			// Validar formato de email
 			var email = $('input[name="Correo"]').val().trim();
+			console.log('Email a validar:', email);
 			if (!validateEmail(email)) {
+				console.log('Error: email invalido');
 				showErrorMessage('Por favor, ingresa un correo electrónico válido');
 				$('input[name="Correo"]').addClass('field-error');
 				return false;
 			}
 
 			// Validar términos y condiciones
+			console.log('Validando terminos...');
 			if (!validateTerms()) {
+				console.log('Error: terminos no aceptados');
 				showErrorMessage('Debes aceptar los términos y condiciones para enviar el mensaje');
 				return false;
 			}
+
+			console.log('Validaciones OK - preparando envio');
 
 			// Ocultar mensajes de error
 			$('#error-message').hide();
@@ -542,6 +550,8 @@
 				mensaje: $('textarea[name="Mensaje"]').val().trim()
 			};
 
+			console.log('Datos del formulario:', formData);
+
 			// Preparar payload para el backend
 			var emailPayload = {
 				to: ["comercial@avaltrust.co"],
@@ -552,7 +562,6 @@
 			};
 
 			console.log('Enviando a:', API_ENDPOINT);
-			console.log('Payload:', emailPayload);
 
 			// Enviar usando fetch con .then()
 			fetch(API_ENDPOINT, {
@@ -563,14 +572,15 @@
 				body: JSON.stringify(emailPayload)
 			})
 			.then(function(response) {
-				console.log('Respuesta recibida:', response.status);
+				console.log('Respuesta HTTP recibida - Status:', response.status);
 				if (!response.ok) {
 					throw new Error('Error del servidor: ' + response.status);
 				}
 				return response.json();
 			})
 			.then(function(data) {
-				console.log('Éxito:', data);
+				console.log('=== EXITO - Correo enviado ===');
+				console.log('Respuesta del servidor:', data);
 				// Éxito
 				$('#loading-message').hide();
 				$('#success-message').show();
@@ -583,7 +593,8 @@
 				checkFormCompletion();
 			})
 			.catch(function(error) {
-				console.error('Error al enviar:', error);
+				console.error('=== ERROR al enviar ===');
+				console.error('Detalle:', error);
 				$('#loading-message').hide();
 				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
 				showErrorMessage('Hubo un error al enviar el mensaje. Por favor intenta nuevamente.');

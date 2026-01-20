@@ -74,8 +74,8 @@
 					<h2 class="contact-form-title">Envíanos un Mensaje</h2>
 					<p class="contact-form-description">¿Necesitas más información sobre nuestros servicios? Completa el formulario y nuestro equipo se pondrá en contacto contigo a la brevedad.</p>
 
-					<!-- Formulario actualizado con Formsubmit -->
-					<form id="quote-request" class="modern-form" action="https://formsubmit.co/comercial@avaltrust.co" method="POST">
+					<!-- Formulario usando backend propio -->
+					<form id="quote-request" class="modern-form">
 
 						<div class="form-group row">
 							<div class="form-field col-md-6">
@@ -101,10 +101,17 @@
 							</div>
 						</div>
 
-						<!-- Configuraciones ocultas de Formsubmit -->
-						<input type="hidden" name="_subject" value="Nuevo mensaje desde la web de AvalTrust">
-						<input type="hidden" name="_next" value="https://avaltrust.co/contact.html">
-						<input type="hidden" name="_captcha" value="false">
+						<!-- Términos y Condiciones -->
+						<div class="form-group terms-agreement-contact">
+							<label class="checkbox-container-contact">
+								<input type="checkbox" id="acceptTermsContact" required>
+								<span class="checkmark-contact"></span>
+								<span class="checkbox-text-contact">
+									Declaro que he leído y acepto los <a href="terminos-condiciones.html" target="_blank">Términos y Condiciones</a> de Uso y la <a href="politica-privacidad.html" target="_blank">Política de Privacidad</a> y Tratamiento de Datos Personales de AvalTrust S.A.S., y que conozco y acepto expresamente la diferencia entre el servicio de aval o fianza digital y los servicios tecnológicos y en la nube, los cuales son servicios independientes, con naturaleza jurídica y alcance distinto.
+								</span>
+							</label>
+							<div class="validation-message-contact" id="termsValidationContact"></div>
+						</div>
 
 						<button type="submit" class="modern-submit-btn" id="submit-btn">Enviar Mensaje</button>
 
@@ -315,6 +322,8 @@
 <!-- Script para mostrar mensaje de confirmación -->
 <script>
 	$(document).ready(function() {
+		const API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+
 		// Función para validar todos los campos obligatorios
 		function validateRequiredFields() {
 			var isValid = true;
@@ -324,10 +333,8 @@
 				var fieldValue = $(this).val().trim();
 				if (fieldValue === '') {
 					isValid = false;
-					// Agregar clase de error visual (opcional)
 					$(this).addClass('field-error');
 				} else {
-					// Remover clase de error si el campo está lleno
 					$(this).removeClass('field-error');
 				}
 			});
@@ -341,13 +348,26 @@
 			return emailRegex.test(email);
 		}
 
+		// Función para validar términos y condiciones
+		function validateTerms() {
+			var checkbox = $('#acceptTermsContact');
+			var validation = $('#termsValidationContact');
+			
+			validation.removeClass('show error');
+			
+			if (!checkbox.is(':checked')) {
+				validation.text('Debes aceptar los términos y condiciones para continuar');
+				validation.addClass('show error');
+				return false;
+			}
+			return true;
+		}
+
 		// Función para mostrar mensaje de error
 		function showErrorMessage(message) {
-			// Ocultar otros mensajes
 			$('#loading-message').hide();
 			$('#success-message').hide();
 
-			// Mostrar mensaje de error
 			if ($('#error-message').length === 0) {
 				$('#submit-btn').after('<div id="error-message" class="form-results" style="display: none;"><div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #f5c6cb;"><i class="fa fa-exclamation-triangle" style="margin-right: 10px;"></i><span id="error-text"></span></div></div>');
 			}
@@ -355,10 +375,97 @@
 			$('#error-text').text(message);
 			$('#error-message').show();
 
-			// Ocultar mensaje de error después de 5 segundos
 			setTimeout(function() {
 				$('#error-message').fadeOut();
 			}, 5000);
+		}
+
+		// Función para generar el HTML del email
+		function generateEmailHTML(data) {
+			const fechaHora = new Date().toLocaleString('es-CO', {
+				timeZone: 'America/Bogota',
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit'
+			});
+
+			return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Mensaje de Contacto - AvalTrust</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .email-container { max-width: 650px; margin: 0 auto; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .email-header { background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #fff; padding: 40px 30px; text-align: center; }
+        .logo { font-size: 32px; font-weight: 800; margin-bottom: 15px; }
+        .header-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; opacity: 0.9; }
+        .email-content { padding: 40px 30px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #1f2937; margin-bottom: 20px; }
+        .data-section { background: #f8fafc; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #1e3a8a; }
+        .section-title { color: #1f2937; font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .data-item { display: flex; justify-content: space-between; padding: 12px 15px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #e5e7eb; }
+        .data-label { font-weight: 600; color: #374151; }
+        .data-value { color: #1f2937; }
+        .message-section { background: #f0f9ff; border-radius: 15px; padding: 25px; margin: 20px 0; border-left: 5px solid #0ea5e9; }
+        .message-content { background: #fff; padding: 20px; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; }
+        .email-footer { background: #1a1a2e; color: #fff; padding: 30px; text-align: center; }
+        .footer-logo { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+        .footer-text { color: rgba(255,255,255,0.7); font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="logo">AvalTrust</div>
+            <div class="header-title">Nuevo Mensaje de Contacto</div>
+            <div class="header-subtitle">Recibido desde el formulario web</div>
+        </div>
+        <div class="email-content">
+            <div class="greeting">¡Hola Equipo AvalTrust! 👋</div>
+            <p style="color: #6b7280; margin-bottom: 25px;">Se ha recibido un nuevo mensaje a través del formulario de contacto del sitio web.</p>
+            
+            <div class="data-section">
+                <div class="section-title">👤 Información del Contacto</div>
+                <div class="data-item">
+                    <span class="data-label">Nombre:</span>
+                    <span class="data-value">${data.nombre}</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Empresa:</span>
+                    <span class="data-value">${data.empresa || 'No especificada'}</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Correo:</span>
+                    <span class="data-value">${data.correo}</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Teléfono:</span>
+                    <span class="data-value">${data.telefono}</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Fecha/Hora:</span>
+                    <span class="data-value">${fechaHora}</span>
+                </div>
+            </div>
+            
+            <div class="message-section">
+                <div class="section-title">💬 Mensaje</div>
+                <div class="message-content">${data.mensaje}</div>
+            </div>
+        </div>
+        <div class="email-footer">
+            <div class="footer-logo">AvalTrust</div>
+            <div class="footer-text">Este mensaje fue enviado desde el formulario de contacto de avaltrust.co</div>
+        </div>
+    </div>
+</body>
+</html>`;
 		}
 
 		// Remover errores visuales cuando el usuario empiece a escribir
@@ -367,8 +474,12 @@
 			$('#error-message').hide();
 		});
 
-		$('#quote-request').on('submit', function(e) {
-			// Prevenir el envío inmediato
+		// Limpiar validación de términos al marcar el checkbox
+		$('#acceptTermsContact').on('change', function() {
+			$('#termsValidationContact').removeClass('show error');
+		});
+
+		$('#quote-request').on('submit', async function(e) {
 			e.preventDefault();
 
 			// Validar campos obligatorios
@@ -385,7 +496,12 @@
 				return false;
 			}
 
-			// Si todas las validaciones pasan, proceder con el envío
+			// Validar términos y condiciones
+			if (!validateTerms()) {
+				showErrorMessage('Debes aceptar los términos y condiciones para enviar el mensaje');
+				return false;
+			}
+
 			// Ocultar mensajes de error
 			$('#error-message').hide();
 
@@ -394,17 +510,51 @@
 			$('#success-message').hide();
 			$('#submit-btn').prop('disabled', true).text('Enviando...');
 
-			// Simular un pequeño delay para mostrar el mensaje de éxito
-			setTimeout(function() {
+			// Obtener datos del formulario
+			const formData = {
+				nombre: $('input[name="Nombre"]').val().trim(),
+				empresa: $('input[name="Empresa"]').val().trim(),
+				correo: $('input[name="Correo"]').val().trim(),
+				telefono: $('input[name="Teléfono"]').val().trim(),
+				mensaje: $('textarea[name="Mensaje"]').val().trim()
+			};
+
+			// Preparar payload para el backend
+			const emailPayload = {
+				to: ["comercial@avaltrust.co"],
+				cc: [],
+				bcc: [],
+				subject: `Nuevo mensaje de contacto - ${formData.nombre}`,
+				htmlBody: generateEmailHTML(formData)
+			};
+
+			try {
+				const response = await fetch(API_ENDPOINT, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(emailPayload)
+				});
+
+				if (!response.ok) {
+					throw new Error(`Error del servidor: ${response.status}`);
+				}
+
+				// Éxito
 				$('#loading-message').hide();
 				$('#success-message').show();
+				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
 
-				// Esperar 3 segundos antes de proceder con el envío real
-				setTimeout(function() {
-					// El formulario se enviará normalmente después de mostrar el mensaje
-					document.getElementById('quote-request').submit();
-				}, 3000);
-			}, 1000);
+				// Limpiar formulario
+				$('#quote-request')[0].reset();
+
+			} catch (error) {
+				console.error('Error al enviar:', error);
+				$('#loading-message').hide();
+				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
+				showErrorMessage('Hubo un error al enviar el mensaje. Por favor intenta nuevamente.');
+			}
 		});
 	});
 </script>

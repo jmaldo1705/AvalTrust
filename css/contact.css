@@ -406,3 +406,104 @@
     border-color: #dc3545 !important;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
 }
+
+/* Terms and Conditions Checkbox Styles */
+.terms-agreement-contact {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.checkbox-container-contact {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.6;
+}
+
+.checkbox-container-contact input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark-contact {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container-contact:hover .checkmark-contact {
+    border-color: #2C7DFA;
+}
+
+.checkbox-container-contact input[type="checkbox"]:checked + .checkmark-contact {
+    background-color: #2C7DFA;
+    border-color: #2C7DFA;
+}
+
+.checkmark-contact::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container-contact input[type="checkbox"]:checked + .checkmark-contact::after {
+    display: block;
+}
+
+.checkbox-text-contact {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.checkbox-text-contact a {
+    color: #2C7DFA;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.checkbox-text-contact a:hover {
+    color: #1e5bb8;
+    text-decoration: underline;
+}
+
+.validation-message-contact {
+    display: none;
+    margin-top: 10px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+.validation-message-contact.show {
+    display: block;
+}
+
+.validation-message-contact.error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}

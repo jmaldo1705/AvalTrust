@@ -571,16 +571,72 @@
 			minute: '2-digit'
 		});
 
-		var htmlBody = '<html><body style="font-family: Arial, sans-serif; padding: 20px;">';
-		htmlBody += '<h2 style="color: #1e3a8a;">Nuevo Mensaje de Contacto - AvalTrust</h2>';
-		htmlBody += '<p><strong>Nombre:</strong> ' + formData.nombre + '</p>';
-		htmlBody += '<p><strong>Empresa:</strong> ' + (formData.empresa || 'No especificada') + '</p>';
-		htmlBody += '<p><strong>Correo:</strong> ' + formData.correo + '</p>';
-		htmlBody += '<p><strong>Telefono:</strong> ' + formData.telefono + '</p>';
-		htmlBody += '<p><strong>Fecha/Hora:</strong> ' + fechaHora + '</p>';
-		htmlBody += '<hr style="margin: 20px 0;">';
-		htmlBody += '<h3>Mensaje:</h3>';
-		htmlBody += '<p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">' + formData.mensaje + '</p>';
+		var htmlBody = '<!DOCTYPE html>';
+		htmlBody += '<html lang="es">';
+		htmlBody += '<head><meta charset="utf-8"></head>';
+		htmlBody += '<body style="margin: 0; padding: 0; background-color: #f4f7fa; font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;">';
+		htmlBody += '<table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f4f7fa; padding: 40px 20px;">';
+		htmlBody += '<tr><td align="center">';
+		htmlBody += '<table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">';
+		
+		// Header
+		htmlBody += '<tr><td style="background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); padding: 40px 30px; text-align: center;">';
+		htmlBody += '<h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700;">AvalTrust</h1>';
+		htmlBody += '<p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 16px;">Nuevo Mensaje de Contacto</p>';
+		htmlBody += '</td></tr>';
+		
+		// Badge
+		htmlBody += '<tr><td style="padding: 30px 30px 0 30px; text-align: center;">';
+		htmlBody += '<span style="display: inline-block; background-color: #ecfdf5; color: #059669; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600;">&#10003; Mensaje Recibido</span>';
+		htmlBody += '</td></tr>';
+		
+		// Greeting
+		htmlBody += '<tr><td style="padding: 25px 30px 10px 30px;">';
+		htmlBody += '<p style="color: #374151; font-size: 16px; margin: 0;">Hola Equipo AvalTrust,</p>';
+		htmlBody += '<p style="color: #6b7280; font-size: 15px; margin: 10px 0 0 0; line-height: 1.6;">Se ha recibido un nuevo mensaje a traves del formulario de contacto del sitio web.</p>';
+		htmlBody += '</td></tr>';
+		
+		// Contact Info Section
+		htmlBody += '<tr><td style="padding: 20px 30px;">';
+		htmlBody += '<table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 12px; border-left: 4px solid #1e3a8a;">';
+		htmlBody += '<tr><td style="padding: 20px;">';
+		htmlBody += '<h3 style="color: #1f2937; margin: 0 0 15px 0; font-size: 16px;">&#128100; Informacion del Contacto</h3>';
+		
+		// Data rows
+		htmlBody += '<table width="100%" cellpadding="8" cellspacing="0">';
+		htmlBody += '<tr><td style="color: #6b7280; font-size: 14px; width: 120px;">Nombre:</td><td style="color: #1f2937; font-size: 14px; font-weight: 600;">' + formData.nombre + '</td></tr>';
+		htmlBody += '<tr><td style="color: #6b7280; font-size: 14px;">Empresa:</td><td style="color: #1f2937; font-size: 14px; font-weight: 600;">' + (formData.empresa || 'No especificada') + '</td></tr>';
+		htmlBody += '<tr><td style="color: #6b7280; font-size: 14px;">Correo:</td><td style="color: #1f2937; font-size: 14px; font-weight: 600;"><a href="mailto:' + formData.correo + '" style="color: #1e3a8a; text-decoration: none;">' + formData.correo + '</a></td></tr>';
+		htmlBody += '<tr><td style="color: #6b7280; font-size: 14px;">Telefono:</td><td style="color: #1f2937; font-size: 14px; font-weight: 600;">' + formData.telefono + '</td></tr>';
+		htmlBody += '<tr><td style="color: #6b7280; font-size: 14px;">Fecha:</td><td style="color: #1f2937; font-size: 14px; font-weight: 600;">' + fechaHora + '</td></tr>';
+		htmlBody += '</table>';
+		
+		htmlBody += '</td></tr></table>';
+		htmlBody += '</td></tr>';
+		
+		// Message Section
+		htmlBody += '<tr><td style="padding: 10px 30px 20px 30px;">';
+		htmlBody += '<table width="100%" cellpadding="0" cellspacing="0" style="background-color: #eff6ff; border-radius: 12px; border-left: 4px solid #3b82f6;">';
+		htmlBody += '<tr><td style="padding: 20px;">';
+		htmlBody += '<h3 style="color: #1f2937; margin: 0 0 15px 0; font-size: 16px;">&#128172; Mensaje</h3>';
+		htmlBody += '<p style="color: #374151; font-size: 15px; line-height: 1.7; margin: 0; white-space: pre-wrap;">' + formData.mensaje + '</p>';
+		htmlBody += '</td></tr></table>';
+		htmlBody += '</td></tr>';
+		
+		// CTA Button
+		htmlBody += '<tr><td style="padding: 10px 30px 30px 30px; text-align: center;">';
+		htmlBody += '<a href="mailto:' + formData.correo + '" style="display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: #ffffff; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">Responder al Cliente</a>';
+		htmlBody += '</td></tr>';
+		
+		// Footer
+		htmlBody += '<tr><td style="background-color: #1a1a2e; padding: 25px 30px; text-align: center;">';
+		htmlBody += '<p style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 700;">AvalTrust</p>';
+		htmlBody += '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0 0; font-size: 13px;">Transformando el acceso al credito con confianza</p>';
+		htmlBody += '<p style="color: rgba(255,255,255,0.5); margin: 15px 0 0 0; font-size: 12px;">Este mensaje fue enviado desde avaltrust.co</p>';
+		htmlBody += '</td></tr>';
+		
+		htmlBody += '</table>';
+		htmlBody += '</td></tr></table>';
 		htmlBody += '</body></html>';
 
 		// Preparar payload para el backend

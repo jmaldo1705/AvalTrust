@@ -1,4 +1,39 @@
 // Calculadora de Cobertura AvalTrust - JavaScript Mejorado
+
+// Variable global para el token de Turnstile
+let turnstileTokenCalculadora = null;
+
+// Callbacks globales de Turnstile para la calculadora
+function onTurnstileSuccessCalculadora(token) {
+    console.log('Turnstile validado correctamente en calculadora');
+    turnstileTokenCalculadora = token;
+    const validation = document.getElementById('captchaValidation');
+    if (validation) {
+        validation.classList.remove('show', 'error');
+        validation.textContent = '';
+    }
+}
+
+function onTurnstileExpiredCalculadora() {
+    console.log('Token de Turnstile expirado en calculadora');
+    turnstileTokenCalculadora = null;
+    const validation = document.getElementById('captchaValidation');
+    if (validation) {
+        validation.classList.add('show', 'error');
+        validation.textContent = 'El captcha ha expirado, por favor verifica nuevamente';
+    }
+}
+
+function onTurnstileErrorCalculadora() {
+    console.log('Error en Turnstile en calculadora');
+    turnstileTokenCalculadora = null;
+    const validation = document.getElementById('captchaValidation');
+    if (validation) {
+        validation.classList.add('show', 'error');
+        validation.textContent = 'Error al cargar el captcha, por favor recarga la página';
+    }
+}
+
 class CalculadoraCobertura {
     constructor() {
         this.currentStep = 1;
@@ -368,10 +403,32 @@ class CalculadoraCobertura {
         return true;
     }
 
+    validateCaptcha() {
+        const validation = document.getElementById('captchaValidation');
+        
+        if (!turnstileTokenCalculadora) {
+            if (validation) {
+                validation.textContent = 'Por favor completa la verificación de seguridad';
+                validation.classList.add('show', 'error');
+            }
+            return false;
+        }
+
+        if (validation) {
+            validation.classList.remove('show', 'error');
+        }
+        return true;
+    }
+
     async handleSubmit(event) {
         event.preventDefault();
 
         if (!this.validateTerms()) {
+            return;
+        }
+
+        if (!this.validateCaptcha()) {
+            this.showToast('Por favor completa la verificación de seguridad (captcha)', 'error');
             return;
         }
 
@@ -434,7 +491,8 @@ class CalculadoraCobertura {
             cc: [],
             bcc: [],
             subject: `Nueva Solicitud de Calculadora - ${allData.nombreEmpresa || 'Cliente Potencial'}`,
-            htmlBody: htmlBody
+            htmlBody: htmlBody,
+            turnstileToken: turnstileTokenCalculadora
         };
 
         console.log('Enviando email payload:', emailPayload);
@@ -722,6 +780,12 @@ class CalculadoraCobertura {
 
             // Scroll to success message
             successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Resetear el token de Turnstile
+        turnstileTokenCalculadora = null;
+        if (typeof turnstile !== 'undefined') {
+            turnstile.reset();
         }
     }
 

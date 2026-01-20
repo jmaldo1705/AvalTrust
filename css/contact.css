@@ -507,3 +507,30 @@
     color: #dc2626;
     border: 1px solid #fecaca;
 }
+
+/* Cloudflare Turnstile Captcha Container */
+.turnstile-container {
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.turnstile-container .cf-turnstile {
+    margin-bottom: 10px;
+}
+
+.turnstile-container .cf-turnstile iframe {
+    border-radius: 8px !important;
+}
+
+@media (max-width: 768px) {
+    .turnstile-container {
+        align-items: center;
+    }
+    
+    .turnstile-container .cf-turnstile {
+        transform: scale(0.95);
+        transform-origin: center;
+    }
+}

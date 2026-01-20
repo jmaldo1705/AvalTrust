@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="css/calculadora-float.css">
     <link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
     <link rel="stylesheet" type="text/css" href="css/calculadora.css">
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="site-body style-v1 calculadora-page">
 
@@ -406,6 +408,19 @@
                                         </span>
                                     </label>
                                     <div class="validation-message" role="alert" id="termsValidation"></div>
+                                </div>
+
+                                <!-- Cloudflare Turnstile Captcha -->
+                                <div class="turnstile-container">
+                                    <div class="cf-turnstile" 
+                                         data-sitekey="0x4AAAAAAACNuWPh5HaG1Y8L-" 
+                                         data-callback="onTurnstileSuccessCalculadora"
+                                         data-expired-callback="onTurnstileExpiredCalculadora"
+                                         data-error-callback="onTurnstileErrorCalculadora"
+                                         data-theme="light"
+                                         data-language="es">
+                                    </div>
+                                    <div class="validation-message" role="alert" id="captchaValidation"></div>
                                 </div>
 
                                 <div class="form-actions">

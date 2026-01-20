@@ -930,6 +930,47 @@ select.form-control:has(option:checked:not([value=""])) {
     text-decoration: underline;
 }
 
+/* Cloudflare Turnstile Captcha Container - Calculadora */
+.turnstile-container {
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.turnstile-container .cf-turnstile {
+    margin-bottom: 10px;
+}
+
+.turnstile-container .cf-turnstile iframe {
+    border-radius: 8px !important;
+}
+
+.turnstile-container .validation-message {
+    margin-top: 8px;
+}
+
+.turnstile-container .validation-message.show.error {
+    display: block;
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .turnstile-container {
+        align-items: center;
+    }
+    
+    .turnstile-container .cf-turnstile {
+        transform: scale(0.9);
+        transform-origin: center;
+    }
+}
+
 /* Mensaje de Éxito Mejorado */
 .mensaje-exito {
     background: var(--white);

@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/calculadora-float.css">
 	<link rel="stylesheet" type="text/css" href="css/custom-mobile.css">
 	<link rel="stylesheet" type="text/css" href="css/contact.css">
+	<!-- Cloudflare Turnstile -->
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="site-body style-v1">
 <!-- Header -->
@@ -113,18 +115,19 @@
 							<div class="validation-message-contact" id="termsValidationContact"></div>
 						</div>
 
-						<button type="button" class="modern-submit-btn" id="submit-btn" disabled onclick="enviarFormulario()">Enviar Mensaje</button>
-
-						<!-- Mensaje de éxito -->
-						<div id="success-message" class="form-results" style="display: none;">
-							<div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #c3e6cb;">
-								<i class="fa fa-check-circle" style="margin-right: 10px;"></i>
-								<strong>¡Mensaje enviado exitosamente!</strong><br>
-								Hemos recibido tu mensaje. Nuestro equipo se pondrá en contacto contigo a la brevedad.
+							<!-- Cloudflare Turnstile Captcha -->
+							<div class="form-group turnstile-container">
+								<div class="cf-turnstile" 
+									 data-sitekey="0x4AAAAAAACNuWPh5HaG1Y8L-" 
+									 data-callback="onTurnstileSuccessContact"
+									 data-expired-callback="onTurnstileExpiredContact"
+									 data-error-callback="onTurnstileErrorContact"
+									 data-theme="light"
+									 data-language="es">
+								</div>
+								<div class="validation-message-contact" id="captchaValidationContact"></div>
 							</div>
-						</div>
 
-						<!-- Mensaje de cargando -->
 						<div id="loading-message" class="form-results" style="display: none;">
 							<div class="alert alert-info" style="background-color: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #bee5eb;">
 								<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>
@@ -321,38 +324,64 @@
 
 <!-- Script para mostrar mensaje de confirmación -->
 <script>
+	// Variable global para almacenar el token de Turnstile
+	var turnstileTokenContact = null;
+
+	// Callbacks de Turnstile
+	function onTurnstileSuccessContact(token) {
+		console.log('Turnstile validado correctamente');
+		turnstileTokenContact = token;
+		$('#captchaValidationContact').removeClass('show error').text('');
+		checkFormCompletion();
+	}
+
+	function onTurnstileExpiredContact() {
+		console.log('Token de Turnstile expirado');
+		turnstileTokenContact = null;
+		$('#captchaValidationContact').addClass('show error').text('El captcha ha expirado, por favor verifica nuevamente');
+		checkFormCompletion();
+	}
+
+	function onTurnstileErrorContact() {
+		console.log('Error en Turnstile');
+		turnstileTokenContact = null;
+		$('#captchaValidationContact').addClass('show error').text('Error al cargar el captcha, por favor recarga la página');
+		checkFormCompletion();
+	}
+
+	// Función global para verificar completitud del formulario
+	function checkFormCompletion() {
+		var allFieldsFilled = true;
+		var termsAccepted = $('#acceptTermsContact').is(':checked');
+		var emailValid = true;
+		var captchaValid = turnstileTokenContact !== null;
+
+		// Verificar campos requeridos
+		$('.form-control.required').each(function() {
+			if ($(this).val().trim() === '') {
+				allFieldsFilled = false;
+			}
+		});
+
+		// Verificar formato de email si tiene valor
+		var emailValue = $('input[name="Correo"]').val().trim();
+		if (emailValue !== '') {
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			emailValid = emailRegex.test(emailValue);
+		}
+
+		// Habilitar o deshabilitar el botón
+		if (allFieldsFilled && termsAccepted && emailValid && captchaValid) {
+			$('#submit-btn').prop('disabled', false);
+		} else {
+			$('#submit-btn').prop('disabled', true);
+		}
+	}
+
 	$(document).ready(function() {
 		var API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
 
 		console.log('Script de contacto cargado correctamente');
-
-		// Función para verificar si el formulario está completo y habilitar/deshabilitar el botón
-		function checkFormCompletion() {
-			var allFieldsFilled = true;
-			var termsAccepted = $('#acceptTermsContact').is(':checked');
-			var emailValid = true;
-
-			// Verificar campos requeridos
-			$('.form-control.required').each(function() {
-				if ($(this).val().trim() === '') {
-					allFieldsFilled = false;
-				}
-			});
-
-			// Verificar formato de email si tiene valor
-			var emailValue = $('input[name="Correo"]').val().trim();
-			if (emailValue !== '') {
-				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				emailValid = emailRegex.test(emailValue);
-			}
-
-			// Habilitar o deshabilitar el botón
-			if (allFieldsFilled && termsAccepted && emailValid) {
-				$('#submit-btn').prop('disabled', false);
-			} else {
-				$('#submit-btn').prop('disabled', true);
-			}
-		}
 
 		// Función para validar todos los campos obligatorios
 		function validateRequiredFields() {
@@ -543,6 +572,15 @@
 			return;
 		}
 
+		// Validar captcha de Turnstile
+		console.log('Validando captcha...');
+		if (!turnstileTokenContact) {
+			console.log('Error: captcha no completado');
+			$('#captchaValidationContact').addClass('show error').text('Por favor completa la verificación de seguridad');
+			alert('Por favor completa la verificación de seguridad (captcha)');
+			return;
+		}
+
 		console.log('Validaciones OK - preparando envio');
 
 		// Mostrar mensaje de carga
@@ -645,7 +683,8 @@
 			cc: [],
 			bcc: [],
 			subject: "Nuevo mensaje de contacto - " + formData.nombre,
-			htmlBody: htmlBody
+			htmlBody: htmlBody,
+			turnstileToken: turnstileTokenContact
 		};
 
 		console.log('Enviando a:', API_ENDPOINT);
@@ -680,6 +719,12 @@
 			$('input[name="Teléfono"]').val('');
 			$('textarea[name="Mensaje"]').val('');
 			$('#acceptTermsContact').prop('checked', false);
+			
+			// Resetear el captcha de Turnstile
+			turnstileTokenContact = null;
+			if (typeof turnstile !== 'undefined') {
+				turnstile.reset();
+			}
 			
 			// Deshabilitar botón
 			$('#submit-btn').prop('disabled', true);

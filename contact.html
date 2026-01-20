@@ -113,7 +113,7 @@
 							<div class="validation-message-contact" id="termsValidationContact"></div>
 						</div>
 
-						<button type="submit" class="modern-submit-btn" id="submit-btn" disabled>Enviar Mensaje</button>
+						<button type="button" class="modern-submit-btn" id="submit-btn" disabled onclick="enviarFormulario()">Enviar Mensaje</button>
 
 						<!-- Mensaje de éxito -->
 						<div id="success-message" class="form-results" style="display: none;">
@@ -498,111 +498,144 @@
 
 		// Verificar estado inicial del formulario
 		checkFormCompletion();
-
-		$('#quote-request').on('submit', function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-
-			console.log('=== INICIO ENVIO FORMULARIO ===');
-
-			// Validar campos obligatorios
-			console.log('Validando campos...');
-			if (!validateRequiredFields()) {
-				console.log('Error: campos obligatorios incompletos');
-				showErrorMessage('Por favor, completa todos los campos obligatorios marcados con *');
-				return false;
-			}
-
-			// Validar formato de email
-			var email = $('input[name="Correo"]').val().trim();
-			console.log('Email a validar:', email);
-			if (!validateEmail(email)) {
-				console.log('Error: email invalido');
-				showErrorMessage('Por favor, ingresa un correo electrónico válido');
-				$('input[name="Correo"]').addClass('field-error');
-				return false;
-			}
-
-			// Validar términos y condiciones
-			console.log('Validando terminos...');
-			if (!validateTerms()) {
-				console.log('Error: terminos no aceptados');
-				showErrorMessage('Debes aceptar los términos y condiciones para enviar el mensaje');
-				return false;
-			}
-
-			console.log('Validaciones OK - preparando envio');
-
-			// Ocultar mensajes de error
-			$('#error-message').hide();
-
-			// Mostrar mensaje de carga
-			$('#loading-message').show();
-			$('#success-message').hide();
-			$('#submit-btn').prop('disabled', true).text('Enviando...');
-
-			// Obtener datos del formulario
-			var formData = {
-				nombre: $('input[name="Nombre"]').val().trim(),
-				empresa: $('input[name="Empresa"]').val().trim(),
-				correo: $('input[name="Correo"]').val().trim(),
-				telefono: $('input[name="Teléfono"]').val().trim(),
-				mensaje: $('textarea[name="Mensaje"]').val().trim()
-			};
-
-			console.log('Datos del formulario:', formData);
-
-			// Preparar payload para el backend
-			var emailPayload = {
-				to: ["comercial@avaltrust.co"],
-				cc: [],
-				bcc: [],
-				subject: "Nuevo mensaje de contacto - " + formData.nombre,
-				htmlBody: generateEmailHTML(formData)
-			};
-
-			console.log('Enviando a:', API_ENDPOINT);
-
-			// Enviar usando fetch con .then()
-			fetch(API_ENDPOINT, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(emailPayload)
-			})
-			.then(function(response) {
-				console.log('Respuesta HTTP recibida - Status:', response.status);
-				if (!response.ok) {
-					throw new Error('Error del servidor: ' + response.status);
-				}
-				return response.json();
-			})
-			.then(function(data) {
-				console.log('=== EXITO - Correo enviado ===');
-				console.log('Respuesta del servidor:', data);
-				// Éxito
-				$('#loading-message').hide();
-				$('#success-message').show();
-				$('#submit-btn').text('Enviar Mensaje');
-
-				// Limpiar formulario
-				$('#quote-request')[0].reset();
-				
-				// Deshabilitar botón ya que el formulario está vacío
-				checkFormCompletion();
-			})
-			.catch(function(error) {
-				console.error('=== ERROR al enviar ===');
-				console.error('Detalle:', error);
-				$('#loading-message').hide();
-				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
-				showErrorMessage('Hubo un error al enviar el mensaje. Por favor intenta nuevamente.');
-			});
-
-			return false;
-		});
 	});
+
+	// Función global para enviar el formulario
+	function enviarFormulario() {
+		var API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+		
+		console.log('=== INICIO ENVIO FORMULARIO ===');
+
+		// Validar campos obligatorios
+		console.log('Validando campos...');
+		var allValid = true;
+		$('.form-control.required').each(function() {
+			if ($(this).val().trim() === '') {
+				allValid = false;
+				$(this).addClass('field-error');
+			} else {
+				$(this).removeClass('field-error');
+			}
+		});
+		
+		if (!allValid) {
+			console.log('Error: campos obligatorios incompletos');
+			alert('Por favor, completa todos los campos obligatorios marcados con *');
+			return;
+		}
+
+		// Validar formato de email
+		var email = $('input[name="Correo"]').val().trim();
+		var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		console.log('Email a validar:', email);
+		if (!emailRegex.test(email)) {
+			console.log('Error: email invalido');
+			alert('Por favor, ingresa un correo electrónico válido');
+			$('input[name="Correo"]').addClass('field-error');
+			return;
+		}
+
+		// Validar términos y condiciones
+		console.log('Validando terminos...');
+		if (!$('#acceptTermsContact').is(':checked')) {
+			console.log('Error: terminos no aceptados');
+			alert('Debes aceptar los términos y condiciones para enviar el mensaje');
+			return;
+		}
+
+		console.log('Validaciones OK - preparando envio');
+
+		// Mostrar mensaje de carga
+		$('#loading-message').show();
+		$('#success-message').hide();
+		$('#submit-btn').prop('disabled', true).text('Enviando...');
+
+		// Obtener datos del formulario
+		var formData = {
+			nombre: $('input[name="Nombre"]').val().trim(),
+			empresa: $('input[name="Empresa"]').val().trim(),
+			correo: $('input[name="Correo"]').val().trim(),
+			telefono: $('input[name="Teléfono"]').val().trim(),
+			mensaje: $('textarea[name="Mensaje"]').val().trim()
+		};
+
+		console.log('Datos del formulario:', formData);
+
+		// Generar HTML del email
+		var fechaHora = new Date().toLocaleString('es-CO', {
+			timeZone: 'America/Bogota',
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit'
+		});
+
+		var htmlBody = '<html><body style="font-family: Arial, sans-serif; padding: 20px;">';
+		htmlBody += '<h2 style="color: #1e3a8a;">Nuevo Mensaje de Contacto - AvalTrust</h2>';
+		htmlBody += '<p><strong>Nombre:</strong> ' + formData.nombre + '</p>';
+		htmlBody += '<p><strong>Empresa:</strong> ' + (formData.empresa || 'No especificada') + '</p>';
+		htmlBody += '<p><strong>Correo:</strong> ' + formData.correo + '</p>';
+		htmlBody += '<p><strong>Telefono:</strong> ' + formData.telefono + '</p>';
+		htmlBody += '<p><strong>Fecha/Hora:</strong> ' + fechaHora + '</p>';
+		htmlBody += '<hr style="margin: 20px 0;">';
+		htmlBody += '<h3>Mensaje:</h3>';
+		htmlBody += '<p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">' + formData.mensaje + '</p>';
+		htmlBody += '</body></html>';
+
+		// Preparar payload para el backend
+		var emailPayload = {
+			to: ["comercial@avaltrust.co"],
+			cc: [],
+			bcc: [],
+			subject: "Nuevo mensaje de contacto - " + formData.nombre,
+			htmlBody: htmlBody
+		};
+
+		console.log('Enviando a:', API_ENDPOINT);
+
+		// Enviar usando fetch
+		fetch(API_ENDPOINT, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(emailPayload)
+		})
+		.then(function(response) {
+			console.log('Respuesta HTTP recibida - Status:', response.status);
+			if (!response.ok) {
+				throw new Error('Error del servidor: ' + response.status);
+			}
+			return response.json();
+		})
+		.then(function(data) {
+			console.log('=== EXITO - Correo enviado ===');
+			console.log('Respuesta del servidor:', data);
+			// Éxito
+			$('#loading-message').hide();
+			$('#success-message').show();
+			$('#submit-btn').text('Enviar Mensaje');
+
+			// Limpiar formulario
+			$('input[name="Nombre"]').val('');
+			$('input[name="Empresa"]').val('');
+			$('input[name="Correo"]').val('');
+			$('input[name="Teléfono"]').val('');
+			$('textarea[name="Mensaje"]').val('');
+			$('#acceptTermsContact').prop('checked', false);
+			
+			// Deshabilitar botón
+			$('#submit-btn').prop('disabled', true);
+		})
+		.catch(function(error) {
+			console.error('=== ERROR al enviar ===');
+			console.error('Detalle:', error);
+			$('#loading-message').hide();
+			$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
+			alert('Hubo un error al enviar el mensaje. Por favor intenta nuevamente.');
+		});
+	}
 </script>
 
 

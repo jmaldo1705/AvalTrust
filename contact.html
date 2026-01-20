@@ -128,7 +128,18 @@
 								<div class="validation-message-contact" id="captchaValidationContact"></div>
 							</div>
 
-						<div id="loading-message" class="form-results" style="display: none;">
+							<button type="button" class="modern-submit-btn" id="submit-btn" disabled onclick="enviarFormulario()">Enviar Mensaje</button>
+
+							<!-- Mensaje de éxito -->
+							<div id="success-message" class="form-results" style="display: none;">
+								<div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #c3e6cb;">
+									<i class="fa fa-check-circle" style="margin-right: 10px;"></i>
+									<strong>¡Mensaje enviado exitosamente!</strong><br>
+									Hemos recibido tu mensaje. Nuestro equipo se pondrá en contacto contigo a la brevedad.
+								</div>
+							</div>
+
+							<div id="loading-message" class="form-results" style="display: none;">
 							<div class="alert alert-info" style="background-color: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #bee5eb;">
 								<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>
 								Enviando mensaje...

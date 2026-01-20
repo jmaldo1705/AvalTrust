@@ -512,8 +512,11 @@
 		// Verificar estado inicial del formulario
 		checkFormCompletion();
 
-		$('#quote-request').on('submit', async function(e) {
+		$('#quote-request').on('submit', function(e) {
 			e.preventDefault();
+			e.stopPropagation();
+
+			console.log('Formulario enviado - iniciando proceso');
 
 			// Validar campos obligatorios
 			if (!validateRequiredFields()) {
@@ -544,7 +547,7 @@
 			$('#submit-btn').prop('disabled', true).text('Enviando...');
 
 			// Obtener datos del formulario
-			const formData = {
+			var formData = {
 				nombre: $('input[name="Nombre"]').val().trim(),
 				empresa: $('input[name="Empresa"]').val().trim(),
 				correo: $('input[name="Correo"]').val().trim(),
@@ -553,44 +556,53 @@
 			};
 
 			// Preparar payload para el backend
-			const emailPayload = {
+			var emailPayload = {
 				to: ["comercial@avaltrust.co"],
 				cc: [],
 				bcc: [],
-				subject: `Nuevo mensaje de contacto - ${formData.nombre}`,
+				subject: "Nuevo mensaje de contacto - " + formData.nombre,
 				htmlBody: generateEmailHTML(formData)
 			};
 
-			try {
-				const response = await fetch(API_ENDPOINT, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(emailPayload)
-				});
+			console.log('Enviando a:', API_ENDPOINT);
+			console.log('Payload:', emailPayload);
 
+			// Enviar usando fetch con .then()
+			fetch(API_ENDPOINT, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(emailPayload)
+			})
+			.then(function(response) {
+				console.log('Respuesta recibida:', response.status);
 				if (!response.ok) {
-					throw new Error(`Error del servidor: ${response.status}`);
+					throw new Error('Error del servidor: ' + response.status);
 				}
-
+				return response.json();
+			})
+			.then(function(data) {
+				console.log('Éxito:', data);
 				// Éxito
 				$('#loading-message').hide();
 				$('#success-message').show();
-				$('#submit-btn').prop('disabled', true).text('Enviar Mensaje');
+				$('#submit-btn').text('Enviar Mensaje');
 
 				// Limpiar formulario
 				$('#quote-request')[0].reset();
 				
 				// Deshabilitar botón ya que el formulario está vacío
 				checkFormCompletion();
-
-			} catch (error) {
+			})
+			.catch(function(error) {
 				console.error('Error al enviar:', error);
 				$('#loading-message').hide();
 				$('#submit-btn').prop('disabled', false).text('Enviar Mensaje');
 				showErrorMessage('Hubo un error al enviar el mensaje. Por favor intenta nuevamente.');
-			}
+			});
+
+			return false;
 		});
 	});
 </script>

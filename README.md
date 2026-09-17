@@ -8,6 +8,10 @@ dentro del workspace de Angular, en `projects/landing`. Se prerenderiza a
 HTML estático y se publica en el mismo bucket y la misma distribución de
 CloudFront.
 
+GitHub Pages quedó desactivado en septiembre de 2026, junto con el archivo
+`CNAME` que reclamaba avaltrust.co para Pages. El dominio lo resuelve
+CloudFront y ya nada compite por él.
+
 Este repo se conserva por dos razones:
 
 1. **Rollback.** El workflow `deploy.yml` sigue existiendo y puede

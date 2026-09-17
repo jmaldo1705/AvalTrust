@@ -1,8 +1,13 @@
-name: Deploy AvalTrust static site to S3 + CloudFront
+# CONGELADO: desde el cutover de septiembre de 2026, avaltrust.co lo
+# publica el repositorio jmaldo1705/avaltrust-dashboard, donde vive la
+# landing en Angular (projects/landing).
+#
+# Este workflow queda solo como via de rollback: ejecutarlo a mano
+# restaura el sitio estatico antiguo sobre el mismo bucket. Ya no corre
+# en cada push, porque sobrescribiria el sitio nuevo.
+name: (rollback) Deploy AvalTrust static site to S3 + CloudFront
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch: {}
 
 env:

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="es">
 <head>
 	<title>Contáctanos | AvalTrust</title>
 	<meta charset="utf-8" />
@@ -13,6 +13,22 @@
 	<link rel="stylesheet" type="text/css" href="css/contact.css">
 	<!-- Cloudflare Turnstile -->
 	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+	<meta name="description" content="En AvalTrust estamos listos para construir soluciones de aval y garantía que impulsen tu crecimiento financiero. ¡Hablemos y transformemos juntos el acceso al crédito!">
+	<link rel="canonical" href="https://avaltrust.co/contact.html">
+	<meta property="og:site_name" content="AvalTrust">
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="es_CO">
+	<meta property="og:url" content="https://avaltrust.co/contact.html">
+	<meta property="og:title" content="Contáctanos | AvalTrust">
+	<meta property="og:description" content="En AvalTrust estamos listos para construir soluciones de aval y garantía que impulsen tu crecimiento financiero. ¡Hablemos y transformemos juntos el acceso al crédito!">
+	<meta property="og:image" content="https://avaltrust.co/image/og-avaltrust.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Contáctanos | AvalTrust">
+	<meta name="twitter:description" content="En AvalTrust estamos listos para construir soluciones de aval y garantía que impulsen tu crecimiento financiero. ¡Hablemos y transformemos juntos el acceso al crédito!">
+	<meta name="twitter:image" content="https://avaltrust.co/image/og-avaltrust.jpg">
 </head>
 <body class="site-body style-v1">
 <!-- Header -->
@@ -34,7 +50,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<!-- Q-Button for Mobile -->
-				<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
+				<div class="quote-btn"><a class="btn" href="https://app.avaltrust.co/login">Sign in</a></div>
 			</div>
 			<!-- MainNav -->
             <nav class="navbar-collapse collapse" id="mainnav">
@@ -390,7 +406,7 @@
 	}
 
 	$(document).ready(function() {
-		var API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+		var API_ENDPOINT = 'https://api.avaltrust.co/api/mail/send-simple';
 
 		console.log('Script de contacto cargado correctamente');
 
@@ -542,7 +558,7 @@
 
 	// Función global para enviar el formulario
 	function enviarFormulario() {
-		var API_ENDPOINT = 'https://avaltrustback-production.up.railway.app/api/mail/send-simple';
+		var API_ENDPOINT = 'https://api.avaltrust.co/api/mail/send-simple';
 		
 		console.log('=== INICIO ENVIO FORMULARIO ===');
 

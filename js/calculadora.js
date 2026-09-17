@@ -42,7 +42,7 @@ class CalculadoraCobertura {
         this.validators = new FormValidators();
 
         this.emailConfig = {
-            endpoint: 'https://avaltrustback-production.up.railway.app/api/mail/send-simple'
+            endpoint: 'https://api.avaltrust.co/api/mail/send-simple'
         };
 
         this.init();

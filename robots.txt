@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Maquetas de portal sin funcionalidad: el acceso real es https://app.avaltrust.co/login
+Disallow: /login-avalados.html
+Disallow: /login-aliados.html
+
+Sitemap: https://avaltrust.co/sitemap.xml

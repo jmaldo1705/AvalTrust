@@ -15,22 +15,47 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::463470985447:role/avaltrust-site-github-actions-deploy
+          role-session-name: avaltrust-site-deploy
           aws-region: ${{ env.AWS_REGION }}
 
+      # Nada que no sirva al sitio publico debe llegar al bucket:
+      # fuentes de diseno (PSD), el mailer PHP (S3 no ejecuta PHP) y
+      # los vendor css/js que ninguna pagina referencia.
       - name: Sync to S3
         run: |
-          aws s3 sync . s3://$S3_BUCKET/ \
-            --delete \
-            --exclude ".git/*" --exclude ".github/*" --exclude ".idea/*" \
+          EXCLUDES=(
+            --exclude ".git/*" --exclude ".github/*" --exclude ".idea/*"
             --exclude "scss/*" --exclude "*.md" --exclude "CNAME"
+            --exclude "image/PSD/*" --exclude "*.psd"
+            --exclude "form/*"
+            --exclude "css/animate.min.css" --exclude "css/bootstrap.min.css"
+            --exclude "css/font-awesome.min.css" --exclude "css/magnific-popup.css"
+            --exclude "css/owl.carousel.css"
+            --exclude "js/bootstrap.min.js" --exclude "js/filterizr.min.js"
+            --exclude "js/form.plugins.js" --exclude "js/gmaps.js"
+            --exclude "js/jquery.min.js" --exclude "js/magnific-popup.min.js"
+            --exclude "js/owl.carousel.min.js" --exclude "js/parallaxie.js"
+          )
+          aws s3 sync . "s3://$S3_BUCKET/" \
+            --delete \
+            "${EXCLUDES[@]}" \
+            --cache-control "public,max-age=86400,must-revalidate"
+
+          # El HTML no se cachea en el navegador: asi un deploy se ve al instante.
+          aws s3 cp . "s3://$S3_BUCKET/" \
+            --recursive \
+            --exclude "*" --include "*.html" \
+            "${EXCLUDES[@]}" \
+            --cache-control "no-cache, no-store, must-revalidate" \
+            --content-type "text/html; charset=utf-8"
 
       - name: Invalidate CloudFront
         run: |
